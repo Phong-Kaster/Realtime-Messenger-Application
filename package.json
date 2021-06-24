@@ -1,0 +1,31 @@
+{
+  "name": "realtime-messenger-application",
+  "version": "1.0.0",
+  "description": "messenger application on website",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" :"nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Phong-Kaster/Realtime-Messenger-Application.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "messenger",
+    "mongodb"
+  ],
+  "author": "Phong-Kaster",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Phong-Kaster/Realtime-Messenger-Application/issues"
+  },
+  "homepage": "https://github.com/Phong-Kaster/Realtime-Messenger-Application#readme"
+}
