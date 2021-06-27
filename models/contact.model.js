@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const contactSchema = new Schema({
@@ -14,4 +14,10 @@ const contactSchema = new Schema({
     deletedAt : { type : Number, default : null }
 });
 
+contactSchema.statics = {
+    createClone ( item )
+    {
+        return this.create( item);
+    }
+}
 module.exports = mongoose.model('contact',contactSchema);
