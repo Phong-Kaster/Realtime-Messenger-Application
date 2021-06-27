@@ -1,1 +1,3 @@
 delete node module forever
+
+npm install node module
