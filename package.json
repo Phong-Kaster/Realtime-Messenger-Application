@@ -4,8 +4,8 @@
   "description": "messenger application on website",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1"
-    
+    "express": "^4.17.1",
+    "mongoose": "^5.12.15"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
