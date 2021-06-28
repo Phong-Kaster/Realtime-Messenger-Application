@@ -6,3 +6,6 @@ get http://localhost:3000/home
 
 #### go login page of messenger application
 get http://localhost:3000/login
+
+### go log out page
+get http://localhost:3000/logout

@@ -26,9 +26,3 @@ To active , run :
         bower install
 
 Installation will be activated automatically.
-
-Có 2 file chính được sử dụng là 
-1.bowerrc : chỉ định vị chí mà các bower_component sẽ được tải về thì lưu ở thư mục nào
-2.bower.json : tệp tin cấu hình cơ bản của người dùng .Trong đó quan trọng nhất là "dependencies" , chỉ định chính xác đường dẫn nơi nó sẽ lấy các thư viện về cho chúng ta
-
-Để cài đặt các thư viện với bower , chúng ta dùng lệnh : bower install
