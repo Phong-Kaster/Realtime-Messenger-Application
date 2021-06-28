@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Realtime Messenger Application</title>
+    <link rel="shortcut icon" href="./images/logo_favicon/Phong Kaster.svg" />
+
+    <link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./bower_components/AlertifyJS/build/css/alertify.css">
+    
+    <link href="./stylesheet/auth.css" rel="stylesheet" />
+
+    <script src="./bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./bower_components/AlertifyJS/build/alertify.js"></script>
+
+    <script src="./javascripts/authConfig.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 my-content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="login-title text-center">Realtime Messenger Application</h1>
+                    <hr>
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-6 table-responsive">
+                        <table class="table my-table">
+                            <tbody>
+                                <tr>
+                                    <td>Author:</td>
+                                    <td>Phong Kaster</td>
+                                </tr>
+                                <tr>
+                                    <td>GitHub:</td>
+                                    <td>
+                                        <a href="https://github.com/Phong-Kaster" target="_blank">
+                                            https://github.com/Phong-Kaster
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CV:</td>
+                                    <td>
+                                        <a href="#" target="_blank">
+                                        https://github.io/resume.io
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-7 text-center">
+                    <a class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();">Đăng nhập</a>
+                    <a class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">Đăng ký</a>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center bottom-description">
+                    <span>
+                        “ Không cúi đầu - Không chùn bước - Không đầu hàng ”
+                    </span>
+                    <br>
+                    <span>
+                        “ Unbowed - Unbent - Unbroken ”
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+        <div class="modal fade login" id="loginModal">
+            <div class="modal-dialog login animated">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Đăng nhập</h4>
+                    </div>
+                    <div class="modal-body">
+                        <%- include('./section/alert.ejs'); %>
+
+                        <%- include('./section/login.ejs'); %>
+                        
+                        <%- include('./section/register.ejs'); %>
+                                              
+                    </div>
+                    <div class="modal-footer">
+                        <div class="forgot login-footer">
+                            <span>Bạn chưa có tài khoản?
+                            <a href="javascript: showRegisterForm();">Tạo một tài khoản mới</a>
+                            </span>
+                        </div>
+                        <div class="forgot register-footer" style="display:none">
+                            <span>Bạn đã có tài khoản?</span>
+                            <a href="javascript: showLoginForm();">Đăng nhập</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

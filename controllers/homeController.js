@@ -1,5 +1,5 @@
 let home = (req,res) =>{
-    return res.render("home");
+    return res.render("./home/section/content.ejs");
 };
 
 let groupChat = (req,res)=>{

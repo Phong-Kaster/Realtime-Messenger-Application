@@ -1,0 +1,146 @@
+<div class="modal fade" id="user-profile-modal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Tài khoản cá nhân</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#seting-profile">Cài đặt chung</a></li>
+                    <li><a data-toggle="tab" id="link-to-password-profile" href="#password-profile">Quản lý mật khẩu</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="seting-profile" class="tab-pane fade in active">
+                        <div class="row">
+                            <form class="form-horizontal" method="post" role="form" action="">
+                                <!-- left column -->
+                                <div class="col-md-3">
+                                    <div class="text-center" id="div-update-avatar">
+                                        <div id="image-edit-profile">
+                                            <img src="./images/users/Blue.jpg" class="avatar img-circle" alt="avatar">
+                                        </div>
+                                        <h6>Tải lên một ảnh mới...</h6>
+                                        <input type="file" class="form-control" id="input-change-avatar" name="avatar"><br>
+                                        <div id="show-button-update-avatar"></div>
+                                    </div>
+                                </div>
+                                <!-- edit form column -->
+                                <div class="col-md-9 personal-info">
+                                    <div class="alert alert-danger alert-dismissable">
+                                        <a class="panel-close close" data-dismiss="alert">×</a>
+                                        Update user error example.<br>
+                                        <!-- <script>openProfileModal();</script> -->
+                                    </div>
+
+                                    <div class="alert alert-success alert-dismissable">
+                                        <a class="panel-close close" data-dismiss="alert">×</a>
+                                        Update user success example.<br>
+                                        <!-- <script>openProfileModal();</script> -->
+                                    </div>
+
+                                    <h3>Local account.</h3>
+                                    <h3>Facebook account.</h3>
+                                    <h3>Google account.</h3>
+
+                                    <br>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Email:</label>
+                                        <div class="col-lg-8">
+                                            <div class="form-control" disabled>trungquandev@trungquandev.com</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Username:</label>
+                                        <div class="col-md-8">
+                                            <input class="form-control" type="text" name="username" value="Pontifex">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Giới tính:</label>
+                                        <div class="col-lg-8">
+                                            <label class="radio-inline col-lg-2">Nam
+                                                <input type="radio" name="gender" value="male" checked required>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="radio-inline col-lg-2">Nữ
+                                                <input type="radio" name="gender" value="female" required>
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Địa chỉ:</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" type="text" name="address" value="Hà Nội, Việt Nam">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Số điện thoại:</label>
+                                        <div class="col-lg-8">
+                                            <input class="form-control" type="text" name="phone" value="0123456789">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label"></label>
+                                        <div class="col-md-8">
+                                            <input type="submit" class="btn btn-primary custom-background-btn-primary" name="submit" value="Lưu lại">
+                                            <span></span>
+                                            <input type="reset" class="btn btn-default custom-background-btn-reset" value="Hủy bỏ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="password-profile" class="tab-pane fade">
+                        <div class="col-md-9 personal-info">
+                            <div class="alert alert-danger alert-dismissable">
+                                <a class="panel-close close" data-dismiss="alert">×</a>
+                                Update password error example<br>
+                                <!-- <script>openProfilePasswordModal();</script> -->
+                            </div>
+
+                            <div class="alert alert-success alert-dismissable">
+                                <a class="panel-close close" data-dismiss="alert">×</a>
+                                Update password success example<br>
+                                <!-- <script>openProfilePasswordModal();</script> -->
+                            </div>
+
+                            <h3>Thay đổi mật khẩu</h3>
+                            <br>
+                            <form class="form-horizontal" method="post" role="form" action="">
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Mật khẩu cũ</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" name="current_password" placeholder="Enter your curent password...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Mật khẩu mới</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" name="new_password" placeholder="Enter new password...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">Nhập lại mật khẩu mới</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" name="confirm_new_password" placeholder="Enter confirm new password...">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"></label>
+                                    <div class="col-md-8">
+                                        <input type="submit" class="btn btn-primary custom-background-btn-primary" value="Lưu lại">
+                                        <span></span>
+                                        <input type="reset" class="btn btn-default custom-background-btn-reset" value="Hủy bỏ">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

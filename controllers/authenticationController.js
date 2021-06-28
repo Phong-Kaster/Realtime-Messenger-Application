@@ -1,5 +1,5 @@
 let login = (req,res) =>{
-    return res.render("login");
+    return res.render("./authentication/authentication.ejs");
 };
 
 let logout = (req,res) =>{

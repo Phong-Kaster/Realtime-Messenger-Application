@@ -1,0 +1,145 @@
+<div class="modal fade" id="contactsModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Quản lý liên lạc</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#find-user">Tìm người dùng</a></li>
+                    <li><a data-toggle="tab" id="link-contacts" href="#contacts">
+                        Danh bạ <span class="show-number-contacts count-contacts">(100)</span>
+                    </a></li>
+                    <li><a data-toggle="tab" id="link-request-contact-sent" href="#request-contact-sent">
+                        Đang chờ xác nhận <span class="show-number-contacts count-request-contact-sent">(100)</span>
+                    </a></li>
+                    <li><a data-toggle="tab" id="link-request-contact-received" href="#request-contact-received">
+                        Yêu cầu kết bạn <span class="show-number-contacts count-request-contact-received">(100)</span>
+                    </a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="find-user" class="tab-pane fade in active">
+                        <div class="find-user-top">
+                            <div class="input-group col-md-12">
+                                <input type="text" class="form-control" placeholder="Nhập E-mail hoặc username..." />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-lg" type="button">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="find-user-bottom">
+                            <ul class="contactList">
+                                <li class="_contactList" data-uid="user._id">
+                                    <div class="contactPanel">
+                                        <div class="user-avatar">
+                                            <img src="./images/users/Blue.jpg" alt="">
+                                        </div>
+                                        <div class="user-name">
+                                            <p>
+                                                Pontifex
+                                            </p>
+                                        </div>
+                                        <br>
+                                        <div class="user-address">
+                                            <span>&nbsp Hà Nội, Việt Nam</span>
+                                        </div>
+                                        <div class="user-add-new-contact" data-uid="user._id">
+                                            Thêm vào danh sách liên lạc
+                                        </div>
+                                        <div class="user-remove-request-contact action-danger" data-uid="user._id">
+                                            Hủy yêu cầu
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="contacts" class="tab-pane fade">
+                        <div class="find-user-bottom">
+                            <ul class="contactList">
+                                <li class="_contactList" data-uid="user._id">
+                                    <div class="contactPanel">
+                                        <div class="user-avatar">
+                                            <img src="./images/users/Blue.jpg" alt="">
+                                        </div>
+                                        <div class="user-name">
+                                            <p>
+                                                Pontifex
+                                            </p>
+                                        </div>
+                                        <br>
+                                        <div class="user-address">
+                                            <span>&nbsp Hà Nội, Việt Nam.</span>
+                                        </div>
+                                        <div class="user-talk" data-uid="user._id">
+                                            Trò chuyện
+                                        </div>
+                                        <div class="user-remove-contact action-danger" data-uid="user._id">
+                                            Xóa liên hệ
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="request-contact-sent" class="tab-pane fade">
+                        <div class="find-user-bottom">
+                            <ul class="contactList">
+                                <li class="_contactList" data-uid="user._id">
+                                    <div class="contactPanel">
+                                        <div class="user-avatar">
+                                            <img src="./images/users/Blue.jpg" alt="">
+                                        </div>
+                                        <div class="user-name">
+                                            <p>
+                                                Pontifex
+                                            </p>
+                                        </div>
+                                        <br>
+                                        <div class="user-address">
+                                            <span>&nbsp Hà Nội, Việt Nam.</span>
+                                        </div>
+                                        <div class="user-remove-request-sent action-danger" data-uid="user._id">
+                                            Hủy yêu cầu
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="request-contact-received" class="tab-pane fade">
+                        <div class="find-user-bottom">
+                            <ul class="contactList">
+                                <li class="_contactList" data-uid="user._id">
+                                    <div class="contactPanel">
+                                        <div class="user-avatar">
+                                            <img src="./images/users/Blue.jpg" alt="">
+                                        </div>
+                                        <div class="user-name">
+                                            <p>
+                                                Pontifex
+                                            </p>
+                                        </div>
+                                        <br>
+                                        <div class="user-address">
+                                            <span>&nbsp Hà Nội, Việt Nam.</span>
+                                        </div>
+                                        <div class="user-acccept-contact-received" data-uid="user._id">
+                                            Chấp nhận
+                                        </div>
+                                        <div class="user-reject-request-contact-received action-danger" data-uid="user._id">
+                                            Xóa yêu cầu
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
