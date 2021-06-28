@@ -1,0 +1,21 @@
+{
+  "name": "awesome-chat",
+  "homepage": "https://trungquandev.com",
+  "authors": [
+    "trungquan17 <quanlightning17@gmail.com>"
+  ],
+  "description": "Manage frontend libraries.",
+  "main": "src/server.js",
+  "license": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bower_components": "https://github.com/trungquan17/awesome-chat-third-party-libraries.git"
+  }
+}

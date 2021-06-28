@@ -1,0 +1,22 @@
+{
+  "name": "bower_components",
+  "authors": [
+    "Trung Quan <quanlightning17@gmail.com> <https://trungquandev.com>"
+  ],
+  "description": "Tổng hợp những thư viện bên thứ 3 sử dụng cho dự án Awesome Chat. https://trungquandev.com",
+  "main": "/",
+  "keywords": [
+    "awesome-chat-third-party-libraries-trungquandev"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/trungquan17/awesome-chat-third-party-libraries.git",
+  "_release": "bf29962a70",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "bf29962a70af1a17688fb2b870d495854d18fda7"
+  },
+  "_source": "https://github.com/trungquan17/awesome-chat-third-party-libraries.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/trungquan17/awesome-chat-third-party-libraries.git"
+}
