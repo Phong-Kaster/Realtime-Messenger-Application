@@ -1,2 +1,11 @@
 #ignore node_modules folder
+#ignore node_modules folder
 node_modules/
+
+
+#ignore chatTemplate folder
+chatTemplate/
+
+#ignore zip file
+*.zip
+chatTemplate.zip
