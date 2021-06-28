@@ -1,0 +1,25 @@
+{
+  "name": "jquery.nicescroll",
+  "main": [
+    "./jquery.nicescroll.min.js"
+  ],
+  "ignore": [
+    "**/.*",
+    "demo",
+    "package.json"
+  ],
+  "dependencies": {
+    "jquery": ">=1.8.3"
+  },
+  "homepage": "https://github.com/inuyaksa/jquery.nicescroll",
+  "version": "3.7.6",
+  "_release": "3.7.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "3.7.6",
+    "commit": "54d164e97ac6e3b874481a30a5f816d8ff616233"
+  },
+  "_source": "https://github.com/inuyaksa/jquery.nicescroll.git",
+  "_target": "^3.7.6",
+  "_originalSource": "https://github.com/inuyaksa/jquery.nicescroll.git"
+}
