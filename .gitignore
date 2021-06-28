@@ -9,3 +9,6 @@ chatTemplate/
 #ignore zip file
 *.zip
 chatTemplate.zip
+
+#ignore bower_components
+public/bower_components/

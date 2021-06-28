@@ -1,6 +1,8 @@
 get http://localhost:3000/
 
-###
+### go home center of messenger application
 get http://localhost:3000/home
-####
-get http://localhost:3000/createClone
+
+
+#### go login page of messenger application
+get http://localhost:3000/login

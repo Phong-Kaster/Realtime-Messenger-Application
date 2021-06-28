@@ -1,0 +1,22 @@
+{
+    "name": "realtime-messenger-application",
+    "homepage": "https://github.com/Phong-Kaster",
+    "authors": [
+      "Phong-Kaster"
+    ],
+    "description": "Third party libraries",
+    "main": "app.js",
+    "license": "",
+    "private": true,
+    "ignore": [
+      "**/.*",
+      "node_modules",
+      "bower_components",
+      "test",
+      "tests"
+    ],
+    "dependencies": {
+      "bower_components": "https://github.com/trungquan17/awesome-chat-third-party-libraries.git"
+    }
+  }
+  

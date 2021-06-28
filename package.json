@@ -4,8 +4,11 @@
   "description": "messenger application on website",
   "main": "index.js",
   "dependencies": {
+    "bower": "^1.8.12",
     "dotenv": "^10.0.0",
+    "ejs": "^2.5.7",
     "express": "^4.17.1",
+    "express-ejs-extend": "0.0.1",
     "mongoose": "^5.12.15"
   },
   "devDependencies": {
