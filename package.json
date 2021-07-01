@@ -4,11 +4,13 @@
   "description": "messenger application on website",
   "main": "index.js",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "bower": "^1.8.12",
     "dotenv": "^10.0.0",
     "ejs": "^2.5.7",
     "express": "^4.17.1",
     "express-ejs-extend": "0.0.1",
+    "express-validator": "^4.3.0",
     "mongoose": "^5.12.15"
   },
   "devDependencies": {
@@ -18,7 +20,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "babel-node app.js"
   },
   "repository": {
     "type": "git",

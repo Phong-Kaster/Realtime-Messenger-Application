@@ -5,7 +5,17 @@ get http://localhost:3000/home
 
 
 #### go login page of messenger application
-get http://localhost:3000/login
+get http://localhost:3000/signin
 
 ### go log out page
-get http://localhost:3000/logout
+POST  http://localhost:3000/signup
+Content-Type: application/json
+
+{
+    "email":"phongkaster@gmail.com",
+    "gender":"male",
+    "password":"Forever21",
+    "password_confirmation":"Forever21",
+    "commit":"Tạo tài khoản"
+}
+
