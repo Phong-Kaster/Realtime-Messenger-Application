@@ -27,3 +27,5 @@ To active , run :
         bower install
 
 Installation will be activated automatically.
+
+Begun on 24-6-2021
