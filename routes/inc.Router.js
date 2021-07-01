@@ -12,7 +12,7 @@ const signUpValidation = require('../middlewares/signUpValidation.js');
  */
 let initiateRouters = (app) =>{
     
-    router.get("/",authenticationController.signin );
+    router.get("/"      ,authenticationController.signin );
     router.get("/signin",authenticationController.signin );
     
     router.get("/home",homeController.home );
