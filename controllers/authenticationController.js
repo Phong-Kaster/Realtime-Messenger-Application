@@ -1,7 +1,10 @@
 import { validationResult } from "express-validator/check";
 
 let signin = (req,res) =>{
-    return res.render("./authentication/authentication.ejs");
+    return res.render("./authentication/authentication.ejs",{ 
+        errors : req.flash("errors"), 
+        success : req.flash("success") 
+    });
 };
 
 let signup = (req,res) =>{
@@ -16,8 +19,8 @@ let signup = (req,res) =>{
         errors.forEach( element => {
             errorsArray.push( element.msg );
         });
-        console.log(errorsArray);
-        return;
+        req.flash("errors",errorsArray);
+        return res.redirect("/signin");
     }
     console.log(req.body); 
         

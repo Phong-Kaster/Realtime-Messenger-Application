@@ -4,8 +4,8 @@ const bluebird = require('bluebird');
 let connectDatabase = () =>{
     mongoose.Promise = bluebird;
 
-    let URI = `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}`;
-    mongoose.connect(URI , { 
+    let URL = `mongodb://127.0.0.1:27017/rma`;
+    mongoose.connect(URL , { 
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
