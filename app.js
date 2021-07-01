@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 const connectDatabase = require('./config/connectDatabase.js');
 const configViewEngine = require('./config/viewEngine');
-const initRouter = require('./routes/Router.js');
+const initRouter = require('./routes/initRouter');
 const bodyParser = require('body-parser');
 /* ======================= FUNCTION ======================= */
 connectDatabase();//connect to MongoDB
