@@ -6,7 +6,7 @@ const signupModel = require('../models/authenticateModel.js');
  * public get /signin
  * @param {*} req 
  * @param {*} res 
- * @returns 
+ * @returns home page , errors & success notification 
  */
 let signin = (req,res) =>{
     return res.render("./authentication/authentication.ejs",{ 
@@ -16,9 +16,7 @@ let signin = (req,res) =>{
 };
 /**
  * public post /signup
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ * @returns if user account was created successfully or not ??
  */
 let signup = async (req,res) =>{
     // define 2 array which contain errors & success notification
