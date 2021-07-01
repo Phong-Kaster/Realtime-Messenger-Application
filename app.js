@@ -16,8 +16,8 @@ configViewEngine(app);//config View engine
 app.use(bodyParser.urlencoded( { extended : true } ));
 app.use(connectFlash());
 initRouter(app);
-
 /* ======================= LISTEN ON PORT 3000 ======================= */
 app.listen( port, () => {
-    console.log(`Server is running on port http://localhost/${port}`);
+    console.log(`->Server is running on port http://localhost/${process.env.APP_PORT} to connect database ${process.env.DATABASE_NAME}`);
+    console.log(`->rma stands for ${process.env.STANDARD_DATABASE_NAME}`);
 });

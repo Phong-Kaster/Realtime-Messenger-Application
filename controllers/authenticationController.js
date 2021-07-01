@@ -40,7 +40,7 @@ let signup = async (req,res) =>{
     // sign up successfully
     try 
     {
-        let createUserSuccess = await signupModel(req.body.email,req.body.gender,req.body.password);
+        let createUserSuccess = await signupModel(req.body.email , req.body.gender , req.body.password , req.protocol , req.get("host"));
         successArray.push(createUserSuccess);
         req.flash("success",successArray);
         return res.redirect("signin");

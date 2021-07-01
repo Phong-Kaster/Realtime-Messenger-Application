@@ -4,10 +4,21 @@ const bcrypt = require('bcrypt');
 const saltRounds = 7; 
 import uuidv4 from 'uuid/v4';
 import {userError} from '../notification/english.js';
+import {sendEmail} from '../config/email.js';
 import {successfulNotice} from '../notification/english.js';
-
+import {subject} from '../notification/english.js';
+import {systemError} from '../notification/english.js';
 /* ============================ FUNCTION ============================ */
-let signup = async ( email,gender,password ) =>{
+/**
+ * 
+ * @param {*} email which is requested from register form - yourname@gmail.com
+ * @param {*} gender which is requested from register form - male or female
+ * @param {*} password which is requested from register form
+ * @param {*} protocol which is a HTTP protocol or a HTTPS protocol - HTTP or HTTPS
+ * @param {*} host which indicates this application's port - For instance : 3000 or 5000
+ * @returns 
+ */
+let signup = async ( email,gender,password,protocol , host ) =>{
     // this function returns a Promise
     return new Promise( async (resolve , reject )=>{
         
@@ -43,8 +54,16 @@ let signup = async ( email,gender,password ) =>{
 
         // create a new account
         let user = await userSchema.createNew( userInformation );
-        // return successful promise
-        resolve( successfulNotice.userCreated( user.local.email ) );
+        let verifyPath = `${protocol}://${host}/verify/${user.local.verifyToken}`;
+        // send email 
+        // sendEmail( email,subject.confirmAccount, subject.template(verifyPath))
+        //     .then( success =>{ resolve(successfulNotice.userCreated( user.local.email )); })
+        //     .catch( error =>{
+        //         console.log(error); 
+        //         reject( systemError.unsentEmail );
+        //     })
+        // return successful promise 
+        resolve(successfulNotice.userCreated( user.local.email ));
     });
 }
 

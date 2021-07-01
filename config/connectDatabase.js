@@ -11,7 +11,7 @@ let connectDatabase = () =>{
         useCreateIndex: true,
         useFindAndModify: false
     })
-    .then(() => { console.log("Connected MongoDB successfully !!!") })
+    .then(() => { console.log("->Connected MongoDB successfully !!!") })
     .catch( (error) => { console.log( error ) } )
 }
 module.exports = connectDatabase;
