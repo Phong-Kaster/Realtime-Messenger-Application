@@ -23,6 +23,7 @@ We have 2 important bower file:
 2.bower.json : configuration file include many valuable information and what URL we have to download ?
 
 To active , run :
+
         bower install
 
 Installation will be activated automatically.
