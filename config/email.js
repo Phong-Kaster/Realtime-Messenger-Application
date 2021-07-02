@@ -6,24 +6,25 @@ const adminPassword = process.env.ADMINISTRATOR_PASSWORD;
 const adminHost = process.env.ADMINISTRATOR_HOST;
 const adminPort = process.env.ADMINISTRATOR_PORT;
 
-let sendEmail = (receiver,subject,htmlContent) =>{
+let sendEmail = (to,subject,htmlContent) =>{
     let transporter = nodeMailer.createTransport({
         host : adminHost,
         port : adminPort,
         secure : false,
-        authentication : {
-            username : adminEmail,
-            password : adminPassword
+        auth : {
+            user : adminEmail,
+            pass : adminPassword
         }
     });
 
-    let option = {
+    let options = {
         from : adminEmail,
-        receiver : receiver,
+        to : to,
+        subject : subject,
         html : htmlContent
     };
     // return a promise
-    return transporter.sendMail(option);
+    return transporter.sendMail(options);
 }
 
 module.exports = sendEmail;

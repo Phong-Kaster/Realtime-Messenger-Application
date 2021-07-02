@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const saltRounds = 7; 
 import uuidv4 from 'uuid/v4';
 import {userError} from '../notification/english.js';
-import {sendEmail} from '../config/email.js';
+const sendEmail = require('../config/email.js');
 import {successfulNotice} from '../notification/english.js';
 import {subject} from '../notification/english.js';
 import {systemError} from '../notification/english.js';
@@ -55,15 +55,16 @@ let signup = async ( email,gender,password,protocol , host ) =>{
         // create a new account
         let user = await userSchema.createNew( userInformation );
         let verifyPath = `${protocol}://${host}/verify/${user.local.verifyToken}`;
-        // send email 
-        // sendEmail( email,subject.confirmAccount, subject.template(verifyPath))
-        //     .then( success =>{ resolve(successfulNotice.userCreated( user.local.email )); })
-        //     .catch( error =>{
-        //         console.log(error); 
-        //         reject( systemError.unsentEmail );
-        //     })
-        // return successful promise 
-        resolve(successfulNotice.userCreated( user.local.email ));
+        // send email if it is sent return successful Notice
+        // if not return systemError
+        sendEmail( email,subject.confirmAccount, subject.template(verifyPath))
+            .then( () =>{ resolve(successfulNotice.userCreated( user.local.email )); })
+            .catch( async (error) =>{
+                await userSchema.removeById( user._id );
+                console.log(error); 
+                reject( systemError.unsentEmail );
+            });
+        
     });
 }
 

@@ -11,9 +11,9 @@ let signupValidation = [
         .isIn( [ "male","female" ]),
 
 
-    check("password",userError.incorrectPassword)//password have number - uppercase,lower & special letter
-        .isLength({ min : 8 })
-        .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/),
+    check("password",userError.incorrectPassword),//password have number - uppercase,lower & special letter
+        //.isLength({ min : 8 }),
+        //.matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/),
 
 
     check("password_confirmation",userError.incorrectPasswordConfirmation)
