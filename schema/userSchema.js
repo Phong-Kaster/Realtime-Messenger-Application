@@ -29,7 +29,7 @@ const userSchema = new Schema({
             type : Boolean,
             default : false
         },
-        verifyToken : String
+        verifiedToken : String
     },
     facebook :
     {
@@ -60,6 +60,18 @@ userSchema.statics = {
     removeById(id)
     {
         return this.findByIdAndRemove(id).exec();
+    },
+    verifyToken(token)
+    {
+        return this.findOneAndUpdate(
+            { "local.verifiedToken":token },
+            { "local.isActive":true,
+               "local.verifiedToken":null
+        }).exec();
+    },
+    findByToken(token)
+    {
+        return this.findOne({"local.verifiedToken":token}).exec();
     }
 }
 

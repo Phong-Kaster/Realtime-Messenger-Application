@@ -19,6 +19,7 @@ let initiateRouters = (app) =>{
 
     router.post("/signup",signUpValidation,authenticationController.signup);
 
+    router.get("/verify/:verifiedToken", authenticationController.verify);
     return app.use("/",router);
 }
 

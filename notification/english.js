@@ -5,19 +5,21 @@ export const userError = {
     incorrectEmail : "Email must have pattern yourname@gmail.com",
     incorrectGender : "Your gender must be male or female",
     incorrectPassword : "Your password have at least 8 letter include number, special character.For example : Aa!234567",
-    incorrectPasswordConfirmation: "Your password confirmation doesn't familiar with password"
+    incorrectPasswordConfirmation: "Your password confirmation doesn't familiar with password",
+    activatedAccount : "Your account was activated successfully.You don't need to click the link in e-verify email"
 };
 export const systemError = {
     unsentEmail : "The email can't be send.Please get contact with our customer service"
 }
-export const successfulNotice = {
+export const notice = {
     userCreated : (email) =>{
         return `Your account <strong>${email}</strong> was created successfully.Please check your email to activate your account !`
-    }
+    },
+    activatedAccount : "Your account have been activated successfully !"
 }
 
 export const subject = {
-    confirmAccount : "Confirm activate your account ",
+    confirmAccount : "Realtime Messenger Application : confirm your account",
     template : (verifyPath) =>{
         return `<!DOCTYPE html>
         <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">

@@ -2,15 +2,15 @@
 const userSchema = require('../schema/userSchema.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 7; 
-import uuidv4 from 'uuid/v4';
+import uuidv4 from 'uuid/v4';// used to create token
 import {userError} from '../notification/english.js';
 const sendEmail = require('../config/email.js');
-import {successfulNotice} from '../notification/english.js';
+import {notice} from '../notification/english.js';
 import {subject} from '../notification/english.js';
 import {systemError} from '../notification/english.js';
 /* ============================ FUNCTION ============================ */
 /**
- * 
+ * let users create a new account for them
  * @param {*} email which is requested from register form - yourname@gmail.com
  * @param {*} gender which is requested from register form - male or female
  * @param {*} password which is requested from register form
@@ -48,24 +48,47 @@ let signup = async ( email,gender,password,protocol , host ) =>{
             {
                 email : email,
                 password : bcrypt.hashSync(password,salt),
-                verifyToken : uuidv4()
+                verifiedToken : uuidv4()
             }
         }
 
         // create a new account
         let user = await userSchema.createNew( userInformation );
-        let verifyPath = `${protocol}://${host}/verify/${user.local.verifyToken}`;
+        let verifyPath = `${protocol}://${host}/verify/${user.local.verifiedToken}`;
         // send email if it is sent return successful Notice
         // if not return systemError
         sendEmail( email,subject.confirmAccount, subject.template(verifyPath))
-            .then( () =>{ resolve(successfulNotice.userCreated( user.local.email )); })
+            .then( () =>{ resolve(notice.userCreated( user.local.email )); })
             .catch( async (error) =>{
                 await userSchema.removeById( user._id );
-                console.log(error); 
+                console.log("send email : "  + error); 
                 reject( systemError.unsentEmail );
             });
         
     });
 }
+/**
+ * verify an account whether the user click the link in e-verify email
+ * @param {*} verifiedToken which is created when user wanna create a new account
+ * @returns 
+ */
+let verifyAccount = ( verifiedToken ) =>{
+    return new Promise( async (resolve , reject) =>
+    {
+        let status = await userSchema.findByToken(verifiedToken);
 
-module.exports = signup;
+        if( !status )
+        {
+           return reject( userError.activatedAccount );
+        }
+
+        await userSchema.verifyToken(verifiedToken);
+        resolve( notice.activatedAccount );       
+    });
+}
+
+module.exports = 
+{ 
+    signup : signup,
+    verifyAccount : verifyAccount
+};

@@ -1,6 +1,6 @@
 /* ======================= LIBRARY ======================= */
 import { validationResult } from "express-validator/check";
-const signupModel = require('../models/authenticateModel.js');
+const authenticationModel = require('../models/authenticationModel.js');
 /* ======================= FUNCTION ======================= */
 /**
  * public get /signin
@@ -40,7 +40,7 @@ let signup = async (req,res) =>{
     // sign up successfully
     try 
     {
-        let createUserSuccess = await signupModel(req.body.email , req.body.gender , req.body.password , req.protocol , req.get("host"));
+        let createUserSuccess = await authenticationModel.signup(req.body.email , req.body.gender , req.body.password , req.protocol , req.get("host"));
         successArray.push(createUserSuccess);
         req.flash("success",successArray);
         return res.redirect("signin");
@@ -53,7 +53,33 @@ let signup = async (req,res) =>{
         return res.redirect("signin");
     }
 }
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ * @returns verified result
+ */
+let verify =  async (req,res) =>{
+    let errorsArray = [];
+    let successArray = [];
+
+    try 
+    {
+        let status = await authenticationModel.verifyAccount(req.params.verifiedToken);
+        successArray.push( status );
+        req.flash( "success",successArray );
+        return res.redirect("/signin");
+    } 
+    catch (error) 
+    {
+        errorsArray.push( error );
+        req.flash("errors",errorsArray);
+        return res.redirect("/signin");
+    }
+}
+
 module.exports = {
     signin : signin,
-    signup : signup
+    signup : signup,
+    verify : verify
 };
