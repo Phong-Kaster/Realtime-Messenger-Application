@@ -17,6 +17,8 @@
     "express-validator": "^4.3.0",
     "mongoose": "^5.12.15",
     "nodemailer": "^4.7.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {

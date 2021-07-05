@@ -1,5 +1,8 @@
 let home = (req,res) =>{
-    return res.render("./home/section/content.ejs");
+    return res.render("./home/section/content.ejs", {
+        success : req.flash("success"),
+        errors : req.flash("errors")
+    });
 };
 
 let groupChat = (req,res)=>{

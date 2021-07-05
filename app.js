@@ -9,12 +9,27 @@ const initRouter = require('./routes/inc.Router.js');
 const bodyParser = require('body-parser');
 const connectFlash = require('connect-flash');
 const configSession = require('./config/session.js');
+const passport = require('passport');
 /* ======================= FUNCTION ======================= */
-connectDatabase();//connect to MongoDB
-configSession(app);//config session
-configViewEngine(app);//config View engine
+//connect to MongoDB
+connectDatabase();
+
+//config session
+configSession(app);
+
+//config View engine
+configViewEngine(app);
+
 app.use(bodyParser.urlencoded( { extended : true } ));
+
+// call connect flash
 app.use(connectFlash());
+
+// passport must stand between connect database and initRouter
+app.use(passport.initialize());
+app.use(passport.session());
+
+// initialize routers
 initRouter(app);
 /* ======================= LISTEN ON PORT 3000 ======================= */
 app.listen( port, () => {

@@ -6,16 +6,24 @@ export const userError = {
     incorrectGender : "Your gender must be male or female",
     incorrectPassword : "Your password have at least 8 letter include number, special character.For example : Aa!234567",
     incorrectPasswordConfirmation: "Your password confirmation doesn't familiar with password",
-    activatedAccount : "Your account was activated successfully.You don't need to click the link in e-verify email"
+    activatedAccount : "Your account was activated successfully.You don't need to click the link in e-verify email",
+    inexistentAccount : "Account does not exist !",
+    lackUsernameOrPassword : "Your username or password is empty.Please fill in!",
+    incorrectUsernameOrPassword : "Your account or password is incorrect !"
 };
 export const systemError = {
-    unsentEmail : "The email can't be send.Please get contact with our customer service"
+    unsentEmail : "The email can't be send.Please get contact with our customer service",
+    overloadedSystem : "The system is overload ! Please wait a minute and reconnected"
 }
 export const notice = {
     userCreated : (email) =>{
         return `Your account <strong>${email}</strong> was created successfully.Please check your email to activate your account !`
     },
-    activatedAccount : "Your account have been activated successfully !"
+    activatedAccount : "Your account have been activated successfully !",
+    successfulLogin : (name) =>
+    {
+        return `Welcome back, <strong>${name}</strong> ! Have a good day`
+    }
 }
 
 export const subject = {

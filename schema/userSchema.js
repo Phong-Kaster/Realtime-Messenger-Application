@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-
+const bcrypt = require('bcrypt');
 const userSchema = new Schema({
     username:  String, // String is shorthand for {type: String}
     gender: 
@@ -72,6 +72,20 @@ userSchema.statics = {
     findByToken(token)
     {
         return this.findOne({"local.verifiedToken":token}).exec();
+    },
+    findByIdentification(id)
+    {
+        return this.findById(id).exec();
+    }
+}
+/**
+ * methods : handle the schema properties to do something
+ * statics : get record with condition but can not handle with found record
+ */
+userSchema.methods = {
+    verifyPassword( verifiedPassword ){
+        // return a promise true or false
+        return bcrypt.compare( verifiedPassword,this.local.password );
     }
 }
 
