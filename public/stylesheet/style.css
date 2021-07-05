@@ -423,8 +423,8 @@ label:focus,
 }
 
 .navbar-brand>img {
-  margin: -12px 0px 0px 7px;
-  width: 150px;
+  margin: -2px 0px 0px 7px;
+  width: 280px;
   -webkit-filter: brightness(130%);
   filter: brightness(130%);
 }
