@@ -1,23 +1,28 @@
 /* ======================= LIBRARY ======================= */
 import { validationResult } from "express-validator/check";
 const authenticationModel = require('../models/authenticationModel.js');
+import {notice} from '../notification/english.js';
 /* ======================= FUNCTION ======================= */
-/**
+
+
+/************************************************************
  * public get /signin
  * @param {*} req 
  * @param {*} res 
  * @returns home page , errors & success notification 
- */
+ ************************************************************/
 let signin = (req,res) =>{
     return res.render("./authentication/authentication.ejs",{ 
         errors : req.flash("errors"), 
         success : req.flash("success") 
     });
 };
-/**
+
+
+/*************************************************************
  * public post /signup
  * @returns if user account was created successfully or not ??
- */
+ *************************************************************/
 let signup = async (req,res) =>{
     // define 2 array which contain errors & success notification
     let errorsArray = [];
@@ -53,12 +58,14 @@ let signup = async (req,res) =>{
         return res.redirect("signin");
     }
 }
-/**
- * 
+
+
+/**************************************************************
+ * private post /verify/:verifiedToken
  * @param {*} req 
  * @param {*} res 
  * @returns verified result
- */
+ *************************************************************/
 let verify =  async (req,res) =>{
     let errorsArray = [];
     let successArray = [];
@@ -78,8 +85,22 @@ let verify =  async (req,res) =>{
     }
 }
 
+
+/**************************************************************
+ * public get /signout
+ * @param {*} req 
+ * @param {*} res 
+ * @returns account log out - remove account's session
+ *************************************************************/
+let signout = (req,res) =>{
+    // remove session passport user
+    req.logout();
+    req.flash("success",notice.successfulLogout);
+    return res.redirect("/");
+}
 module.exports = {
     signin : signin,
     signup : signup,
-    verify : verify
+    verify : verify,
+    signout : signout
 };

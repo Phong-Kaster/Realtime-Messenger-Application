@@ -9,7 +9,10 @@ import {notice} from '../notification/english.js';
 import {subject} from '../notification/english.js';
 import {systemError} from '../notification/english.js';
 /* ============================ FUNCTION ============================ */
-/**
+
+
+
+/****************************************************************
  * let users create a new account for them
  * @param {*} email which is requested from register form - yourname@gmail.com
  * @param {*} gender which is requested from register form - male or female
@@ -17,7 +20,7 @@ import {systemError} from '../notification/english.js';
  * @param {*} protocol which is a HTTP protocol or a HTTPS protocol - HTTP or HTTPS
  * @param {*} host which indicates this application's port - For instance : 3000 or 5000
  * @returns 
- */
+ ***************************************************************/
 let signup = async ( email,gender,password,protocol , host ) =>{
     // this function returns a Promise
     return new Promise( async (resolve , reject )=>{
@@ -67,11 +70,14 @@ let signup = async ( email,gender,password,protocol , host ) =>{
         
     });
 }
-/**
+
+
+
+/***************************************************************
  * verify an account whether the user click the link in e-verify email
  * @param {*} verifiedToken which is created when user wanna create a new account
- * @returns 
- */
+ * @returns notice 
+ ***************************************************************/
 let verifyAccount = ( verifiedToken ) =>{
     return new Promise( async (resolve , reject) =>
     {

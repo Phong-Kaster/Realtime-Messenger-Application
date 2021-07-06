@@ -23,7 +23,8 @@ export const notice = {
     successfulLogin : (name) =>
     {
         return `Welcome back, <strong>${name}</strong> ! Have a good day`
-    }
+    },
+    successfulLogout : "Logged out successfully ! See you again"
 }
 
 export const subject = {

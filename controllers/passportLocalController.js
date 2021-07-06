@@ -9,7 +9,6 @@ import {userError,notice,systemError} from '../notification/english.js';
 /* ======================= FUNCTION ======================= */
 let verifyLocalAccount = () =>
 {
-
     passport.use(new localStrategy( 
     {
         usernameField : "email",
