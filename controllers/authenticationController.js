@@ -48,14 +48,14 @@ let signup = async (req,res) =>{
         let createUserSuccess = await authenticationModel.signup(req.body.email , req.body.gender , req.body.password , req.protocol , req.get("host"));
         successArray.push(createUserSuccess);
         req.flash("success",successArray);
-        return res.redirect("signin");
+        return res.redirect("/signin");
     }
     //handle errors if happening 
     catch (error) 
     {
         errorsArray.push(error);
         req.flash("errors",errorsArray);
-        return res.redirect("signin");
+        return res.redirect("/signin");
     }
 }
 

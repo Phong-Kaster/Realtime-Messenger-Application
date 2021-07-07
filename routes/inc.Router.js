@@ -6,6 +6,7 @@ const router = express.Router();
 const authenticationController = require('../controllers/authenticationController.js');
 const homeController = require('../controllers/homeController.js');
 const passportLocalController = require('../controllers/passportLocalController.js');
+const passportFacebookController = require('../controllers/passportFacebookController.js');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
@@ -13,6 +14,9 @@ const loginValidation = require('../middlewares/loginValidation.js');
 
 //verify local account
 passportLocalController();
+//verify facebook account
+//https://www.facebook.com/settings/?tab=applications
+passportFacebookController();
 
 /* ======================= ROUTERS ======================= */
 /**
@@ -33,6 +37,11 @@ let initiateRouters = (app) =>{
     router.get("/home", loginValidation.isLogout , homeController.home );
     // signup
     router.post("/signup",signUpValidation,authenticationController.signup);
+    router.get("/auth/facebook",passport.authenticate("facebook",{scope : ["email"]}));
+    router.get("/auth/facebook/callback",passport.authenticate("facebook",{
+        successRedirect : "/home",
+        failureRedirect : "/"
+    }));
     // verify token to activate account
     router.get("/verify/:verifiedToken", authenticationController.verify);
     // sign out

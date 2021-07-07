@@ -11,7 +11,6 @@ import {systemError} from '../notification/english.js';
 /* ============================ FUNCTION ============================ */
 
 
-
 /****************************************************************
  * let users create a new account for them
  * @param {*} email which is requested from register form - yourname@gmail.com
