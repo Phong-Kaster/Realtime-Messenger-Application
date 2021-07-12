@@ -82,7 +82,8 @@ $(document).ready(function(){
             alertify.alert().set('message', 'You have to change some information before saving !').show(); 
         }
 
-        $.ajax({
+        $.ajax(
+            {
             url:"/user/update-avatar",
             type:"put",
             contentType:false,
