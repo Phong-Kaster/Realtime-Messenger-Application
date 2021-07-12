@@ -18,7 +18,7 @@
                                 <div class="col-md-3">
                                     <div class="text-center" id="div-update-avatar">
                                         <div id="image-edit-profile">
-                                            <img src="./images/users/Blue.jpg" class="avatar img-circle" alt="avatar">
+                                            <img src="./images/users/<%= user.avatar %>" id="user-avatar" class="avatar img-circle" alt="avatar">
                                         </div>
                                         <h6>Tải lên một ảnh mới...</h6>
                                         <input type="file" class="form-control" id="input-change-avatar" name="avatar"><br>
@@ -30,41 +30,55 @@
                                     <div class="alert alert-danger alert-dismissable">
                                         <a class="panel-close close" data-dismiss="alert">×</a>
                                         Update user error example.<br>
-                                        <!-- <script>openProfileModal();</script> -->
                                     </div>
 
                                     <div class="alert alert-success alert-dismissable">
                                         <a class="panel-close close" data-dismiss="alert">×</a>
                                         Update user success example.<br>
-                                        <!-- <script>openProfileModal();</script> -->
                                     </div>
+                                    <% if( user.local.email) {%>
+                                        <h3>Local account.</h3>
+                                    <%}%>
 
-                                    <h3>Local account.</h3>
-                                    <h3>Facebook account.</h3>
-                                    <h3>Google account.</h3>
-
+                                    <% if( user.facebook.uid ) {%>
+                                        <h3>Facebook account.</h3>
+                                    <%}%>
+                                    
+                                    <% if( user.google.uid ) {%>
+                                        <h3>Google account.</h3>
+                                    <%}%>
                                     <br>
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Email:</label>
                                         <div class="col-lg-8">
-                                            <div class="form-control" disabled>trungquandev@trungquandev.com</div>
+                                            <% if( user.local.email) {%>
+                                                <div class="form-control" disabled><%= user.local.email %></div>
+                                            <%}%>
+                                            
+                                            <% if( user.facebook.uid) {%>
+                                                <div class="form-control" disabled><%= user.facebook.uid %></div>
+                                            <%}%>
+
+                                            <% if( user.google.uid) {%>
+                                                <div class="form-control" disabled><%= user.google.email %></div>
+                                            <%}%>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Username:</label>
                                         <div class="col-md-8">
-                                            <input class="form-control" type="text" name="username" value="Pontifex">
+                                            <input class="form-control" type="text" name="username" value="<%= user.username %>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Giới tính:</label>
                                         <div class="col-lg-8">
                                             <label class="radio-inline col-lg-2">Nam
-                                                <input type="radio" name="gender" value="male" checked required>
+                                                <input type="radio" name="gender" value="male" <% if(user.gender === "male") {%> checked <%}%>  required>
                                                 <span class="checkmark"></span>
                                             </label>
                                             <label class="radio-inline col-lg-2">Nữ
-                                                <input type="radio" name="gender" value="female" required>
+                                                <input type="radio" name="gender" value="female" <% if(user.gender === "female") {%> checked <%}%>  required>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
@@ -72,13 +86,13 @@
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Địa chỉ:</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" type="text" name="address" value="Hà Nội, Việt Nam">
+                                            <input class="form-control" type="text" name="address" value="<% user.address %>">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-lg-3 control-label">Số điện thoại:</label>
                                         <div class="col-lg-8">
-                                            <input class="form-control" type="text" name="phone" value="0123456789">
+                                            <input class="form-control" type="text" name="phone" value="<% user.phone %>">
                                         </div>
                                     </div>
                                     <div class="form-group">

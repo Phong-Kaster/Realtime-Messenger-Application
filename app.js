@@ -18,7 +18,7 @@ const https = require('https');
 // })
 
 // fake HTTPS method to trick Facebook security
-pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
+/*pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
     if (err) 
     {
       console.log("pem error : " + err);
@@ -51,10 +51,10 @@ pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
       console.log(`->Server is running on port https://localhost:${process.env.APP_PORT} to connect database ${process.env.DATABASE_NAME}`);
       console.log(`->rma stands for ${process.env.STANDARD_DATABASE_NAME}`)
   })
-  })
+  })*/
 
 /**this code block will be re-used  when it public in internet*/
-/*
+
 //connect to MongoDB
 connectDatabase();
 
@@ -76,9 +76,7 @@ app.use(passport.session());
 // initialize routers
 initRouter(app);
 /* ======================= LISTEN ON PORT 3000 ======================= */
-
-/*
 app.listen( port, () => {
     console.log(`->Server is running on port http://localhost:${process.env.APP_PORT} to connect database ${process.env.DATABASE_NAME}`);
     console.log(`->rma stands for ${process.env.STANDARD_DATABASE_NAME}`);
-});*/
+});

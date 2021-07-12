@@ -13,7 +13,7 @@ const userSchema = new Schema({
     avatar : 
     {
         type : String,
-        default : "default-avatar.jpg"
+        default : "Blue.jpg"
     },
     role : 
     {
