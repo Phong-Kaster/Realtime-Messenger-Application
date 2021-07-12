@@ -1,9 +1,12 @@
+let userAvatar = null;
+let userInformation = {};
 function updateInformation (){
-    $("#input-change-avatar").bind("change", ()=>{
-        let file = $("#input-change-avatar").prop("files")[0];
+    // event change avatar
+    $("#input-change-avatar").bind("change", function(){
+        let file = $(this).prop("files")[0];
         let fileExtension = ["image/png","image/jpg","image/jpeg"];
-        let fileMaxSize = 104857; // 1 BYTE = 1MB
-
+        let fileMaxSize = 5242880; // 1024 BYTE = 1 KB | 1024KB = 1 MB
+        
         if( $.inArray(file.type ,fileExtension) === -1 )
         {
             alertify.alert().set('message', 'File extension is not accepted.File must be png - jpg - jpeg!').show(); 
@@ -26,7 +29,7 @@ function updateInformation (){
             let imagePreview = $("#image-edit-profile");
             imagePreview.empty();
 
-            // append updated user avatar & override image Preview
+            // append updated user avatar & override imagePreview
             let fileReader = new FileReader();
             fileReader.onload = function (element){
                 $("<img>",{
@@ -39,14 +42,66 @@ function updateInformation (){
 
             imagePreview.show();
             fileReader.readAsDataURL(file);
+            // initiate a form data to store file avatar
+            let formData = new FormData();
+            formData.append("avatar",file);
+            // pass the avatar to userAvatar
+            userAvatar = formData;
         }
         else
         {
             alertify.alert().set('message', 'Your browser is not supported FileReader !').show(); 
         }
     });
+    // event change username
+    $("#username").bind("change", function(){
+        userInformation.username = $(this).val();
+    });
+    // event change gender
+    $("#male-gender").bind("click", function(){
+        userInformation.gender = $(this).val();
+    })
+    $("#female-gender").bind("click", function(){
+        userInformation.gender = $(this).val();
+    });
+    // event change address
+    $("#address").bind("change", function(){
+        userInformation.address = $(this).val();
+    });
+    // event change phone
+    $("#phone").bind("change", function(){
+        userInformation.phone = $(this).val();
+    })
 }
 
 $(document).ready(function(){
     updateInformation();
+    $("#input-btn-update-user").bind("click" , function(){
+        if( $.isEmptyObject(userInformation) )
+        {
+            alertify.alert().set('message', 'You have to change some information before saving !').show(); 
+        }
+
+        $.ajax({
+            url:"/user/update-avatar",
+            type:"put",
+            contentType:false,
+            processData : false,
+            data:userAvatar,
+            success:function(success)
+            {
+                // code
+            },
+            error:function(error)
+            {
+                // code
+            }
+        });
+    })
+
+    $("#input-btn-cancel-update-user").bind("click",function(){
+
+        userAvatar = null;
+        userInformation = {};
+    })
 });
