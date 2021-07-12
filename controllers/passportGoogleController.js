@@ -2,27 +2,25 @@
 
 /* ======================= LIBRARY ======================= */
 const passport = require('passport');
-const passportFacebook = require('passport-facebook');
-const facebookStrategy = passportFacebook.Strategy;
+const passportGoogle = require('passport-google-oauth');
+const googleStrategy = passportGoogle.OAuth2Strategy;
 const userSchema = require('../schema/userSchema.js');
 import {userError,notice,systemError} from '../notification/english.js';
 /* ======================= FUNCTION ======================= */
-let verifyFacebookAccount = () =>
+let verifyGoogleAccount = () =>
 {
-
-    passport.use(new facebookStrategy( 
+    passport.use(new googleStrategy( 
     {
-        clientID : process.env.FACEBOOK_APP_ID,
-        clientSecret : process.env.FACEBOOK_APP_SECRET,
-        callbackURL : process.env.FACEBOOK_CALLBACK_URL,
-        passReqToCallback : true,
-        profileFields : [ "email","gender","displayName" ]
+        clientID : process.env.GOOGLE_CLIENT_ID,
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL : process.env.GOOGLE_CALLBACK_URL,
+        passReqToCallback : true
     },
     async (req,accessToken,refreshToken,profile,done)=>
     {   
         try 
         {
-            let user = await userSchema.findByFacebookUID(profile.id);
+            let user = await userSchema.findByGoogleUID(profile.id);
 
             if(user)
             {
@@ -30,24 +28,23 @@ let verifyFacebookAccount = () =>
             }
             
             let userInformation = {
-                username : profile.displayName,
+                username : profile.emails[0].value.split("@")[0] || "user",
                 gender : profile.gender || "male",
                 local : {isActive : true},
-                facebook :
+                google :
                 {
                     uid : profile.id,
                     token : String,
-                    email : null
+                    email : profile.emails[0].value
                 }
             };
-            
             // what is created then it will passed in done() function -> newUser replaces user
             let newUser = await userSchema.createNew(userInformation);
             return done(null,newUser,req.flash("success",notice.successfulLogin(newUser.username)));
         } 
         catch (error) 
         {   
-            console.log("Passport Facebook Controller Error: " + error);
+            console.log("Passport Google Controller Error: " + error);
             return done(null,false,req.flash("errors",systemError.overloadedSystem));
         }
     }));
@@ -68,4 +65,4 @@ let verifyFacebookAccount = () =>
     });
 };
 
-module.exports = verifyFacebookAccount;
+module.exports = verifyGoogleAccount;

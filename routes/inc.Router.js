@@ -7,16 +7,22 @@ const authenticationController = require('../controllers/authenticationControlle
 const homeController = require('../controllers/homeController.js');
 const passportLocalController = require('../controllers/passportLocalController.js');
 const passportFacebookController = require('../controllers/passportFacebookController.js');
+const passportGoogleController = require('../controllers/passportGoogleController.js');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
 /* ======================= FUNCTIONS ======================= */
 
-//verify local account
+// verify local account
 passportLocalController();
-//verify facebook account
-//https://www.facebook.com/settings/?tab=applications
+
+// verify facebook account
+// https://www.facebook.com/settings/?tab=applications
 passportFacebookController();
+
+// verify google account
+// https://console.cloud.google.com/apis/credentials/oauthclient/40097144866-5263nqarejn79epho2lm432n2nsf2pq8.apps.googleusercontent.com?project=realtime-messenger-application
+passportGoogleController();
 
 /* ======================= ROUTERS ======================= */
 /**
@@ -35,10 +41,17 @@ let initiateRouters = (app) =>{
     }));
     // home
     router.get("/home", loginValidation.isLogout , homeController.home );
-    // signup
-    router.post("/signup",signUpValidation,authenticationController.signup);
-    router.get("/auth/facebook",passport.authenticate("facebook",{scope : ["email"]}));
+    // sign up by local account 
+    router.post("/signup" ,signUpValidation,authenticationController.signup);
+    // sign up by facebook account
+    router.get("/auth/facebook" , loginValidation.isLogin , passport.authenticate("facebook",{scope : ["email"]}));
     router.get("/auth/facebook/callback",passport.authenticate("facebook",{
+        successRedirect : "/home",
+        failureRedirect : "/"
+    }));
+    // sign up by google account
+    router.get("/auth/google" , loginValidation.isLogin , passport.authenticate("google",{scope : ["email"]}));
+    router.get("/auth/google/callback",passport.authenticate("google",{
         successRedirect : "/home",
         failureRedirect : "/"
     }));

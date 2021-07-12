@@ -66,7 +66,6 @@ let signup = async ( email,gender,password,protocol , host ) =>{
                 console.log("send email : "  + error); 
                 reject( systemError.unsentEmail );
             });
-        
     });
 }
 

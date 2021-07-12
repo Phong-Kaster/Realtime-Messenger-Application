@@ -35,13 +35,13 @@ const userSchema = new Schema({
     {
         uid : String,
         token : String,
-        email : { type : String , trim : true }
+        email : String
     },
     google :
     {
         uid : String,
         token : String,
-        email : { type : String , trim : true }
+        email : String
     },
     createdAt : { type : Number, default : Date.now },
     updatedAt : { type : Number, default : null },
@@ -80,6 +80,10 @@ userSchema.statics = {
     findByFacebookUID(uid)
     {
         return this.findOne( {"facebook.uid" : uid}).exec();
+    },
+    findByGoogleUID(uid)
+    {
+        return this.findOne( {"google.uid" : uid}).exec();
     }
 }
 /**
