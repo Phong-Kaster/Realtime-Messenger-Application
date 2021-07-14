@@ -84,6 +84,11 @@ userSchema.statics = {
     findByGoogleUID(uid)
     {
         return this.findOne( {"google.uid" : uid}).exec();
+    },
+    updateInformation(id,information)
+    {
+        // after updating successfully , mongoose still returns former data
+        return this.findByIdAndUpdate(id ,information).exec();
     }
 }
 /**

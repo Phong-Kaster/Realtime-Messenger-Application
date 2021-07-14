@@ -8,6 +8,7 @@ const homeController = require('../controllers/homeController.js');
 const passportLocalController = require('../controllers/passportLocalController.js');
 const passportFacebookController = require('../controllers/passportFacebookController.js');
 const passportGoogleController = require('../controllers/passportGoogleController.js');
+const userController = require('../controllers/userController.js');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
@@ -56,10 +57,12 @@ let initiateRouters = (app) =>{
         failureRedirect : "/"
     }));
     // verify token to activate account
-    router.get("/verify/:verifiedToken", authenticationController.verify);
+    router.get("/verify/:verifiedToken",loginValidation.isLogin, authenticationController.verify);
     // sign out
     router.get("/signout",authenticationController.signout);
-
+    // user update avatar
+    router.put("/user/update-avatar",loginValidation.isLogout ,userController.updateAvatar );
+    
     return app.use("/",router);
 }
 

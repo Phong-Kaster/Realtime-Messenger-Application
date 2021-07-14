@@ -14,10 +14,9 @@ function updateInformation (){
             return false;
         }
 
-        // size > 1MB
         if( file.size > fileMaxSize)
         {
-            alertify.alert().set('message', 'File size must less than 1 MB!').show(); 
+            alertify.alert().set('message', 'File size must less than 5 MB!').show(); 
             $(this).val(null);
             return false;
         }
@@ -75,27 +74,31 @@ function updateInformation (){
 }
 
 $(document).ready(function(){
-    updateInformation();
-    $("#input-btn-update-user").bind("click" , function(){
-        if( $.isEmptyObject(userInformation) )
-        {
-            alertify.alert().set('message', 'You have to change some information before saving !').show(); 
-        }
 
-        $.ajax(
-            {
+    updateInformation();
+    let avatarOrigin = $("#user-avatar").attr("src");
+
+    $("#input-btn-update-user").bind("click" , function(){
+        $.ajax({
             url:"/user/update-avatar",
             type:"put",
+            cache:false,
             contentType:false,
             processData : false,
             data:userAvatar,
-            success:function(success)
+            success:function(result)
             {
-                // code
+                $(".user-success-alert").find("span").text(result.messenge);
+                $(".user-success-alert").css("display","block");
+                avatarOrigin = result.imageSource
+                $("#navbar-avatar").attr("src",result.imageSource);
+                $("#input-btn-cancel-update-user").click();
             },
             error:function(error)
             {
-                // code
+                $(".user-error-alert").find("span").text(error.responseText);
+                $(".user-error-alert").css("display","block");
+                $("#input-btn-cancel-update-user").click();
             }
         });
     })
@@ -104,5 +107,6 @@ $(document).ready(function(){
 
         userAvatar = null;
         userInformation = {};
+        $("#user-avatar").attr("src",avatarOrigin);
     })
 });

@@ -22,7 +22,7 @@ body {
   text-rendering: optimizeLegibility;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 400;
-  background-image: url("../images/background/image.jpg");
+  background-image: url("../images/background/image\(4\).jpg");
   background-size: cover;
   background-repeat: none;
 }
@@ -1274,4 +1274,8 @@ label:focus,
 
 #user-profile-modal input:hover, #user-profile-modal input:focus {
   border-color: #576574
+}
+
+.user-error-alert , .user-success-alert{
+  display: none;
 }

@@ -9,11 +9,14 @@ export const userError = {
     activatedAccount : "Your account was activated successfully.You don't need to click the link in e-verify email",
     inexistentAccount : "Account does not exist !",
     lackUsernameOrPassword : "Your username or password is empty.Please fill in!",
-    incorrectUsernameOrPassword : "Your account or password is incorrect !"
+    incorrectUsernameOrPassword : "Your account or password is incorrect !",
+    
 };
 export const systemError = {
     unsentEmail : "The email can't be send.Please get contact with our customer service",
-    overloadedSystem : "The system is overload ! Please wait a minute and reconnected"
+    overloadedSystem : "The system is overload ! Please wait a minute and reconnected",
+    avatarOversize : "File size can larger than 5 MB",
+    unavailableFileExtension : "File extension is not available ! Only png - jpg - jpeg accepted"
 }
 export const notice = {
     userCreated : (email) =>{
@@ -24,7 +27,8 @@ export const notice = {
     {
         return `Welcome back, <strong>${name}</strong> ! Have a good day`
     },
-    successfulLogout : "Logged out successfully ! See you again"
+    successfulLogout : "Logged out successfully ! See you again",
+    successfullyUpdateAvatar : "Updated avatar successfully !"
 }
 
 export const subject = {
