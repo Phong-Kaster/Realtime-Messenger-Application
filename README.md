@@ -19,7 +19,9 @@ In folder public/bower_components contain them.They have the same feature like n
 You can read more about Bower at : https://bower.io/#getting-started
 
 We have 2 important bower file:
+
 1.bowerrc : it tell our PC where our libraries will be stored.There I choose public/bower_components
+
 2.bower.json : configuration file include many valuable information and what URL we have to download ?
 
 To active , run :
