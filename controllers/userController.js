@@ -2,7 +2,6 @@
 const multer = require('multer');
 const fileExtension = ["image/png","image/jpg","image/jpeg"];
 import {systemError,notice} from '../notification/english.js';
-import uuidv4 from 'uuid/v4';
 const userModel = require('../models/userModel.js');
 const fsExtra = require('fs-extra');
 const storage = multer.diskStorage({
