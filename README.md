@@ -16,10 +16,12 @@ With front-end , I used third-party libraries which have its version as :
 
 
 In folder public/bower_components contain them.They have the same feature like node_modules so that I do not want to commit them to Git Hub.To address the problem , Bower was used to managing these libraries.
-You can read more about Bower at : https://bower.io/#getting-started
+You can read more about [Bower](https://bower.io/#getting-started)
 
 We have 2 important bower file:
+
 1.bowerrc : it tell our PC where our libraries will be stored.There I choose public/bower_components
+
 2.bower.json : configuration file include many valuable information and what URL we have to download ?
 
 To active , run :
