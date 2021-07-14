@@ -57,11 +57,12 @@ let initiateRouters = (app) =>{
         failureRedirect : "/"
     }));
     // verify token to activate account
-    router.get("/verify/:verifiedToken",loginValidation.isLogin, authenticationController.verify);
+    router.get("/verify/:verifiedToken",loginValidation.isLogout , authenticationController.verify);
     // sign out
     router.get("/signout",authenticationController.signout);
     // user update avatar
-    router.put("/user/update-avatar",loginValidation.isLogout ,userController.updateAvatar );
+    router.put("/user-update-avatar" , loginValidation.isLogout , userController.updateAvatar );
+    router.put("/user-update-information" , loginValidation.isLogout , userController.updateInformation);
     
     return app.use("/",router);
 }

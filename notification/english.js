@@ -28,7 +28,8 @@ export const notice = {
         return `Welcome back, <strong>${name}</strong> ! Have a good day`
     },
     successfulLogout : "Logged out successfully ! See you again",
-    successfullyUpdateAvatar : "Updated avatar successfully !"
+    successfullyUpdateAvatar : "Updated avatar successfully !",
+    successfullyUpdateInformation : "Updated information successfully !"
 }
 
 export const subject = {

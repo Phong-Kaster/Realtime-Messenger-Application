@@ -1,5 +1,14 @@
+/* ======================= GLOBAL CONSTANTS =======================*/
 let userAvatar = null;
 let userInformation = {};
+let userOriginalAvatar;
+let userOriginalInformation = {};
+/* ======================= FUNCTION =======================*/
+
+/**
+ * function "update Information" detects event like "change","click",....to handle
+ * check input data like avatar , username , phone , address
+ */
 function updateInformation (){
     // event change avatar
     $("#input-change-avatar").bind("change", function(){
@@ -73,40 +82,97 @@ function updateInformation (){
     })
 }
 
-$(document).ready(function(){
-
-    updateInformation();
-    let avatarOrigin = $("#user-avatar").attr("src");
-
-    $("#input-btn-update-user").bind("click" , function(){
-        $.ajax({
-            url:"/user/update-avatar",
-            type:"put",
-            cache:false,
-            contentType:false,
-            processData : false,
-            data:userAvatar,
-            success:function(result)
-            {
-                $(".user-success-alert").find("span").text(result.messenge);
-                $(".user-success-alert").css("display","block");
-                avatarOrigin = result.imageSource
-                $("#navbar-avatar").attr("src",result.imageSource);
-                $("#input-btn-cancel-update-user").click();
-            },
-            error:function(error)
-            {
-                $(".user-error-alert").find("span").text(error.responseText);
-                $(".user-error-alert").css("display","block");
-                $("#input-btn-cancel-update-user").click();
-            }
-        });
+/**
+ * function "ajax to update avatar" wraps a Ajax PUT request to store updated avatar
+ */
+function ajaxToUpdateAvatar(){
+    $.ajax({
+        url : "/user-update-avatar",
+        type : "put",
+        cache : false,
+        contentType : false,
+        processData : false,
+        data : userAvatar,
+        success : function(result)
+        {
+            $(".user-success-alert").find("span").text(result.messenge);
+            $(".user-success-alert").css("display","block");
+            userOriginalAvatar = result.imageSource
+            $("#navbar-avatar").attr("src",result.imageSource);
+            $("#input-btn-cancel-update-user").click();
+        },
+        error : function(error)
+        {
+            $(".user-error-alert").find("span").text(error.responseText);
+            $(".user-error-alert").css("display","block");
+            $("#input-btn-cancel-update-user").click();
+        }
     })
+}
 
+
+/**
+ * function "ajax To Update Information" wraps a Ajax PUT request to store updated information
+ */
+function ajaxToUpdateInformation(){
+    $.ajax({
+        url : "/user-update-information",
+        type : "put",
+        data : userInformation,
+        success : function(result)
+        {
+            // pass new information into "userOriginalInformation" variable to refresh
+            userOriginalInformation = Object.assign( userOriginalInformation,userInformation );
+
+            // refresh username in navbar
+            $("#navbar-username").text(userOriginalInformation.username);
+
+            $(".user-success-alert").find("span").text(result.messenge);
+            $(".user-success-alert").css("display","block");
+            $("#input-btn-cancel-update-user").click();
+        },
+        error : function(error)
+        {
+            $(".user-error-alert").find("span").text(error.responseText);
+            $(".user-error-alert").css("display","block");
+            $("#input-btn-cancel-update-user").click();
+        }
+    })
+}
+
+
+$(document).ready(function(){
+    // retrieve current information of user
+    userOriginalAvatar = $("#user-avatar").attr("src");
+    userOriginalInformation = {
+        username : $("#username").val(),
+        gender : $("#male-gender").is(":checked") ? "male" : "female",
+        address : $("#address").val(),
+        phone : $("#phone").val()
+    };
+
+    // get changes that user is editing
+    updateInformation();
+
+    // ajax to store avatar file into database
+    $("#input-btn-update-user").bind("click" , function(){
+        if( userAvatar ){
+            ajaxToUpdateAvatar();
+        }
+
+        if( !$.isEmptyObject(userInformation) ){
+            ajaxToUpdateInformation();
+        }
+    });
+
+    // user is on the second thoughts and cancel
     $("#input-btn-cancel-update-user").bind("click",function(){
-
         userAvatar = null;
         userInformation = {};
-        $("#user-avatar").attr("src",avatarOrigin);
-    })
+        $("#user-avatar").attr("src",userOriginalAvatar)
+        $("#username").val( userOriginalInformation.username )
+        userOriginalInformation.gender === "male" ? $("#male-gender").click() : $("#female-gender").click()
+        $("#address").val( userOriginalInformation.address)
+        $("#phone").val( userOriginalInformation.phone)
+    });
 });
