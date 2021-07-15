@@ -12,6 +12,7 @@ const userController = require('../controllers/userController.js');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
+const updateValidation = require('../middlewares/updateValidation.js');
 /* ======================= FUNCTIONS ======================= */
 
 // verify local account
@@ -42,28 +43,41 @@ let initiateRouters = (app) =>{
     }));
     // home
     router.get("/home", loginValidation.isLogout , homeController.home );
+
+
     // sign up by local account 
     router.post("/signup" ,signUpValidation,authenticationController.signup);
+
+
     // sign up by facebook account
     router.get("/auth/facebook" , loginValidation.isLogin , passport.authenticate("facebook",{scope : ["email"]}));
     router.get("/auth/facebook/callback",passport.authenticate("facebook",{
         successRedirect : "/home",
         failureRedirect : "/"
     }));
+
+
     // sign up by google account
     router.get("/auth/google" , loginValidation.isLogin , passport.authenticate("google",{scope : ["email"]}));
     router.get("/auth/google/callback",passport.authenticate("google",{
         successRedirect : "/home",
         failureRedirect : "/"
     }));
+
+
     // verify token to activate account
     router.get("/verify/:verifiedToken",loginValidation.isLogout , authenticationController.verify);
+
+
     // sign out
     router.get("/signout",authenticationController.signout);
-    // user update avatar
+
+
+    // user update 
     router.put("/user-update-avatar" , loginValidation.isLogout , userController.updateAvatar );
-    router.put("/user-update-information" , loginValidation.isLogout , userController.updateInformation);
+    router.put("/user-update-information" , updateValidation , userController.updateInformation);
     
+
     return app.use("/",router);
 }
 

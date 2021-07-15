@@ -10,7 +10,9 @@ export const userError = {
     inexistentAccount : "Account does not exist !",
     lackUsernameOrPassword : "Your username or password is empty.Please fill in!",
     incorrectUsernameOrPassword : "Your account or password is incorrect !",
-    
+    standardUsername : "Your username length from 3 to 17 character & can not use special character like @ , # , $ , % ,.....",
+    standardAddress : "Address length is from 3 to 30 character !",
+    standardPhone : "Phone has from 10 to 11 number"    
 };
 export const systemError = {
     unsentEmail : "The email can't be send.Please get contact with our customer service",
@@ -28,8 +30,8 @@ export const notice = {
         return `Welcome back, <strong>${name}</strong> ! Have a good day`
     },
     successfulLogout : "Logged out successfully ! See you again",
-    successfullyUpdateAvatar : "Updated avatar successfully !",
-    successfullyUpdateInformation : "Updated information successfully !"
+    updatedAvatar : "Updated avatar successfully !",
+    updatedInformation : "Updated information successfully !"
 }
 
 export const subject = {

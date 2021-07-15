@@ -8,7 +8,7 @@ const userSchema = new Schema({
         type : String,
         default : "male"
     },
-    phone : Number,
+    phone : String,
     address : String,
     avatar : 
     {

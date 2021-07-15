@@ -4,13 +4,8 @@ let userInformation = {};
 let userOriginalAvatar;
 let userOriginalInformation = {};
 /* ======================= FUNCTION =======================*/
-
-/**
- * function "update Information" detects event like "change","click",....to handle
- * check input data like avatar , username , phone , address
- */
-function updateInformation (){
-    // event change avatar
+/* A bundle functions of handling change event for avatar - username - gender - address - phone */
+function handleEventChangeAvatar(){
     $("#input-change-avatar").bind("change", function(){
         let file = $(this).prop("files")[0];
         let fileExtension = ["image/png","image/jpg","image/jpeg"];
@@ -61,30 +56,104 @@ function updateInformation (){
             alertify.alert().set('message', 'Your browser is not supported FileReader !').show(); 
         }
     });
-    // event change username
+}
+function handleEventChangeUsername(){
     $("#username").bind("change", function(){
+        let username = $(this).val();
+        let regexUsername = /^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/;
+        
+        
+        if( !regexUsername.test(username) || username.length < 3 || username.length > 17 ){
+            alertify.alert().set('message', 'Your username length from 3 to 17 character & can not use special character like @ , # , $ , % ,.....').show();
+            $(this).val(userOriginalInformation.username);
+            delete userInformation.username;
+            return false; 
+        }
+
+
         userInformation.username = $(this).val();
     });
-    // event change gender
+}
+function handleEventChangeGenderMale(){
     $("#male-gender").bind("click", function(){
+        let gender = $(this).val();
+
+        if( gender != "male"){
+            alertify.alert().set('message', 'Your gender must be male or female').show();
+            delete userInformation.gender;
+            return false;
+        }
+
         userInformation.gender = $(this).val();
     })
+}
+function handleEventChangeGenderFemale(){
     $("#female-gender").bind("click", function(){
+        let gender = $(this).val();
+
+        if( gender != "female"){
+            alertify.alert().set('message', 'Your gender must be male or female').show();
+            delete userInformation.gender;
+            return false;
+        }
+
         userInformation.gender = $(this).val();
     });
-    // event change address
+}
+function handleEventChangeAddress(){
     $("#address").bind("change", function(){
+        let address = $(this).val();
+
+        if( address.length < 3 || address.length > 50 ){
+            alertify.alert().set('message', 'Your address length from 3 to 50').show();
+            $(this).val(userOriginalInformation.address);
+            delete userInformation.address;
+            return false;
+        }
+
         userInformation.address = $(this).val();
     });
-    // event change phone
+}
+function handleEventChangePhone(){
     $("#phone").bind("change", function(){
+        let phone = $(this).val();
+        let regexPhone = /^(0)[0-9]{9,10}$/;
+
+        if( !regexPhone.test(phone) || phone.length < 10 || phone.length > 11){
+            alertify.alert().set('message', 'Your phone length from 10 to 11').show();
+            $(this).val(userOriginalInformation.phone);
+            delete userInformation.phone;
+            return false;
+        }
+
         userInformation.phone = $(this).val();
     })
 }
-
-/**
- * function "ajax to update avatar" wraps a Ajax PUT request to store updated avatar
+/* public /user-update-information
+ * function "update Information" detects event like "change","click",....to handle
+ * check input data like avatar , username , phone , address
  */
+function updateInformation (){
+
+    // event change avatar
+    handleEventChangeAvatar();
+
+    // event change username
+    handleEventChangeUsername();
+
+    // event change gender
+    handleEventChangeGenderMale();
+    handleEventChangeGenderFemale();
+
+    // event change address
+    handleEventChangeAddress();
+
+    // event change phone
+    handleEventChangePhone();
+}
+
+
+/*function "ajax to update avatar" wraps a Ajax PUT request to store updated avatar*/
 function ajaxToUpdateAvatar(){
     $.ajax({
         url : "/user-update-avatar",
@@ -110,10 +179,7 @@ function ajaxToUpdateAvatar(){
     })
 }
 
-
-/**
- * function "ajax To Update Information" wraps a Ajax PUT request to store updated information
- */
+/*function "ajax To Update Information" wraps a Ajax PUT request to store updated information*/
 function ajaxToUpdateInformation(){
     $.ajax({
         url : "/user-update-information",
@@ -169,6 +235,8 @@ $(document).ready(function(){
     $("#input-btn-cancel-update-user").bind("click",function(){
         userAvatar = null;
         userInformation = {};
+
+        
         $("#user-avatar").attr("src",userOriginalAvatar)
         $("#username").val( userOriginalInformation.username )
         userOriginalInformation.gender === "male" ? $("#male-gender").click() : $("#female-gender").click()
