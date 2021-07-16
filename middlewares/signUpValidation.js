@@ -12,7 +12,7 @@ let signupValidation = [
 
 
     check("password",userError.incorrectPassword)//password have number - uppercase,lower & special letter
-        .isLength({ min : 1, max : 10 }),
+        .isLength({ min : 1 }),
         //.matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$/),
 
 

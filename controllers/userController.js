@@ -4,7 +4,6 @@ const fileExtension = ["image/png","image/jpg","image/jpeg"];
 const userModel = require('../models/userModel.js');
 const fsExtra = require('fs-extra');
 import {systemError,notice} from '../notification/english.js';
-import userSchema from '../schema/userSchema.js';
 import { validationResult } from "express-validator/check";
 /* ======================= CONSTANTS ======================= */
 const storage = multer.diskStorage({
@@ -27,9 +26,7 @@ const storage = multer.diskStorage({
 const uploadAvatarFile = multer({
     storage : storage,
     limits : { fileSize : 5242880 }
-}).single("avatar");// this "avatar" must be the same with value in /public/javascript/updateConfig.js - line 47
-
-/* ======================= FUNCTION ======================= */
+}).single("avatar");// this "avatar" must be the same with value in /public/javascript/updateConfig.js - line 47 
 
 /*************************************************************
  * update avatar that user want
@@ -67,21 +64,21 @@ let updateAvatar = ( req,res ) =>{
         } 
         catch (error) 
         {
-            console.log(error);
             return res.status(500).send(error);
         }
     });
 }
 
 
+
 /*************************************************************
- * update information
+ * update information that user want
  * public /user-update-information
  * @param {*} req 
  * @param {*} res 
  * @returns 
  *************************************************************/
-let updateInformation = async (req,res )=>{
+let updateInformation = async (req,res)=>{
     let errorsArray = [];
     let validationErrors = validationResult(req);
 
@@ -106,13 +103,52 @@ let updateInformation = async (req,res )=>{
     } 
     catch (error)
     {
-        console.log(error);
-        return res.status(500).error;
+        return res.status(500).send(error);
     } 
 }
 
 
+
+/*************************************************************
+ * update password that user want
+ * public /user-update-password
+ * @param {*} req 
+ * @param {*} res 
+ **************************************************************/
+let updatePassword = async (req,res)=>{
+
+    let errorsArray = [];
+    let validationErrors = validationResult(req);
+
+
+    // check if errors exist or not ?
+    if( !validationErrors.isEmpty() )
+    {
+        let errors = Object.values(validationErrors.mapped());
+        errors.forEach( element => {
+            errorsArray.push( element.msg );
+        });
+        return res.status(500).send(errorsArray);
+    }
+
+
+
+    try 
+    {
+        let userPassword = req.body;
+        await userModel.updateUserPassword( req.user._id , userPassword );
+        
+        let result = { messenge : "Updated password successfully !"}
+        return res.status(200).send(result);
+    } 
+    catch (error) 
+    {
+        return res.status(500).send(error);
+    }
+}
+
 module.exports = { 
     updateAvatar : updateAvatar,
-    updateInformation : updateInformation
+    updateInformation : updateInformation,
+    updatePassword : updatePassword
 };

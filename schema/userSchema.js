@@ -89,6 +89,10 @@ userSchema.statics = {
     {
         // after updating successfully , mongoose still returns former data
         return this.findByIdAndUpdate(id ,information).exec();
+    },
+    updatePassword(id,hashedPassword)
+    {
+        return this.findByIdAndUpdate(id, {"local.password" : hashedPassword}).exec();
     }
 }
 /**

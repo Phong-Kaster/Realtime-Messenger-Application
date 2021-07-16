@@ -2,7 +2,7 @@
 import {check} from "express-validator/check";
 import {notice, userError} from "../notification/english.js";
 
-let updateValidation = [
+let informationValidation = [
     check("username", userError.standardUsername)
         .optional()
         .matches(/^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/)
@@ -23,4 +23,4 @@ let updateValidation = [
 ]
     
 
-module.exports = updateValidation
+module.exports = informationValidation
