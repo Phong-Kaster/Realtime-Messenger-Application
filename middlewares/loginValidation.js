@@ -29,6 +29,8 @@ let isLogin = (req,res,next) =>{
     }
     next();
 }
+
+
 module.exports = {
     isLogout : isLogout,
     isLogin : isLogin

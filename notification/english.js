@@ -4,7 +4,7 @@ export const userError = {
     deactivateAccount : "Your account was created but it's not activated by your email.Please check your email to activate your account",
     incorrectEmail : "Email must have pattern yourname@gmail.com",
     incorrectGender : "Your gender must be male or female",
-    incorrectPassword : "Your password have at least 8 letter include number, special character.For example : Aa!234567",
+    incorrectPassword : "Your password have at least 1 letter & maximum 10 letter !",
     incorrectPasswordConfirmation: "Your password confirmation doesn't familiar with password",
     activatedAccount : "Your account was activated successfully.You don't need to click the link in e-verify email",
     inexistentAccount : "Account does not exist !",

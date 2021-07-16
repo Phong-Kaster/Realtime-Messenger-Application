@@ -1,10 +1,16 @@
+/* update user config handle events which relate to user information like : avatar,username,... */
 /* ======================= GLOBAL CONSTANTS =======================*/
 let userAvatar = null;
 let userInformation = {};
 let userOriginalAvatar;
 let userOriginalInformation = {};
+let userPassword = {};
 /* ======================= FUNCTION =======================*/
-/* A bundle functions of handling change event for avatar - username - gender - address - phone */
+
+
+/***************************************************************************************** 
+ * A bundle functions of handling change event for avatar - username - gender - address - phone 
+/*****************************************************************************************/
 function handleEventChangeAvatar(){
     $("#input-change-avatar").bind("change", function(){
         let file = $(this).prop("files")[0];
@@ -129,10 +135,80 @@ function handleEventChangePhone(){
         userInformation.phone = $(this).val();
     })
 }
-/* public /user-update-information
+function handleEventChangeCurrentPassword(){
+    $("#currentPassword").bind("change", function(){
+        let currentPassword = $(this).val();
+
+        if( currentPassword.length < 0 || currentPassword.length > 10){
+            alertify.alert().set('message', 'Your password must has at least 1 letter').show();
+            $(this).val(null);
+            delete userPassword.currentPassword;
+            return false;
+        }
+
+        userPassword.currentPassword = $(this).val();
+    })
+}
+function handleEventChangeNewPassword(){
+    $("#newPassword").bind("change", function(){
+        let newPassword = $(this).val();
+
+        if( !userPassword.currentPassword){
+            alertify.alert().set('message', 'You have to type your current password').show();
+            $(this).val(null);
+            delete userPassword.newPassword;
+            return false;
+        }
+
+        if( userPassword.currentPassword == newPassword){
+            alertify.alert().set('message', 'Your new password can not familiar with current password').show();
+            $(this).val(null);
+            delete userPassword.newPassword;
+            return false;
+        }
+
+        if( newPassword.length < 0 || newPassword.length > 10)
+        {
+            alertify.alert().set('message', 'Your new password must has at least 1 letter & maximum 10 letters').show();
+            $(this).val(null);
+            delete userPassword.newPassword;
+            return false;
+        }
+
+        userPassword.newPassword = $(this).val();
+    })
+}
+function handleEventChangeConfirmNewPassword(){
+    $("#confirmNewPassword").bind("change", function(){
+
+        let confirmNewPassword = $(this).val();
+
+        if( !userPassword.newPassword ){
+            alertify.alert().set('message', 'You have to type a new password').show();
+            $(this).val(null);
+            delete userPassword.confirmNewPassword;
+            return false;
+        }
+
+        if( confirmNewPassword !== userPassword.newPassword){
+            alertify.alert().set('message', 'You confirm password does not match with new password').show();
+            $(this).val(null);
+            delete userPassword.confirmNewPassword;
+            return false;
+        }
+
+
+        userPassword.confirmNewPassword = $(this).val();
+    })
+}
+
+
+
+/****************************************************************************************
+ * public /user-update-information
  * function "update Information" detects event like "change","click",....to handle
  * check input data like avatar , username , phone , address
- */
+ *****************************************************************************************/
 function updateInformation (){
 
     // event change avatar
@@ -150,10 +226,23 @@ function updateInformation (){
 
     // event change phone
     handleEventChangePhone();
+
+
+    //event change current password
+    handleEventChangeCurrentPassword();
+
+    //event change new password
+    handleEventChangeNewPassword();
+
+    //event change confirm new password
+    handleEventChangeConfirmNewPassword();
 }
 
 
-/*function "ajax to update avatar" wraps a Ajax PUT request to store updated avatar*/
+
+/*****************************************************************************************
+* 2 ajax function to send PUT request 
+*****************************************************************************************/
 function ajaxToUpdateAvatar(){
     $.ajax({
         url : "/user-update-avatar",
@@ -178,8 +267,6 @@ function ajaxToUpdateAvatar(){
         }
     })
 }
-
-/*function "ajax To Update Information" wraps a Ajax PUT request to store updated information*/
 function ajaxToUpdateInformation(){
     $.ajax({
         url : "/user-update-information",
@@ -207,20 +294,11 @@ function ajaxToUpdateInformation(){
 }
 
 
-$(document).ready(function(){
-    // retrieve current information of user
-    userOriginalAvatar = $("#user-avatar").attr("src");
-    userOriginalInformation = {
-        username : $("#username").val(),
-        gender : $("#male-gender").is(":checked") ? "male" : "female",
-        address : $("#address").val(),
-        phone : $("#phone").val()
-    };
 
-    // get changes that user is editing
-    updateInformation();
-
-    // ajax to store avatar file into database
+/********************************************************************************************
+* a bundle function that handle event click button
+*****************************************************************************************/
+function handleButtonUpdateUserInformation(){
     $("#input-btn-update-user").bind("click" , function(){
         if( userAvatar ){
             ajaxToUpdateAvatar();
@@ -230,8 +308,8 @@ $(document).ready(function(){
             ajaxToUpdateInformation();
         }
     });
-
-    // user is on the second thoughts and cancel
+}
+function handleButtonCancelUpdateUserInformation(){
     $("#input-btn-cancel-update-user").bind("click",function(){
         userAvatar = null;
         userInformation = {};
@@ -243,4 +321,45 @@ $(document).ready(function(){
         $("#address").val( userOriginalInformation.address)
         $("#phone").val( userOriginalInformation.phone)
     });
+}
+function handleButtonUpdateUserPassword(){
+    $("#password-btn-confirm").bind("click",function(){
+        console.log(userPassword);
+    })
+}
+function handleButtonCancelUpdateUserPassword(){
+    $("#password-btn-cancel").bind("click",function(){
+        userPassword = null;
+        $("#currentPassword").val(null);
+        $("#newPassword").val(null);
+        $("#confirmNewPassword").val(null);
+    })
+}
+
+$(document).ready(function(){
+    // retrieve current information of user
+    userOriginalAvatar = $("#user-avatar").attr("src");
+    userOriginalInformation = {
+        username : $("#username").val(),
+        gender : $("#male-gender").is(":checked") ? "male" : "female",
+        address : $("#address").val(),
+        phone : $("#phone").val()
+    };
+
+    // retrieve fields they changed include information & password
+    updateInformation();
+
+
+
+    // user confirms that they want to save their information changes
+    handleButtonUpdateUserInformation();
+
+    // user is on the second thoughts and cancel update information
+    handleButtonCancelUpdateUserInformation();
+
+    // user confirms that they want to save their new password
+    handleButtonUpdateUserPassword();
+
+    // user changes their mind & cancels update password
+    handleButtonCancelUpdateUserPassword();
 });

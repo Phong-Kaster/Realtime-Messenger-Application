@@ -6,6 +6,7 @@ const fsExtra = require('fs-extra');
 import {systemError,notice} from '../notification/english.js';
 import userSchema from '../schema/userSchema.js';
 import { validationResult } from "express-validator/check";
+/* ======================= CONSTANTS ======================= */
 const storage = multer.diskStorage({
     destination : ( req , file , callback )=>{   
         callback(null,"public/images/users");
@@ -22,6 +23,7 @@ const storage = multer.diskStorage({
         callback(null,avatarName);
     }
 });
+
 const uploadAvatarFile = multer({
     storage : storage,
     limits : { fileSize : 5242880 }
@@ -29,12 +31,12 @@ const uploadAvatarFile = multer({
 
 /* ======================= FUNCTION ======================= */
 
-/**
+/*************************************************************
  * update avatar that user want
  * public /user-update-avatar
  * @param {*} req 
  * @param {*} res 
- */
+ *************************************************************/
 let updateAvatar = ( req,res ) =>{
     uploadAvatarFile(req,res,async function(error){
         if(error)
@@ -70,14 +72,15 @@ let updateAvatar = ( req,res ) =>{
         }
     });
 }
-/**
+
+
+/*************************************************************
  * update information
  * public /user-update-information
  * @param {*} req 
  * @param {*} res 
  * @returns 
- */
-
+ *************************************************************/
 let updateInformation = async (req,res )=>{
     let errorsArray = [];
     let validationErrors = validationResult(req);
@@ -107,6 +110,8 @@ let updateInformation = async (req,res )=>{
         return res.status(500).error;
     } 
 }
+
+
 module.exports = { 
     updateAvatar : updateAvatar,
     updateInformation : updateInformation

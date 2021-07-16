@@ -10,8 +10,10 @@
                     <li class="active"><a data-toggle="tab" href="#seting-profile">Cài đặt chung</a></li>
                     <li><a data-toggle="tab" id="link-to-password-profile" href="#password-profile">Quản lý mật khẩu</a></li>
                 </ul>
+                
                 <div class="tab-content">
                     <div id="seting-profile" class="tab-pane fade in active">
+                        <!-- USER AVATAR & INFORMATION SECTION-->
                         <div class="row">
                             <form class="form-horizontal" method="put" role="form">
                                 <!-- left column -->
@@ -107,15 +109,19 @@
                             </form>
                         </div>
                     </div>
+                    <!-- USER AVATAR & INFORMATION SECTION-->
+
+                    <!-- PASSWORD SECTION-->
                     <div id="password-profile" class="tab-pane fade">
                         <div class="col-md-9 personal-info">
-                            <div class="alert alert-danger alert-dismissable">
+                            </br>
+                            <div class="alert alert-danger alert-dismissable password-error-alert">
                                 <a class="panel-close close" data-dismiss="alert">×</a>
                                 Update password error example<br>
                                 <!-- <script>openProfilePasswordModal();</script> -->
                             </div>
 
-                            <div class="alert alert-success alert-dismissable">
+                            <div class="alert alert-success alert-dismissable password-success-alert">
                                 <a class="panel-close close" data-dismiss="alert">×</a>
                                 Update password success example<br>
                                 <!-- <script>openProfilePasswordModal();</script> -->
@@ -125,34 +131,35 @@
                             <br>
                             <form class="form-horizontal" method="post" role="form" action="">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Mật khẩu cũ</label>
+                                    <label class="col-md-4 control-label">Mật khẩu hiện tại</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="password" name="current_password" placeholder="Enter your curent password...">
+                                        <input id="currentPassword" class="form-control" type="password" name="current_password" placeholder="Enter your curent password...">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Mật khẩu mới</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="password" name="new_password" placeholder="Enter new password...">
+                                        <input id="newPassword" class="form-control" type="password" name="new_password" placeholder="Enter new password...">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label">Nhập lại mật khẩu mới</label>
                                     <div class="col-md-8">
-                                        <input class="form-control" type="password" name="confirm_new_password" placeholder="Enter confirm new password...">
+                                        <input id="confirmNewPassword" class="form-control" type="password" name="confirm_new_password" placeholder="Enter confirm new password...">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-md-4 control-label"></label>
                                     <div class="col-md-8">
-                                        <input type="submit" class="btn btn-primary custom-background-btn-primary" value="Lưu lại">
+                                        <input type="button" id="password-btn-confirm" class="btn btn-primary custom-background-btn-primary" value="Lưu lại">
                                         <span></span>
-                                        <input type="reset" class="btn btn-default custom-background-btn-reset" value="Hủy bỏ">
+                                        <input type="button" id="password-btn-cancel" class="btn btn-default custom-background-btn-reset" value="Hủy bỏ">
                                     </div>
                                 </div>
                             </form>
                         </div>
                     </div>
+                    <!--END PASSWORD SECTION-->
                 </div>
             </div>
         </div>
