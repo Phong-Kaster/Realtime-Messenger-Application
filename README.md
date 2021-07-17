@@ -5,7 +5,7 @@
 # Realtime-Messenger-Application
 
 <p align="center">
-    <img src="./public/images/logo_favicon/logo.png" >
+    <img height="150px" src="./public/images/logo_favicon/logo.png" >
 </p>
 
 </center>
