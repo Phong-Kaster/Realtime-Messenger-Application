@@ -1,13 +1,12 @@
 <center>
 
-# Realtime-Messenger-Application
-
 <p align="center">
     <img height="150px" src="./public/images/logo_favicon/logo.png" >
 </p>
 
 </center>
 
+<h1 align="center">Realtime Messenger Application</h1>
 
 ## Table of contents
 
