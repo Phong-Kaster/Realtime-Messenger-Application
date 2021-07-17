@@ -4,35 +4,8 @@ let userAvatar = null;
 let userInformation = {};
 let userOriginalAvatar;
 let userOriginalInformation = {};
-let userPassword = {};
 /* ======================= FUNCTION =======================*/
 
-function redirectToLoginPage(){
-    let timeInterval;
-    Swal.fire(
-    {
-        position : 'top-end',
-        icon : 'success',
-        title : 'Redirect to login page after 3 seconds',
-        html : "<strong></strong>",
-        timer : 3000,
-        onBeforeOpen : ()=>
-        {
-            Swal.showLoading();
-            timeInterval = setInterval( ()=>
-            {
-                Swal.getContent().querySelector("strong").textContent = Math.ceil( Swal.getTimeLeft() / 1000 )
-            },1000)
-        },
-        onClose : () =>{
-            clearInterval(timeInterval);
-        }
-      })
-      .then( (result) =>
-      { 
-          $.get("/signout",()=>{location.reload;})
-      })
-}
 
 /***************************************************************************************** 
  * A bundle functions of handling change event for avatar - username - gender - address - phone 
@@ -161,73 +134,6 @@ function handleEventChangePhone(){
         userInformation.phone = $(this).val();
     })
 }
-function handleEventChangeCurrentPassword(){
-    $("#currentPassword").bind("change", function(){
-        let currentPassword = $(this).val();
-
-        if( currentPassword.length < 0){
-            alertify.alert().set('message', 'Your password must has at least 1 letter').show();
-            $(this).val(null);
-            delete userPassword.currentPassword;
-            return false;
-        }
-
-        userPassword.currentPassword = $(this).val();
-    })
-}
-function handleEventChangeNewPassword(){
-    $("#newPassword").bind("change", function(){
-        let newPassword = $(this).val();
-
-        if( !userPassword.currentPassword){
-            alertify.alert().set('message', 'You have to type your current password').show();
-            $(this).val(null);
-            delete userPassword.newPassword;
-            return false;
-        }
-
-        if( userPassword.currentPassword == newPassword){
-            alertify.alert().set('message', 'Your new password can not familiar with current password').show();
-            $(this).val(null);
-            delete userPassword.newPassword;
-            return false;
-        }
-
-        if( newPassword.length < 0)
-        {
-            alertify.alert().set('message', 'Your new password must has at least 1 letter').show();
-            $(this).val(null);
-            delete userPassword.newPassword;
-            return false;
-        }
-
-        userPassword.newPassword = $(this).val();
-    })
-}
-function handleEventChangeConfirmNewPassword(){
-    $("#confirmNewPassword").bind("change", function(){
-
-        let confirmNewPassword = $(this).val();
-
-        if( !userPassword.newPassword ){
-            alertify.alert().set('message', 'You have to type a new password').show();
-            $(this).val(null);
-            delete userPassword.confirmNewPassword;
-            return false;
-        }
-
-        if( confirmNewPassword !== userPassword.newPassword){
-            alertify.alert().set('message', 'You confirm password does not match with new password').show();
-            $(this).val(null);
-            delete userPassword.confirmNewPassword;
-            return false;
-        }
-
-
-        userPassword.confirmNewPassword = $(this).val();
-    })
-}
-
 
 
 /****************************************************************************************
@@ -253,15 +159,6 @@ function updateInformation (){
     // event change phone
     handleEventChangePhone();
 
-
-    //event change current password
-    handleEventChangeCurrentPassword();
-
-    //event change new password
-    handleEventChangeNewPassword();
-
-    //event change confirm new password
-    handleEventChangeConfirmNewPassword();
 }
 
 
@@ -315,27 +212,6 @@ function ajaxToUpdateInformation(){
             $(".user-error-alert").find("span").text(error.responseText);
             $(".user-error-alert").css("display","block");
             $("#input-btn-cancel-update-user").click();
-        }
-    })
-}
-function ajaxToUpdatePassword(){
-    $.ajax({
-        url : "/user-update-password",
-        type : "put",
-        data : userPassword,
-        success : function(result)
-        {
-            $(".password-success-alert").find("span").text(result.messenge);
-            $(".password-success-alert").css("display","block");
-            $("#password-btn-cancel").click();
-            //redirectToLoginPage();
-
-        },
-        error : function(error)
-        {
-            $(".password-error-alert").find("span").text(error.responseText);
-            $(".password-error-alert").css("display","block");
-            $("#password-btn-cancel").click();
         }
     })
 }
@@ -428,9 +304,5 @@ $(document).ready(function(){
     // user is on the second thoughts and cancel update information
     handleButtonCancelUpdateUserInformation();
 
-    // user confirms that they want to save their new password
-    handleButtonUpdateUserPassword();
 
-    // user changes their mind & cancels update password
-    handleButtonCancelUpdateUserPassword();
 });

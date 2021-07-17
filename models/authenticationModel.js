@@ -3,11 +3,8 @@ const userSchema = require('../schema/userSchema.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 7; 
 import uuidv4 from 'uuid/v4';// used to create token
-import {userError} from '../notification/english.js';
 const sendEmail = require('../config/email.js');
-import {notice} from '../notification/english.js';
-import {subject} from '../notification/english.js';
-import {systemError} from '../notification/english.js';
+import {userError,notice,subject,systemError} from '../notification/english.js';
 /* ============================ FUNCTION ============================ */
 
 
@@ -23,9 +20,8 @@ import {systemError} from '../notification/english.js';
 let signup = async ( email,gender,password,protocol , host ) =>{
     // this function returns a Promise
     return new Promise( async (resolve , reject )=>{
-        
-        let userByEmail = await userSchema.findByEmail(email);
         // check this email exist or not
+        let userByEmail = await userSchema.findByEmail(email);
         if( userByEmail )
         {
             // this email was removed
@@ -40,9 +36,10 @@ let signup = async ( email,gender,password,protocol , host ) =>{
             }
             return reject( userError.usedAccount );
         }
+
+
         // set salt to encrypt user password
         let salt = bcrypt.genSaltSync(saltRounds);
-
         let userInformation = {
             username : email.split("@")[0],
             gender : gender,
@@ -54,16 +51,18 @@ let signup = async ( email,gender,password,protocol , host ) =>{
             }
         }
 
+
         // create a new account
         let user = await userSchema.createNew( userInformation );
         let verifyPath = `${protocol}://${host}/verify/${user.local.verifiedToken}`;
+
+
         // send email if it is sent return successful Notice
         // if not return systemError
         sendEmail( email,subject.confirmAccount, subject.template(verifyPath))
             .then( () =>{ resolve(notice.userCreated( user.local.email )); })
             .catch( async (error) =>{
                 await userSchema.removeById( user._id );
-                console.log("send email : "  + error); 
                 reject( systemError.unsentEmail );
             });
     });

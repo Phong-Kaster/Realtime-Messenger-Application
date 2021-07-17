@@ -74,7 +74,7 @@ let initiateRouters = (app) =>{
 
 
     // verify token to activate account
-    router.get("/verify/:verifiedToken", loginValidation.isLogout , authenticationController.verify);
+    router.get("/verify/:verifiedToken" , authenticationController.verify);
 
 
 

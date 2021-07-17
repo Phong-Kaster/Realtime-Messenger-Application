@@ -33,7 +33,7 @@ let signup = async (req,res) =>{
     if( !validationErrors.isEmpty() )
     {
         let errors = Object.values(validationErrors.mapped());
-        // push error notification into errorsArray
+        
         errors.forEach( element => {
             errorsArray.push( element.msg );
         });
@@ -98,6 +98,8 @@ let signout = (req,res) =>{
     req.flash("success",notice.successfulLogout);
     return res.redirect("/");
 }
+
+
 module.exports = {
     signin : signin,
     signup : signup,
