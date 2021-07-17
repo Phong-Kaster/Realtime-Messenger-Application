@@ -1,5 +1,3 @@
-
-
 <center>
 
 # Realtime-Messenger-Application
