@@ -75,7 +75,7 @@ Installation will be activated automatically.
 
         4. Configure view engine with EJS
 
- - Authentication function : What type of account does users can use to log in ? [Passport JS](http://www.passportjs.org/) library was used to build up this function. In my [Realtime Messenger Application](https://github.com/Phong-Kaster/Realtime-Messenger-Application),people can login by 3 different ways : [Local Account](http://www.passportjs.org/packages/passport-local/) , [Facebook Account](http://www.passportjs.org/docs/facebook/) , [Google Account](http://www.passportjs.org/docs/google/)
+ - Authentication function : What type of account does users can use to log in ? To heighten performace and shorten code as possible as I can , [Passport JS](http://www.passportjs.org/) library was used to build up this function. In my [Realtime Messenger Application](https://github.com/Phong-Kaster/Realtime-Messenger-Application),people can login by 3 different ways : [Local Account](http://www.passportjs.org/packages/passport-local/) , [Facebook Account](http://www.passportjs.org/docs/facebook/) , [Google Account](http://www.passportjs.org/docs/google/)
   
         1. Client-side account registration function
 
