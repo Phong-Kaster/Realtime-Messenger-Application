@@ -1,3 +1,4 @@
+/* ======================= LIBRARY ======================= */
 const userSchema = require('../schema/userSchema.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 7;

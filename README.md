@@ -14,6 +14,7 @@
 - [**Introduction**](#introduction)
 - [**Architecture**](#architecture)
 - [**Installation**](#installation)
+- [**Features**](#features)
 - [**Timeline**](#timeline)
   - [**Phase 1** : **24-06-2021** to **16-07-2021**](#phase-1--24-06-2021-to-16-07-2021)
   - [**Phase 2** : **19-07-2021** to **xx-xx-2021**](#phase-2--19-07-2021-to-xx-xx-2021)
@@ -33,7 +34,7 @@
 What type of architecture have I use ? I have written this application following **Model-View-Controller** architecture
 
 ## [**Installation**](#installation)
-In folder `public/bower_components` contains third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , Bower was used to managing these libraries.Detail about [third-party libraries](#third-party-libraries)
+In folder `public/bower_components` contains third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , [Bower](https://bower.io/#getting-started) was used to managing these libraries.
 You can read more about [Bower](https://bower.io/#getting-started)
 
 We have 2 important bower file:
@@ -51,6 +52,12 @@ To active , run :
         bower install
 
 Installation will be activated automatically.
+
+## [**Features**](#features)
+1. Login Function 
+       Both Local Account,Facebook Account & Google Account use node_mailer & passportJS node package
+2. Chat Function
+
 ## [**Timeline**](#timeline)
 
  ### **Phase 1** : **24-06-2021** to **16-07-2021**
@@ -75,7 +82,7 @@ Installation will be activated automatically.
 
         4. Configure view engine with EJS
 
- - Authentication function : What type of account does users can use to log in ? To heighten performace and shorten code as possible as I can , [Passport JS](http://www.passportjs.org/) library was used to build up this function. In my [Realtime Messenger Application](https://github.com/Phong-Kaster/Realtime-Messenger-Application),people can login by 3 different ways : [Local Account](http://www.passportjs.org/packages/passport-local/) , [Facebook Account](http://www.passportjs.org/docs/facebook/) , [Google Account](http://www.passportjs.org/docs/google/)
+ - Authentication function : What type of account does users can use to log in ? To heighten performance and shorten code as possible as I can , [Passport JS](http://www.passportjs.org/) library was used to build up this function. In my [Realtime Messenger Application](https://github.com/Phong-Kaster/Realtime-Messenger-Application),people can login by 3 different ways : [Local Account](http://www.passportjs.org/packages/passport-local/) , [Facebook Account](http://www.passportjs.org/docs/facebook/) , [Google Account](http://www.passportjs.org/docs/google/)
   
         1. Client-side account registration function
 
