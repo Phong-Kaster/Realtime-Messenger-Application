@@ -19,6 +19,7 @@ let signin = (req,res) =>{
 };
 
 
+
 /*************************************************************
  * public post /signup
  * @returns if user account was created successfully or not ??
@@ -60,6 +61,7 @@ let signup = async (req,res) =>{
 }
 
 
+
 /**************************************************************
  * private post /verify/:verifiedToken
  * @param {*} req 
@@ -84,6 +86,7 @@ let verify =  async (req,res) =>{
         return res.redirect("/signin");
     }
 }
+
 
 
 /**************************************************************
