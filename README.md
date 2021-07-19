@@ -33,7 +33,7 @@
 What type of architecture have I use ? I have written this application following **Model-View-Controller** architecture
 
 ## [**Installation**](#installation)
-In folder `public/bower_components` contain third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , Bower was used to managing these libraries.Detail about [third party libraries](#third-party-libraries)
+In folder `public/bower_components` contains third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , Bower was used to managing these libraries.Detail about [third-party libraries](#third-party-libraries)
 You can read more about [Bower](https://bower.io/#getting-started)
 
 We have 2 important bower file:
