@@ -5,7 +5,6 @@ const _ = require('lodash');
 /* ======================= FUNCTION ======================= */
 
 /**
- * 
  * @param {*} currentUserID that account ID is logging in
  * @param {*} keyword that is condition we input to search
  * @invalidUserIDs is an array that contains User IDs who are our friends

@@ -12,6 +12,7 @@
 
 - [**Table of contents**](#table-of-contents)
 - [**Introduction**](#introduction)
+- [**The reason why I write**](#the-reason-why-i-write)
 - [**Architecture**](#architecture)
 - [**Installation**](#installation)
 - [**Features**](#features)
@@ -29,9 +30,12 @@
 
 [Facebook Messenger](https://www.facebook.com/) , [WhatsApp](https://www.whatsapp.com/?lang=en) , [Skype](https://www.skype.com/en/features/skype-web/) doesn't respect your private ?  Advertisements make you annoy ? You want some chatting application which protects your information & encrypts every single messenger  ? It's simple 😆 Get into [Realtime Messenger Application](https://github.com/Phong-Kaster) . I can do it for you & for free forever 🤗.This is my idea
 
+
+## [**The reason why I write**](#the-reason-why-i-write-)
+When I make a start , I have been just a third-year student in **Posts and Telecommunications Institute of Technology HCM Branch**.So I am hungry for a challenge , I want to learn & build some thing usefully . In addition , it can make employer impressive,so on 😎😋
 ## [**Architecture**](#architecture)
 
-What type of architecture have I use ? I have written this application following **Model-View-Controller** architecture
+What type of architecture have I used ? I have written this application following **Model-View-Controller** architecture
 
 ## [**Installation**](#installation)
 In folder `public/bower_components` contains third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , [Bower](https://bower.io/#getting-started) was used to managing these libraries.
@@ -56,7 +60,7 @@ Installation will be activated automatically.
 ## [**Features**](#features)
 1. Login Function 
        Both Local Account,Facebook Account & Google Account use node_mailer & passportJS node package
-2. Chat Function
+2. Search Function
 
 ## [**Timeline**](#timeline)
 
@@ -115,7 +119,6 @@ Installation will be activated automatically.
 
 ## [**Third-party libraries**](#third-party-libraries)
 With front-end , I used third-party libraries which have its version as :
-
 1. bootstrap : 3.3.7
    
 2. font-awesome : 4.7.0
