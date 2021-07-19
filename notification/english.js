@@ -13,7 +13,8 @@ export const userError = {
     standardUsername : "Your username length from 3 to 17 character & can not use special character like @ , # , $ , % ,.....",
     standardAddress : "Address length is from 3 to 30 character !",
     standardPhone : "Phone has from 10 to 11 number",
-    incorrectCurrentEmail : "Your current password is not correct !"    
+    incorrectCurrentEmail : "Your current password is not correct !",
+    invalidKeyword : "Your keyword include invalid character !"
 };
 export const systemError = {
     unsentEmail : "The email can't be send.Please get contact with our customer service",

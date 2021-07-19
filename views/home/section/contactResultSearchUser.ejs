@@ -1,0 +1,25 @@
+<!-- list information about users that we can send friend request-->
+<% users.forEach( function(user){ %> 
+    <li class="_contactList" data-uid="<%= user._id %>">
+        <div class="contactPanel">
+            <div class="user-avatar">
+                <img src="./images/users/<%= user.avatar %>" alt="avatar">
+            </div>
+            <div class="user-name">
+                <p>
+                    <%= user.username %>
+                </p>
+            </div>
+            <br>
+            <div class="user-address">
+                <span>&nbsp <%= user.address %></span>
+            </div>
+            <div class="user-add-new-contact" data-uid="<%= user._id %>">
+                Thêm vào danh sách liên lạc
+            </div>
+            <div class="user-remove-request-contact action-danger" data-uid="<%= user._id %>">
+                Hủy yêu cầu
+            </div>
+        </div>
+    </li>
+<% }); %>

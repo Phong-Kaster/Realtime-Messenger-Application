@@ -44,7 +44,6 @@ function handleEventChangeCurrentPassword(){
         }
 
         userPassword.currentPassword = $(this).val();
-        console.log("userPassword current : " + userPassword.currentPassword);
     })
 }
 function handleEventChangeNewPassword(){

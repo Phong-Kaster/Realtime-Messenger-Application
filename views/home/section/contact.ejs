@@ -22,9 +22,9 @@
                     <div id="find-user" class="tab-pane fade in active">
                         <div class="find-user-top">
                             <div class="input-group col-md-12">
-                                <input type="text" class="form-control" placeholder="Nhập E-mail hoặc username..." />
+                                <input id="keyword" type="text" class="form-control" placeholder="Nhập E-mail hoặc username..." />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-lg" type="button">
+                                    <button id="btn-search-keyword" class="btn btn-lg" type="button">
                                         <i class="glyphicon glyphicon-search"></i>
                                     </button>
                                 </span>
@@ -32,28 +32,7 @@
                         </div>
                         <div class="find-user-bottom">
                             <ul class="contactList">
-                                <li class="_contactList" data-uid="user._id">
-                                    <div class="contactPanel">
-                                        <div class="user-avatar">
-                                            <img src="./images/users/Blue.jpg" alt="">
-                                        </div>
-                                        <div class="user-name">
-                                            <p>
-                                                Pontifex
-                                            </p>
-                                        </div>
-                                        <br>
-                                        <div class="user-address">
-                                            <span>&nbsp Hà Nội, Việt Nam</span>
-                                        </div>
-                                        <div class="user-add-new-contact" data-uid="user._id">
-                                            Thêm vào danh sách liên lạc
-                                        </div>
-                                        <div class="user-remove-request-contact action-danger" data-uid="user._id">
-                                            Hủy yêu cầu
-                                        </div>
-                                    </div>
-                                </li>
+                                <!-- include (./views/home/section/contactResultSearchUser.ejs)-->
                             </ul>
                         </div>
                     </div>

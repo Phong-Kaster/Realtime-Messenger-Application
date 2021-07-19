@@ -9,13 +9,15 @@ const passportLocalController = require('../controllers/passportLocalController.
 const passportFacebookController = require('../controllers/passportFacebookController.js');
 const passportGoogleController = require('../controllers/passportGoogleController.js');
 const userController = require('../controllers/userController.js');
+const searchController = require('../controllers/searchController.js');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
 const informationValidation = require('../middlewares/informationValidation.js');
 const passwordValidation = require('../middlewares/passwordValidation.js');
-/* ======================= FUNCTIONS ======================= */
+const searchValidation = require('../middlewares/searchValidation');
 
+/* ======================= FUNCTIONS ======================= */
 // verify local account
 passportLocalController();
 
@@ -85,10 +87,10 @@ let initiateRouters = (app) =>{
 
     // user update 
     router.put("/user-update-avatar" , loginValidation.isLogout , userController.updateAvatar );
-    router.put("/user-update-information" , informationValidation , userController.updateInformation);
-    router.put("/user-update-password" , passwordValidation , userController.updatePassword);
+    router.put("/user-update-information" , loginValidation.isLogout , informationValidation , userController.updateInformation);
+    router.put("/user-update-password" , loginValidation.isLogout , passwordValidation , userController.updatePassword);
     
-    
+    router.get("/search/:keyword" , loginValidation.isLogout , searchValidation , searchController.searchByKeyword);
 
     return app.use("/",router);
 }

@@ -14,4 +14,27 @@ const contactSchema = new Schema({
     deletedAt : { type : Number, default : null }
 });
 
+contactSchema.statics = {
+    createNew(information)
+    {
+        return this.create(information);
+    },
+    /**
+     * 
+     * @param {*} id 
+     * @returns  all friends of user have this id
+     */
+    searchFriendsByID(id)
+    {
+        return this.find({
+            /* search myself as userId or search myself as contactId 
+            & return all record have userID & contact Id as myself */
+            $or : [
+                { "userId" : id },
+                { "contactId" : id }
+            ]
+        }).exec();
+    }
+}
+
 module.exports = mongoose.model('contact',contactSchema);
