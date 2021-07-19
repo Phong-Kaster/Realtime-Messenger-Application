@@ -1,6 +1,6 @@
 /* the middleware check input data like :email , username , phone , address */
 import {check} from "express-validator/check";
-import {notice, userError} from "../notification/english.js";
+import {userError} from "../notification/english.js";
 
 let searchValidation = [
     check("keyword" , userError.invalidKeyword)

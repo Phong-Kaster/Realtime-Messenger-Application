@@ -16,7 +16,7 @@ function search(element){
 
         if( !regexUsername.test(keyword) )
         {
-            alertify.alert().set('message', 'Your keyword is not valid.Only letter & number').show();
+            alertify.alert().set('message','Your keyword  is not valid.Only letter & number').show();
             return false;
         }
 

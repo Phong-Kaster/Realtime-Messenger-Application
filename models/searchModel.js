@@ -4,12 +4,19 @@ const userSchema = require('../schema/userSchema.js');
 const _ = require('lodash');
 /* ======================= FUNCTION ======================= */
 
+/**
+ * 
+ * @param {*} currentUserID that account ID is logging in
+ * @param {*} keyword that is condition we input to search
+ * @invalidUserIDs is an array that contains User IDs who are our friends
+ * @friendsOfCurrentUserID is an array that is result from query searchFriendsByID
+ * @validUserIDs is an array that include User IDs who are not our friends
+ * @returns validUserIDs
+ */
 let searchByKeyword = ( currentUserID , keyword )=>{
     return new Promise( async ( resolve , reject )=>{
 
-        // deprecate User ID contains ID that isn't used to search new user
         let invalidUserIDs = [];
-        // friends Of Current User Id contains ID that is friend of current User Id
         let friendsOfCurrentUserID = await contactSchema.searchFriendsByID( currentUserID , keyword );
         
        
@@ -22,9 +29,6 @@ let searchByKeyword = ( currentUserID , keyword )=>{
         // filter duplicate ID
         invalidUserIDs = _.unionBy(invalidUserIDs);
 
-
-
-        // returns validUserIDs include user that they aren't friend with current User ID
         let validUserIDs = await userSchema.searchByInvalidUserIDsAndKeyword( invalidUserIDs , keyword );
         resolve(validUserIDs);
     });

@@ -90,6 +90,9 @@ let initiateRouters = (app) =>{
     router.put("/user-update-information" , loginValidation.isLogout , informationValidation , userController.updateInformation);
     router.put("/user-update-password" , loginValidation.isLogout , passwordValidation , userController.updatePassword);
     
+
+    
+    // search by keyword
     router.get("/search/:keyword" , loginValidation.isLogout , searchValidation , searchController.searchByKeyword);
 
     return app.use("/",router);
