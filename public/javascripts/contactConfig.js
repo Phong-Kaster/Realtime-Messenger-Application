@@ -48,7 +48,9 @@ function sendAddFriendRequest(){
                 $("#find-user").find(`div.user-add-new-contact[data-uid = ${targetID} ]`).hide();
                 // display "cancel request" button
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).css("display","inline-block");
+                
                 increaseResultNumber("count-request-contact-sent");
+                socket.emit("send-add-friend-request",{ contactId : targetID });
             }
         })
     })
@@ -66,7 +68,9 @@ function cancelFriendRequest(){
                 $("#find-user").find(`div.user-add-new-contact[data-uid = ${targetID} ]`).css("display","inline-block");
                 // hide "cancel request" button
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).hide();
+                
                 decreaseResultNumber("count-request-contact-sent");
+                socket.emit("cancel-friend-request" ,{ contactId : targetID });
             },
             error : function(error)
             {

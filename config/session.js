@@ -13,10 +13,10 @@ let sessionStore = new mongoStore({
  * configure session for application
  * @param {*} app 
  */
-let configureSession = (app) =>{
+let sessionConfigure = (app) =>{
     app.use(session( {
-        key : "express.sid",
-        secret : "mySecret",
+        key : process.env.SESSION_KEY,
+        secret : process.env.SESSION_SECRET,
         store : sessionStore,
         resave : true,
         saveUninitialized : false,
@@ -24,4 +24,7 @@ let configureSession = (app) =>{
     }));
 }
 
-module.exports = configureSession;
+module.exports = { 
+    sessionConfigure : sessionConfigure,
+    sessionStore : sessionStore
+}
