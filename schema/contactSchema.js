@@ -19,21 +19,43 @@ contactSchema.statics = {
     {
         return this.create(information);
     },
-    /**
-     * 
-     * @param {*} id 
+    /************************************************************
+     * search myself as userId or search myself as contactId & 
+     * return all record have userID & contact Id as myself
+     * @param {*} id whose user is finding his friends
      * @returns  all friends of user have this id
-     */
+     ************************************************************/
     searchFriendsByID(id)
     {
         return this.find({
-            /* search myself as userId or search myself as contactId 
-            & return all record have userID & contact Id as myself */
-            $or : [
-                { "userId" : id },
-                { "contactId" : id }
-            ]
+            $or : [{ "userId" : id },{ "contactId" : id }]
         }).exec();
+    },
+    /************************************************************
+     * check if userId & contactId is friend each other or not ?
+     * @param {*} userId that account Id is logging in
+     * @param {*} contactId that account Id is being searched
+     * @returns a record that include both userId and contactId
+     ************************************************************/
+    isFriend(userId,contactId)
+    {
+        return this.findOne({
+            $or : [ {$and : [ {"userId" : userId } , {"contactId" : contactId}]},
+                    {$and : [ {"userId" : contactId} , {"contactId" : userId}]}]
+         }).exec();
+    },
+    /************************************************************
+     * @param {*} userId that account ID is logging in
+     * @param {*} contactId that account ID we want to cancel add friend request
+     * @returns delete the record that have userId & contactId
+    ************************************************************/
+    cancelFriendRequest(userId,contactId)
+    {
+        return this.deleteOne({
+            $and : [ 
+                {"userId" : userId } , 
+                {"contactId" : contactId }
+        ]}).exec();
     }
 }
 

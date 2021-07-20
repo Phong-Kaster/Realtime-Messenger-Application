@@ -28,18 +28,17 @@
 
 ## [**Introduction**](#introduction)
 
-[Facebook Messenger](https://www.facebook.com/) , [WhatsApp](https://www.whatsapp.com/?lang=en) , [Skype](https://www.skype.com/en/features/skype-web/) doesn't respect your private ?  Advertisements make you annoy ? You want some chatting application which protects your information & encrypts every single messenger  ? It's simple 😆 Get into [Realtime Messenger Application](https://github.com/Phong-Kaster) . I can do it for you & for free forever 🤗.This is my idea
+[Facebook Messenger](https://www.facebook.com/) , [WhatsApp](https://www.whatsapp.com/?lang=en) , [Skype](https://www.skype.com/en/features/skype-web/) doesn't respect your private ?  Advertisements make you annoy ? You want some chatting application which protects your information & encrypts every single messenger  ? It's simple 😆 Get into Realtime Messenger Application . I can do it for you & for free forever 🤗.This is my idea
 
 
 ## [**The reason why I write**](#the-reason-why-i-write-)
-When I make a start , I have been just a third-year student in **Posts and Telecommunications Institute of Technology HCM Branch**.So I am hungry for a challenge , I want to learn & build some thing usefully . In addition , it can make employer impressive,so on 😎😋
+When I make a start , I have been just a third-year student in [Posts and Telecommunications Institute of Technology HCM Branch](https://en.wikipedia.org/wiki/Posts_and_Telecommunications_Institute_of_Technology,_Ho_Chi_Minh_City).So I am hungry for a challenge , I want to learn & build some thing usefully . In addition , it can make employer impressive,so on 😎😋
 ## [**Architecture**](#architecture)
 
 What type of architecture have I used ? I have written this application following **Model-View-Controller** architecture
 
 ## [**Installation**](#installation)
 In folder `public/bower_components` contains third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , [Bower](https://bower.io/#getting-started) was used to managing these libraries.
-You can read more about [Bower](https://bower.io/#getting-started)
 
 We have 2 important bower file:
 
@@ -58,9 +57,18 @@ To active , run :
 Installation will be activated automatically.
 
 ## [**Features**](#features)
-1. Login Function 
-       Both Local Account,Facebook Account & Google Account use node_mailer & passportJS node package
-2. Search Function
+1. User Account Manager Functions
+       Login : Both Local Account,Facebook Account & Google Account use node_mailer & passportJS node package
+
+       Logout
+
+       Update Avatar
+
+       Update Information
+
+       Update Password
+2. Contact Management Functions
+       Search By Keyword
 
 ## [**Timeline**](#timeline)
 

@@ -9,7 +9,7 @@ const passportLocalController = require('../controllers/passportLocalController.
 const passportFacebookController = require('../controllers/passportFacebookController.js');
 const passportGoogleController = require('../controllers/passportGoogleController.js');
 const userController = require('../controllers/userController.js');
-const searchController = require('../controllers/searchController.js');
+const contactController = require('../controllers/contactController.js');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
@@ -91,10 +91,12 @@ let initiateRouters = (app) =>{
     router.put("/user-update-password" , loginValidation.isLogout , passwordValidation , userController.updatePassword);
     
 
-    
-    // search by keyword
-    router.get("/search/:keyword" , loginValidation.isLogout , searchValidation , searchController.searchByKeyword);
 
+    // search
+    router.get("/search/:keyword" , loginValidation.isLogout , searchValidation , contactController.searchByKeyword);
+
+    router.post("/send-add-friend-request" , loginValidation.isLogout , contactController.sendAddFriendRequest);
+    router.delete("/cancel-friend-request" , loginValidation.isLogout , contactController.cancelFriendRequest);
     return app.use("/",router);
 }
 

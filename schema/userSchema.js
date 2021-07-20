@@ -95,7 +95,7 @@ userSchema.statics = {
         return this.findByIdAndUpdate(id, {"local.password" : hashedPassword}).exec();
     },
     /**
-     * 
+     * Character "i" indicates that no distingue Upper case or Lower case
      * @param {*} deprecatedUserIDs is eradicated from returned result
      * @param {*} keyword is condition to search
      * @returns records include _id,username,address,avatar that they aren't in deprecatedUserIDs array + account must active 
@@ -109,10 +109,10 @@ userSchema.statics = {
                 { "_id" : { $nin : invalidUserIDs }},
                 { "local.isActive" : true },
                 { $or : [
-                    { "username" : {"$regex" : keyword}},
-                    { "local.email" : {"$regex" : keyword}},
-                    { "google.email" : {"$regex" : keyword}},
-                    { "facebook.email" : {"$regex" : keyword}}
+                    { "username" : {"$regex" : new RegExp(keyword,"i") }},
+                    { "local.email" : {"$regex" : new RegExp(keyword,"i")}},
+                    { "google.email" : {"$regex" : new RegExp(keyword,"i")}},
+                    { "facebook.email" : {"$regex" : new RegExp(keyword,"i")}}
                 ]}
             ]
         },

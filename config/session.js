@@ -6,7 +6,7 @@ const mongoStore = connectMongo(session);
  * this variable locate where session is stored
  */
 let sessionStore = new mongoStore({
-    url : `mongodb://127.0.0.1:27017/${process.env.DB_NAME}`,
+    url : `mongodb://127.0.0.1:27017/rma`,
     autoReconnect : true
  });
 /**
