@@ -1,8 +1,8 @@
 /* ======================= LIBRARY ======================= */
 const contactSchema = require('../schema/contactSchema.js');
 const userSchema = require('../schema/userSchema.js');
+const notificationSchema = require('../schema/notificationSchema.js');
 const _ = require('lodash');
-const { reject } = require('lodash');
 /* ======================= FUNCTION ======================= */
 
 /************************************************************
@@ -35,45 +35,54 @@ let searchByKeyword = ( currentUserID , keyword )=>{
 
 
 
-let sendAddFriendRequest = ( currentUserID , targetID )=>{
+
+
+
+/************************************************************
+ * @senderID that account ID is logging in
+ * @receiverID is user ID whose we wanna cancel friend request 
+ * @param {*} senderID who send request to Object influenced
+ * @param {*} receiverID is the Object who is influenced
+ * @returns resolve cancel friend request if success
+ ************************************************************/
+let sendAddFriendRequest = ( senderID , receiverID )=>{
     return new Promise( async ( resolve , reject ) =>{
 
-        let isFriend =  await contactSchema.isFriend( currentUserID , targetID );
+        let isFriend =  await contactSchema.isFriend( senderID , receiverID );
         if( isFriend ){
            return reject(false)
         }
 
 
         let informationRequest = {
-            userId : currentUserID,
-            contactId : targetID
+            userId : senderID,
+            contactId : receiverID
         }
-
-
         let friendRequest = await contactSchema.createNew(informationRequest);
-        return resolve(friendRequest);
+
+        let informationNotification = {
+            senderId : senderID,
+            receiverId : receiverID,
+            type : notificationSchema.type.friendRequest
+        }
+        await notificationSchema.model.createNew(informationNotification);
+        return resolve(true);
     })
 }
-
-
-/************************************************************
- * @currentUserID that account ID is logging in
- * @targetID is user ID whose we wanna cancel friend request 
- * @param {*} currentUserID 
- * @param {*} targetID 
- * @returns resolve cancel friend request if success
- ************************************************************/
-let cancelFriendRequest = ( currentUserID , targetID )=>{
+let cancelFriendRequest = ( senderID , receiverID )=>{
     return new Promise( async ( resolve , reject )=>{
 
-        let cancelFriendRequest = await contactSchema.cancelFriendRequest( currentUserID , targetID );
+        let type = notificationSchema.type.friendRequest;
+        let cancelFriendRequest = await contactSchema.cancelFriendRequest( senderID , receiverID );
+
         // handle error
         if( cancelFriendRequest.n === 0)
         {
             return reject(false);
         }
-
-        return resolve(cancelFriendRequest); 
+        
+        await notificationSchema.model.cancelFriendRequest( senderID , receiverID , type );
+        return resolve(true); 
     });
 }
 

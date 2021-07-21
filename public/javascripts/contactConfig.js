@@ -59,7 +59,7 @@ function cancelFriendRequest(){
 // (3) event 
 socket.on("response-send-add-friend-request", function(sender){
     let notification = 
-    `<span data-uid="${ sender.id }">
+    `<span class="unsent-notification" data-uid="${ sender.id }">
         <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
         <strong> ${sender.username} </strong> gửi lời mời kết bạn !
     </span><br><br><br>`;

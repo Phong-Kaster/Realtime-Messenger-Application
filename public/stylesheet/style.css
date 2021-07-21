@@ -245,7 +245,7 @@ label:focus,
 
 #notifications {
   display: none;
-  min-width: 250px;
+  min-width: 300px;
   position: absolute;
   right: 17px !important;
   border: solid 1px rgba(100, 100, 100, .20);
@@ -278,7 +278,7 @@ label:focus,
 }
 
 .noti_contact_counter {
-  display: none;
+  display: block;
   position: absolute;
   background: #E1141E;
   color: #FFF;
@@ -293,7 +293,7 @@ label:focus,
 }
 
 .noti_counter {
-  display: none;
+  display: block;
   position: absolute;
   background: #E1141E;
   color: #FFF;
@@ -309,7 +309,7 @@ label:focus,
 
 .noti_content {
   position: relative;
-  height: 200px;
+  height: 250px;
   background-color: #fff;
   overflow: auto;
 }
@@ -1282,5 +1282,13 @@ label:focus,
 }
 
 .password-error-alert , .password-success-alert{
+  display: none;
+}
+
+.unsent-notification{
+  background: #e3e8f0;
+}
+
+.no-display{
   display: none;
 }

@@ -78,7 +78,7 @@ let cancelFriendRequest = async ( req , res)=>{
 
     try 
     {
-       let result = await contactModel.cancelFriendRequest( currentUserID , targetID );
+       await contactModel.cancelFriendRequest( currentUserID , targetID );
        return res.status(200).send();
     } 
     catch (error) {
