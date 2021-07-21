@@ -58,9 +58,10 @@ Installation will be activated automatically.
 
 ## [**Features**](#features)
 
-1. User Account Manager Functions
+[** 1. User Account Manager Functions **](#user-account-manager-functions)
 
-    1.1 Login : It is known that login function is one of the most important function with every chat application.It's a difficult function for me.Overcome all the obstacle,I completed this function.So every single user can log in by 3 different ways : Local Account,Facebook Account & Google Account.[PassportJS](http://www.passportjs.org/) & [node_mailer](https://nodemailer.com/about/) were used to build up.
+    [**1.1 Login**](#login)
+It is known that login function is one of the most important function with every chat application.It's a difficult function for me.Overcome all the obstacle,I completed this function.So every single user can log in by 3 different ways : Local Account,Facebook Account & Google Account.[PassportJS](http://www.passportjs.org/) & [node_mailer](https://nodemailer.com/about/) were used to build up.
  
  With Facebook Account & Google Account , user can easily login by matched icons.
  
