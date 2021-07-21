@@ -278,7 +278,7 @@ label:focus,
 }
 
 .noti_contact_counter {
-  display: block;
+  display: none;
   position: absolute;
   background: #E1141E;
   color: #FFF;
@@ -308,6 +308,7 @@ label:focus,
 }
 
 .noti_content {
+  position: relative;
   height: 200px;
   background-color: #fff;
   overflow: auto;

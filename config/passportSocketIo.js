@@ -4,7 +4,7 @@ const passportSocketIo = require("passport.socketio");
  * onAuthorizeFail for fail connection to socket.io
  * @param {*} data that socket listened & got
  * @param {*} accept that how server response client
- * @returns 
+ * @returns notification
  ************************************************************/
 let onAuthorizeSuccess = ( data , accept )=>{
 

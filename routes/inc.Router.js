@@ -33,7 +33,7 @@ passportGoogleController();
 /**
  * @param app from exactly express module
  */
-let initiateRouters = (app) =>{
+let incRouters = (app) =>{
     
     // login
     router.get("/"      , loginValidation.isLogin , authenticationController.signin );
@@ -100,4 +100,4 @@ let initiateRouters = (app) =>{
     return app.use("/",router);
 }
 
-module.exports = initiateRouters;
+module.exports = incRouters;

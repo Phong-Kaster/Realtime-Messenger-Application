@@ -1,35 +1,4 @@
 /************************************************************
- * increaseResultNumber & decreaseResultNumber are 2 functions that interact with DOM Object
- * @param {*} className that <div> name that is changed value of number
- * @value is the value that <div> tag will be changed
- * @returns the latest value bases on action in contact management
- ************************************************************/
-function increaseResultNumber(className){
-
-    let value =  +$(`.${className}`).find("strong").text();
-    value = value+1;
-    
-    if(value === 0)
-    {
-        +$(`.${className}`).html(null);
-    }
-    +$(`.${className}`).html(`(<strong>${value}</strong>)`);
-}
-function decreaseResultNumber(className){
-    let value = $(`.${className}`).find("strong").text();
-    value--;
-
-    if( value === 0)
-    {
-        $(`.${className}`).html(null);
-    }
-    
-    $(`.${className}`).html( (`(<strong>${value}</strong>)`) ) ;
-}
-
-
-
-/************************************************************
  * listen event click button send add friend request
  * @targetID whose Username is sent friend request
  * @returns DOM Object for changing button from "send friend request" to "cancel friend request" 
@@ -50,10 +19,11 @@ function sendAddFriendRequest(){
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).css("display","inline-block");
                 
                 increaseResultNumber("count-request-contact-sent");
+                // (1)emit an event & send targetID -> javascript/contactSocket.js (2)
                 socket.emit("send-add-friend-request",{ contactId : targetID });
             }
         })
-    })
+    });
 }
 function cancelFriendRequest(){
     $(".user-remove-request-contact").bind("click",function(){
@@ -70,7 +40,7 @@ function cancelFriendRequest(){
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).hide();
                 
                 decreaseResultNumber("count-request-contact-sent");
-                socket.emit("cancel-friend-request" ,{ contactId : targetID });
+                //socket.emit("cancel-friend-request" ,{ contactId : targetID });
             },
             error : function(error)
             {
@@ -79,6 +49,24 @@ function cancelFriendRequest(){
         })
     })
 }
+
+
+// (3) listen response & receive "sender"
+socket.on("response-send-add-friend-request", function(sender){
+    let notification = 
+    `<span data-uid="${ sender.id }">
+        <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
+        <strong> ${sender.username} </strong> đã chấp nhận lời mời kết bạn của bạn!
+    </span><br><br><br>`;
+
+    $(".noti_content").prepend(notification);
+    increaseResultNumber("count-request-contact-received");
+    increaseNotificationNumber("noti_contact_counter");
+    increaseNotificationNumber("noti_counter");
+    
+})
+
+
 
 /* check input is username which is being searching valid or not ?  */
 function search(element){

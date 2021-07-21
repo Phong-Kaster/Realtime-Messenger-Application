@@ -95,7 +95,7 @@ app.use(passport.session());
 incRouter(app);
 
 // configure passport socket io to retrieve information user from passportJS
-passportSocketIoConfigure( io , cookieParser , session.sessionStore);
+passportSocketIoConfigure( io , cookieParser , session.sessionStore );
 
 // initialize socket io
 incSocket(io);
