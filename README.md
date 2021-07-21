@@ -8,7 +8,7 @@
 
 <h1 align="center">Realtime Messenger Application</h1>
 
-## [**Table of contents**](#table-of-contents)
+# [**Table of contents**](#table-of-contents)
 
 - [**Table of contents**](#table-of-contents)
 - [**Introduction**](#introduction)
@@ -16,6 +16,14 @@
 - [**Architecture**](#architecture)
 - [**Installation**](#installation)
 - [**Features**](#features)
+  - [**1.User Account Manager Functions**](#1user-account-manager-functions)
+    - [**1.1.Login**](#11login)
+    - [**1.2.Logout**](#12logout)
+    - [**1.3.Update Avatar**](#13update-avatar)
+    - [**1.4.Update Information**](#14update-information)
+    - [**1.5.Update Password**](#15update-password)
+  - [**2.Contact Management Functions**](#2contact-management-functions)
+    - [**2.1.Search By Keyword**](#21search-by-keyword)
 - [**Timeline**](#timeline)
   - [**Phase 1** : **24-06-2021** to **16-07-2021**](#phase-1--24-06-2021-to-16-07-2021)
   - [**Phase 2** : **19-07-2021** to **xx-xx-2021**](#phase-2--19-07-2021-to-xx-xx-2021)
@@ -26,29 +34,29 @@
 - [**Post script**](#post-script)
 - [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with--and-javascript-)
 
-## [**Introduction**](#introduction)
+# [**Introduction**](#introduction)
 
 [Facebook Messenger](https://www.facebook.com/) , [WhatsApp](https://www.whatsapp.com/?lang=en) , [Skype](https://www.skype.com/en/features/skype-web/) doesn't respect your private ?  Advertisements make you annoy ? You want some chatting application which protects your information & encrypts every single messenger  ? It's simple 😆 Get into Realtime Messenger Application . I can do it for you & for free forever 🤗.This is my idea
 
 
-## [**The reason why I write**](#the-reason-why-i-write-)
+# [**The reason why I write**](#the-reason-why-i-write-)
 When I make a start , I have been just a third-year student in [Posts and Telecommunications Institute of Technology HCM Branch](https://en.wikipedia.org/wiki/Posts_and_Telecommunications_Institute_of_Technology,_Ho_Chi_Minh_City).So I am hungry for a challenge , I want to learn & build some thing usefully . In addition , it can make employer impressive,so on 😎😋
-## [**Architecture**](#architecture)
+# [**Architecture**](#architecture)
 
 What type of architecture have I used ? I have written this application following **Model-View-Controller** architecture
 
-## [**Installation**](#installation)
+# [**Installation**](#installation)
 In folder `public/bower_components` contains third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , [Bower](https://bower.io/#getting-started) was used to managing these libraries.
 
 We have 2 important bower file:
 
-1.bowerrc : it tell our PC where our libraries will be stored.There I choose `public` folder to store them
+**bowerrc** : it tell our PC where our libraries will be stored.There I choose `public` folder to store them
 
        {
               "directory": "public/"
        }
 
-2.bower.json : configuration file include many valuable information and what URL we have to download ?
+**bower.json** : configuration file include many valuable information and what URL we have to download ?
 
 To active , run :
 
@@ -56,30 +64,40 @@ To active , run :
 
 Installation will be activated automatically.
 
-## [**Features**](#features)
+# [**Features**](#features)
 
-[** 1. User Account Manager Functions **](#user-account-manager-functions)
+## [**1.User Account Manager Functions**](#1user-account-manager-functions)
 
-    [**1.1 Login**](#login)
-It is known that login function is one of the most important function with every chat application.It's a difficult function for me.Overcome all the obstacle,I completed this function.So every single user can log in by 3 different ways : Local Account,Facebook Account & Google Account.[PassportJS](http://www.passportjs.org/) & [node_mailer](https://nodemailer.com/about/) were used to build up.
+###    [**1.1.Login**](#11-login)
+
+It is known that login function is one of the most important function with every chat application. It's too difficult to me for the first time to build it up . Overcome all the obstacle , I completed this function . So every single user can log in by 3 different ways : Local Account , Facebook Account & Google Account . [PassportJS](http://www.passportjs.org/) & [Nodemailer](https://nodemailer.com/about/) were used to build up.
  
- With Facebook Account & Google Account , user can easily login by matched icons.
+With Facebook Account & Google Account : people user their Facebook account or Google account to  login by matched methods.
  
- With Local Account , after signing up successfully , they have to activate their account by click the link from verify e-mail.
+With Local Account :  they have to activate their account by click the link from verify e-mail after signing up successfully.
 
-       Logout
+###   [**1.2.Logout**](#12-logout)
 
-       Update Avatar
+Of course , who don't need log out their account for going to sleep 😴 ?
 
-       Update Information
+### [**1.3.Update Avatar**](#13-update-avatar)
 
-       Update Password
-2. Contact Management Functions
-       Search By Keyword
+People can change whatever image to show their personality . It's a piece of cake.However , I set max size is 5 MB . SAVE  !! New avatar is updated 😎. 
 
-## [**Timeline**](#timeline)
+### [**1.4.Update Information**](#14-update-information)
 
- ### **Phase 1** : **24-06-2021** to **16-07-2021**
+At user's convenient & connect with each other face to face easily , both phone number and address could be edited so as to get contact with someone in person . From now , we don't just friends on the Internet , we are real friend 👩🏻‍🤝‍👩🏻
+
+### [**1.5.Update Password**](#15-update-password)
+
+Some people are obsessed with their private 😨 . You are afraid of being read secret ? Don't worry,you can change your password whenever you're concerned
+##  [**2.Contact Management Functions**](#2contact-management-functions)
+
+### [**2.1.Search By Keyword**](#21-search-by-keyword)
+
+# [**Timeline**](#timeline)
+
+ ## **Phase 1** : **24-06-2021** to **16-07-2021**
 
  - Prepare knowledge and tools : I learn about what I will use to build up this application :
 
@@ -122,17 +140,17 @@ It is known that login function is one of the most important function with every
         9. Updating Information function
      
         10. Changing Password function
- ### **Phase 2** : **19-07-2021** to **xx-xx-2021**
+ ## **Phase 2** : **19-07-2021** to **xx-xx-2021**
 
- ### **Phase 3** : **xx-xx-2021** to **xx-xx-2021**
+ ## **Phase 3** : **xx-xx-2021** to **xx-xx-2021**
 
- ### **Phase 4** : **xx-xx-2021** to **xx-xx-2021**
- ### **Phase 5** : **xx-xx-2021** to **xx-xx-2021**
-
-
+ ## **Phase 4** : **xx-xx-2021** to **xx-xx-2021**
+ ## **Phase 5** : **xx-xx-2021** to **xx-xx-2021**
 
 
-## [**Third-party libraries**](#third-party-libraries)
+
+
+# [**Third-party libraries**](#third-party-libraries)
 With front-end , I used third-party libraries which have its version as :
 1. bootstrap : 3.3.7
    
@@ -157,10 +175,10 @@ With front-end , I used third-party libraries which have its version as :
 11. jquery-colorbox : 1.6.4
 
 They will be installed immediately when `bower install` command run
-## [**Post script**](#post-script)
+# [**Post script**](#post-script)
 
 - Begun on **24-06-2021**
 
 - Finish on **xx-xx-2021**
   
-## [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with-love-and-javascript)
+# [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with-love-and-javascript)
