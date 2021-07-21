@@ -40,7 +40,7 @@ function cancelFriendRequest(){
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).hide();
                 
                 decreaseResultNumber("count-request-contact-sent");
-                //socket.emit("cancel-friend-request" ,{ contactId : targetID });
+                socket.emit("cancel-friend-request" ,{ contactId : targetID });//(1) event emit
             },
             error : function(error)
             {
@@ -51,12 +51,17 @@ function cancelFriendRequest(){
 }
 
 
-// (3) listen response & receive "sender"
+
+/************************************************************
+ * @sender contains information who is sending request.
+ * socket.on catches event sent back & handle bases on "name" event
+ ************************************************************/
+// (3) event 
 socket.on("response-send-add-friend-request", function(sender){
     let notification = 
     `<span data-uid="${ sender.id }">
         <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
-        <strong> ${sender.username} </strong> đã chấp nhận lời mời kết bạn của bạn!
+        <strong> ${sender.username} </strong> gửi lời mời kết bạn !
     </span><br><br><br>`;
 
     $(".noti_content").prepend(notification);
@@ -65,7 +70,13 @@ socket.on("response-send-add-friend-request", function(sender){
     increaseNotificationNumber("noti_counter");
     
 })
+socket.on("response-cancel-friend-request" , function(sender){
+    $(".noti_content").find(`span[data-uid = ${sender.id}]`).html("");
 
+    decreaseResultNumber("count-request-contact-received");
+    decreaseNotificationNumber("noti_contact_counter");
+    decreaseNotificationNumber("noti_counter");
+});
 
 
 /* check input is username which is being searching valid or not ?  */
