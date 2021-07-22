@@ -35,6 +35,14 @@ notificationSchema.statics = {
                 { "isRead" : false }
             ]
         }).exec();
+    },
+    retrieveMoreNotification( receiverID , quantitySeenNotifications )
+    {
+        return this.find({ "receiverId" : receiverID})
+        .limit(10)
+        .sort({$natural:-1})
+        .skip(quantitySeenNotifications)
+        .exec();
     }
 }
 

@@ -10,6 +10,7 @@ const passportFacebookController = require('../controllers/passportFacebookContr
 const passportGoogleController = require('../controllers/passportGoogleController.js');
 const userController = require('../controllers/userController.js');
 const contactController = require('../controllers/contactController.js');
+const notificationController = require('../controllers/notificationController');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
@@ -97,6 +98,7 @@ let incRouters = (app) =>{
 
     router.post("/send-add-friend-request" , loginValidation.isLogout , contactController.sendAddFriendRequest);
     router.delete("/cancel-friend-request" , loginValidation.isLogout , contactController.cancelFriendRequest);
+    router.get("/notification-read-more/:quantitySeenNotifications" , loginValidation.isLogout ,   notificationController.retrieveMoreNotifications)
     return app.use("/",router);
 }
 

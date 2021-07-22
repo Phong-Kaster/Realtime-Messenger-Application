@@ -2,8 +2,8 @@
 const { reject } = require('lodash');
 const notificationSchema = require('../schema/notificationSchema.js');
 const userSchema = require('../schema/userSchema.js');
-/* ======================= FUNCTION ======================= */
 
+/************************** FUNCTION ***************************/
 /*************************************************************
  * @param {*} receiverID is user whose account is logging in
  * @notifications are content relate to user logging now
@@ -31,6 +31,7 @@ let retrieveNotifications = ( receiverID )=>{
 }
 
 
+
 /*************************************************************
  * @param {*} receiverID 
  * @returns 
@@ -49,7 +50,35 @@ let countUnreadNotifications = ( receiverID )=>{
     })
 }
 
+
+
+/*************************************************************
+ * @param {*} receiverID 
+ * @returns 
+ *************************************************************/
+let retrieveMoreNotifications = ( receiverID , quantitySeenNotifications )=>{
+    return new Promise ( async ( resolve, reject )=>{
+        try
+        {
+            let oldNotification = await notificationSchema.model.retrieveMoreNotification( receiverID , quantitySeenNotifications );
+            let contentOfNotifications = oldNotification.map( async (element)=>{
+
+                let sender = await userSchema.findByIdentification(element.senderId);
+               
+                return notificationSchema.notificationTemplate( sender , element.type , element.isRead );
+            });
+            
+            resolve( await Promise.all(contentOfNotifications) );
+        }
+        catch(error)
+        {
+           reject(error);
+        }
+    })
+}
+
 module.exports = {
     retrieveNotifications : retrieveNotifications,
-    countUnreadNotifications : countUnreadNotifications
+    countUnreadNotifications : countUnreadNotifications,
+    retrieveMoreNotifications : retrieveMoreNotifications
 }
