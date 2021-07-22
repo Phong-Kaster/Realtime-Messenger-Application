@@ -1,8 +1,23 @@
-// let ajaxToReadMoreNotifications = (QuantityOfNotifications)=> {
-//     $.get(`/notification-read-more?quantityNotification=${QuantityOfNotifications}`,(notification)=>{
-//         console.log(notification);
-//     });
-// }
+let ajaxToRetrieveMoreOldNotification = (quantitySeenNotifications)=>{
+    $.get(`/notification-read-more/${quantitySeenNotifications}`,function(oldNotifications){
+            
+        if( oldNotifications.length < 0 )
+        {
+            alertify.notify("No more notifications to show !");
+            $("#btn-read-more-notifications").css("display","block");
+            $(".lds-ring").css("display","none");
+            return false;
+        }
+
+
+        oldNotifications.forEach( (element)=>{
+            $("ul.list-notifications").append(`<li>${element}</li>`);
+        })
+        $("#btn-read-more-notifications").css("display","block");
+        $(".lds-ring").css("display","none");
+
+    });
+}
 
 $(document).ready(function(){
 
@@ -10,19 +25,15 @@ $(document).ready(function(){
     {
         let quantitySeenNotifications = $("ul.list-notifications").find("li").length;
 
-        $.get(`/notification-read-more/${quantitySeenNotifications}`,function(oldNotifications){
-            
-            if( oldNotifications.length < 0 )
-            {
-                alertify.notify("No more notifications to show !");
-                //alertify.alert().set('message', 'No more notifications to show !').show();
-            }
+        // if(quantitySeenNotifications > 10)
+        // {
+        //     $("#btn-read-more-notifications").css("display","none");
+        //     $(".lds-ring").css("display","none");
+        // }
 
+        $("#btn-read-more-notifications").css("display","none");
+        $(".lds-ring").css("display","inline-block");
 
-            oldNotifications.forEach( (element)=>{
-                $("ul.list-notifications").append(`<li>${element}</li>`);
-            })
-
-        });
+        ajaxToRetrieveMoreOldNotification(quantitySeenNotifications);
     });
 });
