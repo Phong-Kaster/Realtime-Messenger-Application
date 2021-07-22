@@ -61,17 +61,23 @@ socket.on("response-send-add-friend-request", function(sender){
     let notification = 
     `<span class="unsent-notification" data-uid="${ sender.id }">
         <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
-        <strong> ${sender.username} </strong> gửi lời mời kết bạn !
+        <strong> ${sender.username} </strong> sent to you a friend request
     </span><br><br><br>`;
-
+    // notification icon
     $(".noti_content").prepend(notification);
+    // notification modal
+    $("ul.list-notifications").prepend(`<li>${notification}</li>`);
+
     increaseResultNumber("count-request-contact-received");
     increaseNotificationNumber("noti_contact_counter");
     increaseNotificationNumber("noti_counter");
     
 })
 socket.on("response-cancel-friend-request" , function(sender){
+    // notification icons
     $(".noti_content").find(`span[data-uid = ${sender.id}]`).html("");
+    // notification model
+    $("ul.list-notifications").find(`li>span[data-uid = ${sender.id}]`).parent().remove();
 
     decreaseResultNumber("count-request-contact-received");
     decreaseNotificationNumber("noti_contact_counter");

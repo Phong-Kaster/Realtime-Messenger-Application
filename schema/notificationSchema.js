@@ -5,7 +5,7 @@ const notificationSchema = new Schema({
     senderId : String,
     receiverId : String,
     type : String,
-    isRead : { type : Boolean , default : false},
+    isRead : { type : Boolean , default : false },
     createdAt : { type : Number, default : Date.now }
 });
 
@@ -25,7 +25,16 @@ notificationSchema.statics = {
     },
     retrieveNotification( receiverID )
     {
-        return this.find({ "receiverId" : receiverID}).limit(5).sort({$natural:-1}).exec();
+        return this.find({ "receiverId" : receiverID}).limit(10).sort({$natural:-1}).exec();
+    },
+    countUnreadNotification( receiverID )
+    {
+        return this.countDocuments({
+            $and : [ 
+                { "receiverId" : receiverID },
+                { "isRead" : false }
+            ]
+        }).exec();
     }
 }
 
@@ -42,13 +51,13 @@ const notificationTemplate = ( sender , type , isRead)=>{
         {
             return `<span class="unsent-notification" data-uid="${ sender._id }">
                 <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
-                <strong> ${sender.username} </strong> gửi lời mời kết bạn !
-                </span><br><br><br>`;
+                <strong> ${sender.username} </strong> sent to you a friend request
+                </span><br><br>`;
         }
         return `<span data-uid="${ sender._id }">
                 <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
-                <strong> ${sender.username} </strong> gửi lời mời kết bạn !
-                </span><br><br><br>`;
+                <strong> ${sender.username} </strong> sent to you a friend request
+                </span><br><br>`;
     }
 }
 

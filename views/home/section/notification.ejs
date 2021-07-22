@@ -1,0 +1,29 @@
+<div class="modal fade" id="notifications-template" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notifications</h4>
+            </div>
+            <div class="modal-body">
+                <div><a href="#" id="modal-mark-as-read">
+                    <strong>Mark as read</strong>
+                </a></div> 
+                <hr>
+                <ul class="list-notifications">
+                    <% if(notifications.length > 0){ %>
+                        <% notifications.forEach( function(element){ %>
+                            <li>
+                                <%- element %>
+                            </li>
+                        <%})%>
+                    <%}%>
+                </ul>
+                <hr>
+                <div id="modal-read-more">
+                    <a href="#" ><strong>Read more notifications</strong></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

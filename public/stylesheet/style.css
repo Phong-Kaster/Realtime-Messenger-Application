@@ -254,7 +254,7 @@ label:focus,
   z-index: 999;
 }
 
-#notifications h3 {
+#mark-as-read {
   display: block;
   color: #333;
   background: #FFF;
@@ -322,6 +322,10 @@ label:focus,
   color: #333;
 }
 
+.noti_content>span:hover{
+  cursor: pointer;
+  background-color: #eceff1;
+}
 .seeAll {
   background: #F6F7F8;
   padding: 8px;
@@ -1291,4 +1295,37 @@ label:focus,
 
 .no-display{
   display: none;
+}
+
+#noti_Button:hover{
+  text-decoration: none;
+}
+
+.list-notifications li {
+  width: 90%;
+  height: auto;
+  padding: 20px 0px 10px 0px;
+  margin: 0 auto;
+  list-style-type: none;
+}
+
+.list-notifications li span {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #dfe6e9;
+}
+ 
+.list-notifications li span:hover {
+  cursor: pointer;
+  background-color: #eceff1;
+}
+
+#modal-mark-as-read {
+  float: right;
+  margin-right: 20px;
+}
+
+#modal-read-more {
+  text-align: center;
 }

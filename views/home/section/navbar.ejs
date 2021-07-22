@@ -16,7 +16,7 @@
                 <li>
                     <input type="text" name="search" class="searchBox" placeholder="Tìm kiếm tên cuộc trò chuyện">
                     <div id="search-results">
-                        <h3>Kết quả</h3>
+                        <h3>Contacts</h3>
                         <div class="search_content">
                             <ul></ul>
                         </div>
@@ -51,14 +51,16 @@
                             
                         <div id="noti_Container">
                             <div id="notifications">
-                                <h3>Thông báo</h3>
+                                <a id="mark-as-read" href="#">Mask as read</a>
                                 <div class="noti_content">
-                                    <% if( !notifications.length ){ %> 
+                                    <% if( notifications.length > 0){ %> 
                                         <% notifications.forEach(function(element){ %>
-                                            <%= element %>
+                                            <%- element %>
                                     <% })} %>
                                 </div>
-                                <div class="seeAll"><a href="#">Xem tất cả</a></div>
+                                <div class="seeAll">
+                                    <a href="#notifications-template" data-toggle="modal">Read all</a>
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -73,13 +75,13 @@
                         <li>
                             <a href="#user-profile-modal" data-toggle="modal">
                                 <i class="fa fa-cog"></i>
-                                &nbsp;Cài đặt tài khoản
+                                &nbsp;Account settings
                             </a>
                         </li>
                         <li>
                             <a href="/signout">
                                 <i class="fa fa-sign-out"></i>
-                                &nbsp;Đăng xuất
+                                &nbsp;Log out
                             </a>
                         </li>
                     </ul>
