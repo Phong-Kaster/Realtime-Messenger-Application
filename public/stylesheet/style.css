@@ -1289,7 +1289,7 @@ label:focus,
   display: none;
 }
 
-.unsent-notification{
+.unseen-notification{
   background: #e3e8f0;
 }
 

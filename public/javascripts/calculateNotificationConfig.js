@@ -32,13 +32,13 @@ function decreaseResultNumber(className){
 /************************************************************
  * increaseNotificationNumber & decreaseNotificationNumber are 2 functions that interact with DOM Object
  * @param {*} className that <div> name that is changed value of number
- * @value is the value that <div> tag will be changed
+ * @param {*} number is notification value increases|decreases each time
  * @returns number of notifications
  ************************************************************/
-function increaseNotificationNumber(className){
+function increaseNotificationNumber( className , number ){
     // "+" converted value from string to number
     let value =  +$(`.${className}`).text();
-    value = value+1;
+    value += number;
     
     if(value === 0)
     {
@@ -46,9 +46,9 @@ function increaseNotificationNumber(className){
     }
     +$(`.${className}`).css( "display" , "block" ).html(value);
 }
-function decreaseNotificationNumber(className){
+function decreaseNotificationNumber( className , number){
     let value = $(`.${className}`).text();
-    value--;
+    value -= number;
 
     if(value === 0)
     {

@@ -37,7 +37,7 @@ let sendAddFriendRequest = (io)=> {
             }
 
 
-            if(SocketIDClientSide[receiver.contactId])
+            if( SocketIDClientSide[receiver.contactId] )
             {
                 SocketIDClientSide[receiver.contactId].forEach( (socketID) => {
                     // & send back who is sending request -> javascript/contactConfig.js

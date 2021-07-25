@@ -54,7 +54,7 @@ let countUnreadNotifications = ( receiverID )=>{
 
 /*************************************************************
  * @param {*} receiverID 
- * @returns 
+ * @returns more notifications when click "load more notifications"
  *************************************************************/
 let retrieveMoreNotifications = ( receiverID , quantitySeenNotifications )=>{
     return new Promise ( async ( resolve, reject )=>{
@@ -77,8 +77,34 @@ let retrieveMoreNotifications = ( receiverID , quantitySeenNotifications )=>{
     })
 }
 
+
+
+/*************************************************************
+ * @param {*} receiverID who receive notifications
+ * @param {*} senderIDs is array include Sender's ID
+ * @returns mark unseen notifications as read 
+ *************************************************************/
+let markAsRead = ( receiverID , senderIDs)=>{
+    return new Promise( async ( resolve , reject )=>{
+        try
+        {
+            await notificationSchema.model.markAsRead( receiverID , senderIDs );
+            resolve(true);
+        } 
+        catch (error) 
+        {
+            console.log("Error mark as read");
+            console.log(error);
+            reject(false); 
+        }
+    });
+}
+
+
+
 module.exports = {
     retrieveNotifications : retrieveNotifications,
     countUnreadNotifications : countUnreadNotifications,
-    retrieveMoreNotifications : retrieveMoreNotifications
+    retrieveMoreNotifications : retrieveMoreNotifications,
+    markAsRead : markAsRead
 }

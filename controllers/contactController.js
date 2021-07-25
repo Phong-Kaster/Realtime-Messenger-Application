@@ -2,8 +2,8 @@
 const contactModel = require('../models/contactModel.js');
 import { validationResult } from "express-validator/check";
 
-/* ======================= FUNCTION ======================= */
-
+/************************************************************/
+/************************* FUNCTION *************************/
 /************************************************************
  * @currentUserID that account ID is logging in
  * @keyword that is condition we input to search
@@ -43,6 +43,7 @@ let searchByKeyword = async ( req , res )=>{
 }
 
 
+
 /************************************************************
  * @currentUserID that account ID is logging in
  * @param {*} req 
@@ -50,13 +51,13 @@ let searchByKeyword = async ( req , res )=>{
  * @returns success : true if send add friend request successfully
  ************************************************************/
 let sendAddFriendRequest = async ( req , res )=>{
-    let currentUserID = req.user._id;
-    let targetID = req.body.uid;
+    let senderID = req.user._id;
+    let receiverID = req.body.uid;
 
     try 
     {
-       let result = await contactModel.sendAddFriendRequest( currentUserID , targetID );
-       return res.status(200).send( {success : !!result});
+       let result = await contactModel.sendAddFriendRequest( senderID , receiverID );
+       return res.status(200).send( {success : !!result} );
     } 
     catch (error) {
         return res.status(500).send(error);

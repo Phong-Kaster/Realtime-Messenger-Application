@@ -98,7 +98,11 @@ let incRouters = (app) =>{
 
     router.post("/send-add-friend-request" , loginValidation.isLogout , contactController.sendAddFriendRequest);
     router.delete("/cancel-friend-request" , loginValidation.isLogout , contactController.cancelFriendRequest);
-    router.get("/notification-read-more/:quantitySeenNotifications" , loginValidation.isLogout ,   notificationController.retrieveMoreNotifications)
+    
+    
+    // notification read more
+    router.get("/notification-read-more/:quantitySeenNotifications" , loginValidation.isLogout ,   notificationController.retrieveMoreNotifications);
+    router.put("/notification-mark-as-read" , loginValidation.isLogout , notificationController.markAsRead);
     return app.use("/",router);
 }
 

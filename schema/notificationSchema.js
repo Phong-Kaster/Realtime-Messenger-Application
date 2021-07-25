@@ -43,6 +43,20 @@ notificationSchema.statics = {
         .sort({$natural:-1})
         .skip(quantitySeenNotifications)
         .exec();
+    },
+    /*************************************************************
+     * @param {string} receiverID 
+     * @param {array} senderIDs 
+     * @returns change field "isRead" from false to true
+     *************************************************************/
+    markAsRead( receiverID , senderIDs )
+    {
+        return this.updateMany({
+            $and : [
+                {"receiverId" : receiverID},
+                {"senderId": {$in:senderIDs}}]
+            },
+            { "isRead":true }).exec();
     }
 }
 
@@ -57,7 +71,7 @@ const notificationTemplate = ( sender , type , isRead)=>{
     {
         if( !isRead )
         {
-            return `<span class="unsent-notification" data-uid="${ sender._id }">
+            return `<span class="unseen-notification" data-uid="${ sender._id }">
                 <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
                 <strong> ${sender.username} </strong> sent to you a friend request
                 </span><br><br>`;

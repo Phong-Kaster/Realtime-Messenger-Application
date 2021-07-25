@@ -28,6 +28,7 @@ function sendAddFriendRequest(){
 function cancelFriendRequest(){
     $(".user-remove-request-contact").bind("click",function(){
         let targetID = $(this).data("uid");
+        
         $.ajax({
             url : "/cancel-friend-request",
             type : "delete",
@@ -59,7 +60,7 @@ function cancelFriendRequest(){
 // (3) event 
 socket.on("response-send-add-friend-request", function(sender){
     let notification = 
-    `<span class="unsent-notification" data-uid="${ sender.id }">
+    `<span class="unseen-notification" data-uid="${ sender.id }">
         <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
         <strong> ${sender.username} </strong> sent to you a friend request
     </span><br><br><br>`;
@@ -69,8 +70,8 @@ socket.on("response-send-add-friend-request", function(sender){
     $("ul.list-notifications").prepend(`<li>${notification}</li>`);
 
     increaseResultNumber("count-request-contact-received");
-    increaseNotificationNumber("noti_contact_counter");
-    increaseNotificationNumber("noti_counter");
+    increaseNotificationNumber("noti_contact_counter",1);
+    increaseNotificationNumber("noti_counter",1);
     
 })
 socket.on("response-cancel-friend-request" , function(sender){
@@ -80,8 +81,8 @@ socket.on("response-cancel-friend-request" , function(sender){
     $("ul.list-notifications").find(`li>span[data-uid = ${sender.id}]`).parent().remove();
 
     decreaseResultNumber("count-request-contact-received");
-    decreaseNotificationNumber("noti_contact_counter");
-    decreaseNotificationNumber("noti_counter");
+    decreaseNotificationNumber("noti_contact_counter",1);
+    decreaseNotificationNumber("noti_counter",1);
 });
 
 
