@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { retrieveReceivedFriendContact } = require('../models/contactModel');
 const { Schema } = mongoose;
 
 const contactSchema = new Schema({
@@ -56,6 +57,76 @@ contactSchema.statics = {
                 {"userId" : userId } , 
                 {"contactId" : contactId }
         ]}).exec();
+    },
+    retrieveFriendContact(userId)
+    {
+        return this.find({
+            $and : [
+                { $or : [{"userId":userId},
+                         {"contactId":userId}]
+                },
+                {"status" : true}
+            ]
+        })
+        .limit(10)
+        .sort({$natural:-1})
+        .exec();
+    },
+    retrieveSentFriendContact(userId)
+    {
+        return this.find({
+            $and : [
+                {"userId" : userId},
+                {"status" : false}
+            ]
+        })
+        .limit(10)
+        .sort({$natural:-1})
+        .exec();
+    },
+    retrieveReceivedFriendContact(userId)
+    {
+        return this.find({
+            $and : [
+                {"contactId" : userId},
+                {"status" : false}
+            ]
+        })
+        .limit(10)
+        .sort({$natural:-1})
+        .exec()
+    },
+    countFriendContact(userId)
+    {
+        return this.countDocuments({
+            $and : [
+                { $or : [{"userId":userId},
+                         {"contactId":userId}]
+                },
+                {"status" : true}
+            ]
+        })
+        .exec();
+    },
+    countSentFriendContact(userId)
+    {
+        return this.countDocuments({
+            $and : [
+                {"userId" : userId},
+                {"status" : false}
+            ]
+        })
+        .exec();
+    },
+    countReceivedFriendContact(userId)
+    {
+        return this.countDocuments({
+            $and : [
+                {"contactId" : userId},
+                {"status" : false}
+            ]
+        })
+        .exec()
     }
 }
 

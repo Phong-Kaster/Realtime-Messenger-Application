@@ -3,6 +3,7 @@ const contactSchema = require('../schema/contactSchema.js');
 const userSchema = require('../schema/userSchema.js');
 const notificationSchema = require('../schema/notificationSchema.js');
 const _ = require('lodash');
+const { reject } = require('lodash');
 /* ======================= FUNCTION ======================= */
 
 /************************************************************
@@ -32,9 +33,6 @@ let searchByKeyword = ( currentUserID , keyword )=>{
         resolve(validUserIDs);
     });
 }
-
-
-
 
 
 
@@ -88,8 +86,147 @@ let cancelFriendRequest = ( senderID , receiverID )=>{
 
 
 
+/************************************************************
+ * @param {*} userID | string | who is logging in
+ * @returns people that are friends of @userID
+ ************************************************************/
+ let retrieveFriendContact = (userID)=>{
+    return new Promise( async ( resolve , reject )=>{
+        try 
+        {
+            let result = await contactSchema.retrieveFriendContact( userID );
+            let contacts = result.map( async (element)=>{
+                if( element.contactId == userID)
+                {
+                    return await userSchema.findByIdentification( element.userId );
+                }
+                else
+                {
+                    return await userSchema.findByIdentification( element.contactId );
+                }
+                
+            });
+
+            resolve(await Promise.all(contacts) );
+        }
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+
+/************************************************************
+ * @param {*} userID | string | who is logging in
+ * @returns people that are friends of @userID
+ ************************************************************/
+let retrieveSentFriendContact = ( userID )=>{
+    return new Promise( async ( resolve , reject )=>{
+        try 
+        {
+            let result = await contactSchema.retrieveSentFriendContact( userID );
+            let contacts = result.map( async (element)=>{
+                return await userSchema.findByIdentification( element.contactId );
+            });
+
+            resolve(await Promise.all(contacts) );
+        }
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+
+/************************************************************
+ * @param {*} userID | string | who is logging in
+ * @returns people that are friends of @userID
+ ************************************************************/
+let retrieveReceivedFriendContact = (userID)=>{
+    return new Promise( async ( resolve , reject )=>{
+        try 
+        {
+            let result = await contactSchema.retrieveReceivedFriendContact( userID );
+            let contacts = result.map( async (element)=>{
+                return await userSchema.findByIdentification( element.userId );
+            });
+
+            resolve(await Promise.all(contacts) );
+        }
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+/************************************************************
+ * @param {*} userID 
+ * @returns 
+ ************************************************************/
+let countFriendContact = (userID)=>{
+    return new Promise( async ( resolve , reject )=>{
+        try 
+        {
+            let totalContact = await contactSchema.countFriendContact(userID);
+            resolve(totalContact);
+        }
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+
+let countSentFriendContact = (userID)=>{
+    return new Promise( async ( resolve , reject )=>{
+        try 
+        {
+            let totalContact = await contactSchema.countSentFriendContact(userID);
+            resolve(totalContact);
+        }
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+
+let countReceivedFriendContact = (userID)=>{
+    return new Promise( async ( resolve , reject )=>{
+        try 
+        {
+            let totalContact = await contactSchema.countReceivedFriendContact(userID);
+            resolve(totalContact);
+        }
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
-    cancelFriendRequest : cancelFriendRequest
+    cancelFriendRequest : cancelFriendRequest,
+
+    retrieveSentFriendContact : retrieveSentFriendContact,
+    retrieveReceivedFriendContact : retrieveReceivedFriendContact,
+    retrieveFriendContact : retrieveFriendContact,
+
+    countFriendContact : countFriendContact,
+    countSentFriendContact : countSentFriendContact,
+    countReceivedFriendContact : countReceivedFriendContact
 }

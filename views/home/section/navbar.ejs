@@ -34,7 +34,11 @@
                 <li>
                     <a href="#contactsModal" data-toggle="modal" title="Quản lý liên lạc" id="show-modal-contacts">
                         <i class="fa fa-user-plus"></i>
-                        <div class="noti_contact_counter"></div>
+                        <% if(quantityOfReceivedFriendRequestContacts > 0){ %> 
+                            <div class="noti_contact_counter"><%= quantityOfReceivedFriendRequestContacts %></div>
+                        <% }else{ %> 
+                            <div class="noti_contact_counter no-display"></div>
+                        <%}%>
                     </a>
                 </li>
                 <li>

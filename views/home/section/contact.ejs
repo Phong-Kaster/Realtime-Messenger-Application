@@ -9,13 +9,28 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#find-user">Tìm người dùng</a></li>
                     <li><a data-toggle="tab" id="link-contacts" href="#contacts">
-                        Danh bạ <span class="show-number-contacts count-contacts">(<strong>0</strong>)</span>
+                        Danh bạ
+                        <% if(quantityOfFriendContacts > 0){ %> 
+                            <span class="show-number-contacts count-contacts">(<strong><%= quantityOfFriendContacts%></strong>)</span>
+                        <%}else{%>
+                            <span class="show-number-contacts count-contacts"></span>
+                        <%}%>
                     </a></li>
                     <li><a data-toggle="tab" id="link-request-contact-sent" href="#request-contact-sent">
-                        Đang chờ xác nhận <span class="show-number-contacts count-request-contact-sent">(<strong>0</strong>)</span>
+                        Đang chờ xác nhận
+                        <% if(quantifyOfSentFriendRequestContact > 0){ %> 
+                            <span class="show-number-contacts count-contacts">(<strong><%= quantifyOfSentFriendRequestContact%></strong>)</span>
+                        <%}else{%>
+                            <span class="show-number-contacts count-contacts"></span>
+                        <%}%>
                     </a></li>
                     <li><a data-toggle="tab" id="link-request-contact-received" href="#request-contact-received">
-                        Yêu cầu kết bạn <span class="show-number-contacts count-request-contact-received">(<strong>0</strong>)</span>
+                        Yêu cầu kết bạn
+                        <% if(quantityOfReceivedFriendRequestContacts > 0){ %> 
+                            <span class="show-number-contacts count-contacts">(<strong><%= quantityOfReceivedFriendRequestContacts%></strong>)</span>
+                        <%}else{%>
+                            <span class="show-number-contacts count-contacts"></span>
+                        <%}%>
                     </a></li>
                 </ul>
                 <div class="tab-content">
@@ -39,19 +54,20 @@
                     <div id="contacts" class="tab-pane fade">
                         <div class="find-user-bottom">
                             <ul class="contactList">
-                                <li class="_contactList" data-uid="user._id">
+                                <% friendContacts.forEach(function(element){ %> 
+                                <li class="_contactList" data-uid="<%= element._id %>">
                                     <div class="contactPanel">
                                         <div class="user-avatar">
-                                            <img src="./images/users/Blue.jpg" alt="">
+                                            <img src="./images/users/<%= element.avatar %>" alt="">
                                         </div>
                                         <div class="user-name">
                                             <p>
-                                                Pontifex
+                                                <%= element.username %>
                                             </p>
                                         </div>
                                         <br>
                                         <div class="user-address">
-                                            <span>&nbsp Hà Nội, Việt Nam.</span>
+                                            <span>&nbsp <%= element.address %></span>
                                         </div>
                                         <div class="user-talk" data-uid="user._id">
                                             Trò chuyện
@@ -61,60 +77,77 @@
                                         </div>
                                     </div>
                                 </li>
+                                <% }) %>
                             </ul>
+                            <div id="read-more-friend-contacts">
+                                <a href="#" id="btn-read-more-notifications" ><strong>Read more friend contacts</strong></a>
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
                         </div>
                     </div>
                     <div id="request-contact-sent" class="tab-pane fade">
                         <div class="find-user-bottom">
                             <ul class="contactList">
-                                <li class="_contactList" data-uid="user._id">
+                                <% sentFriendRequestContacts.forEach(function(element){ %> 
+                                <li class="_contactList" data-uid="<%= element._id %>">
                                     <div class="contactPanel">
                                         <div class="user-avatar">
-                                            <img src="./images/users/Blue.jpg" alt="">
+                                            <img src="./images/users/<%= element.avatar %>" alt="">
                                         </div>
                                         <div class="user-name">
                                             <p>
-                                                Pontifex
+                                                <%= element.username %>
                                             </p>
                                         </div>
                                         <br>
                                         <div class="user-address">
-                                            <span>&nbsp Hà Nội, Việt Nam.</span>
+                                            <span>&nbsp <%= element.address %></span>
                                         </div>
-                                        <div class="user-remove-request-sent action-danger" data-uid="user._id">
+                                        <div class="user-remove-request-sent action-danger" data-uid="<%= element._id %>">
                                             Hủy yêu cầu
                                         </div>
                                     </div>
                                 </li>
+                                <% }) %>
                             </ul>
+                            <div id="read-more-sent-friend-request-contacts">
+                                <a href="#" id="btn-read-more-notifications" ><strong>Read more sent friend request contacts</strong></a>
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
                         </div>
                     </div>
                     <div id="request-contact-received" class="tab-pane fade">
                         <div class="find-user-bottom">
                             <ul class="contactList">
-                                <li class="_contactList" data-uid="user._id">
+                                <% receivedFriendRequestContacts.forEach(function(element){ %> 
+                                <li class="_contactList" data-uid="<%= element._id %>">
                                     <div class="contactPanel">
                                         <div class="user-avatar">
-                                            <img src="./images/users/Blue.jpg" alt="">
+                                            <img src="./images/users/<%= element.avatar %>" alt="">
                                         </div>
                                         <div class="user-name">
                                             <p>
-                                                Pontifex
+                                                <%= element.username %>
                                             </p>
                                         </div>
                                         <br>
                                         <div class="user-address">
-                                            <span>&nbsp Hà Nội, Việt Nam.</span>
+                                            <span>&nbsp <%= element.address %></span>
                                         </div>
-                                        <div class="user-acccept-contact-received" data-uid="user._id">
+                                        <div class="user-acccept-contact-received" data-uid="<%= element._id %>">
                                             Chấp nhận
                                         </div>
-                                        <div class="user-reject-request-contact-received action-danger" data-uid="user._id">
+                                        <div class="user-reject-request-contact-received action-danger" data-uid="<%= element._id %>">
                                             Xóa yêu cầu
                                         </div>
                                     </div>
                                 </li>
+                                <%})%>
                             </ul>
+                            <div id="read-more-received-friend-request-contacts">
+                                <a href="#" id="btn-read-more-notifications" ><strong>Read more received friend request contacts</strong></a>
+                                <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>

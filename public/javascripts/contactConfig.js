@@ -19,6 +19,10 @@ function sendAddFriendRequest(){
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).css("display","inline-block");
                 
                 increaseResultNumber("count-request-contact-sent");
+                
+                let userReceivedFriendRequest = $("#find-user").find(`ul li[data-uid = ${targetID} ]`).get(0).outerHTML;
+                $("#request-contact-sent").find("ul").prepend(userReceivedFriendRequest);
+
                 // (1)emit an event & send targetID -> javascript/contactSocket.js (2)
                 socket.emit("send-add-friend-request",{ contactId : targetID });
             }
@@ -41,6 +45,9 @@ function cancelFriendRequest(){
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).hide();
                 
                 decreaseResultNumber("count-request-contact-sent");
+
+                $("#request-contact-sent").find(`li[data-uid=${targetID}]`).remove();
+
                 socket.emit("cancel-friend-request" ,{ contactId : targetID });//(1) event emit
             },
             error : function(error)
@@ -73,6 +80,30 @@ socket.on("response-send-add-friend-request", function(sender){
     increaseNotificationNumber("noti_contact_counter",1);
     increaseNotificationNumber("noti_counter",1);
     
+    let userReceivedFriendRequest = `<li class="_contactList" data-uid="${sender.id}">
+                                        <div class="contactPanel">
+                                            <div class="user-avatar">
+                                                <img src="./images/users/${sender.avatar}" alt="">
+                                            </div>
+                                            <div class="user-name">
+                                                <p>
+                                                    ${sender.username}
+                                                </p>
+                                            </div>
+                                            <br>
+                                            <div class="user-address">
+                                                <span>&nbsp ${sender.address}</span>
+                                            </div>
+                                            <div class="user-acccept-contact-received" data-uid="${sender.id}">
+                                                Chấp nhận
+                                            </div>
+                                            <div class="user-reject-request-contact-received action-danger" data-uid="${sender.id}">
+                                                Xóa yêu cầu
+                                            </div>
+                                        </div>
+                                    </li>`;
+    console.log(userReceivedFriendRequest);
+    $("#request-contact-received").find("ul").prepend(userReceivedFriendRequest);
 })
 socket.on("response-cancel-friend-request" , function(sender){
     // notification icons
@@ -83,6 +114,8 @@ socket.on("response-cancel-friend-request" , function(sender){
     decreaseResultNumber("count-request-contact-received");
     decreaseNotificationNumber("noti_contact_counter",1);
     decreaseNotificationNumber("noti_counter",1);
+    // delete in modal "dang cho xac nhan"
+    $("#request-contact-received").find(`li[data-uid=${sender.id}]`).remove();
 });
 
 

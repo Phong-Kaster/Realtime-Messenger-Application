@@ -1365,3 +1365,13 @@ label:focus,
     transform: rotate(360deg);
   }
 }
+
+#read-more-friend-contacts {
+  text-align: center;
+}
+#read-more-sent-friend-request-contacts {
+  text-align: center;
+}
+#read-more-received-friend-request-contacts {
+  text-align: center;
+}
