@@ -24,7 +24,7 @@ let sendAddFriendRequest = (io)=> {
         }
         
 
-        /* (2) catch "cancel-friend-request" event & send 
+        /* (2) catch "send-friend-request" event & send 
         * back "response" event & sender who sent request
         */
         socket.on("send-add-friend-request" , (receiver)=>

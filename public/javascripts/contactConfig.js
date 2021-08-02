@@ -98,7 +98,7 @@ function search(element){
     {
         if( keyword.length < 0)
         {
-            alertify.alert().set('message', 'Your gender must write a username or e-mail').show();
+            alertify.alert().set('message', 'Your keyword must write a username or e-mail').show();
             return false;
         }
 
