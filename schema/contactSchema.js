@@ -127,6 +127,20 @@ contactSchema.statics = {
             ]
         })
         .exec()
+    },
+    retrieveMoreFriendContact(userId,quantitySeenFriendContacts)
+    {
+        return this.find({
+            $and: [
+                { $or: [ {"userId" : userId},
+                         {"contactId" : userId}]},
+                {"status": true}
+            ]
+        })
+        .sort({$natural:-1})
+        .skip(quantitySeenFriendContacts)
+        .limit(10)
+        .exec();
     }
 }
 

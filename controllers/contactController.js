@@ -88,8 +88,31 @@ let cancelFriendRequest = async ( req , res)=>{
 }
 
 
+/*************************************************************
+ * @param {*} req 
+ * @param {*} res 
+ * @returns 
+ *************************************************************/
+let retrieveMoreFriendContacts = async ( req , res )=>{
+    try 
+    {
+        let quantitySeenFriendContacts = Number(req.params.quantitySeenFriendContacts);
+        let receiverID = req.user._id;
+        
+        let friendContacts = await contactModel.retrieveMoreFriendContacts( receiverID , quantitySeenFriendContacts );
+        return res.status(200).send(friendContacts);
+    } 
+    catch (error) 
+    {
+        return res.status(500).send(error);
+    }
+}
+
+
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
-    cancelFriendRequest : cancelFriendRequest
+    cancelFriendRequest : cancelFriendRequest,
+    retrieveMoreFriendContacts : retrieveMoreFriendContacts
 }

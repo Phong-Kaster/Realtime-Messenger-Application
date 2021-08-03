@@ -103,6 +103,9 @@ let incRouters = (app) =>{
     // notification read more
     router.get("/notification-read-more/:quantitySeenNotifications" , loginValidation.isLogout ,   notificationController.retrieveMoreNotifications);
     router.put("/notification-mark-as-read" , loginValidation.isLogout , notificationController.markAsRead);
+
+    // load more contact
+    router.get("/read-more-friend-contacts/:quantitySeenFriendContacts" , loginValidation.isLogout , contactController.retrieveMoreFriendContacts);
     return app.use("/",router);
 }
 

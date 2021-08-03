@@ -7,9 +7,15 @@ const contactModel = require('../models/contactModel.js');
 /*************************************************************
  * @notifications | array | notifications appear in notice icon
  * @quantityOfUnreadNotification | number | how many notification user have not read ?
+ * 
  * @sentFriendRequestContact | object array | people that user sent to them a friend request
  * @receivedFriendRequestContact | object array | people that user received a friend request from them
  * @friendContact | object array | people are user's friends at the moment
+ * 
+ * @quantityOfFriendContact | number | indicates how many friends user has
+ * @quantifyOfSentFriendRequestContact | number | indicates how many people user sent friend request & wait for their response
+ * @quantityOfReceivedFriendRequestContacts | number | indicates how many friend requests user received
+ * 
  * @param {*} req 
  * @param {*} res 
  *************************************************************/

@@ -98,11 +98,11 @@ let cancelFriendRequest = ( senderID , receiverID )=>{
             let contacts = result.map( async (element)=>{
                 if( element.contactId == userID)
                 {
-                    return await userSchema.findByIdentification( element.userId );
+                    return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.userId );
                 }
                 else
                 {
-                    return await userSchema.findByIdentification( element.contactId );
+                    return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.contactId );
                 }
                 
             });
@@ -128,7 +128,7 @@ let retrieveSentFriendContact = ( userID )=>{
         {
             let result = await contactSchema.retrieveSentFriendContact( userID );
             let contacts = result.map( async (element)=>{
-                return await userSchema.findByIdentification( element.contactId );
+                return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.contactId );
             });
 
             resolve(await Promise.all(contacts) );
@@ -152,7 +152,7 @@ let retrieveReceivedFriendContact = (userID)=>{
         {
             let result = await contactSchema.retrieveReceivedFriendContact( userID );
             let contacts = result.map( async (element)=>{
-                return await userSchema.findByIdentification( element.userId );
+                return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.userId );
             });
 
             resolve(await Promise.all(contacts) );
@@ -165,9 +165,11 @@ let retrieveReceivedFriendContact = (userID)=>{
 }
 
 
+
 /************************************************************
- * @param {*} userID 
- * @returns 
+ * @param {*} userID | string | who is logging in
+ * @totalContact | number | how many documents are counted that matched with this condition
+ * @returns number of friend contacts belong to who has this @userID
  ************************************************************/
 let countFriendContact = (userID)=>{
     return new Promise( async ( resolve , reject )=>{
@@ -185,6 +187,11 @@ let countFriendContact = (userID)=>{
 
 
 
+/************************************************************
+ * @param {*} userID | string | who is logging in
+ * @totalContact | number | how many documents are counted that matched with this condition
+ * @returns number of people contacts whom @userID sent friend request & is waiting for response
+ ************************************************************/
 let countSentFriendContact = (userID)=>{
     return new Promise( async ( resolve , reject )=>{
         try 
@@ -201,6 +208,11 @@ let countSentFriendContact = (userID)=>{
 
 
 
+/************************************************************
+ * @param {*} userID | string | who is logging in
+ * @totalContact | number | how many documents are counted that matched with this condition
+ * @returns |number| number of people contacts who sent friend request to @userID
+ ************************************************************/
 let countReceivedFriendContact = (userID)=>{
     return new Promise( async ( resolve , reject )=>{
         try 
@@ -215,6 +227,37 @@ let countReceivedFriendContact = (userID)=>{
     });
 }
 
+/************************************************************
+ * @param {*} userID 
+ * @param {*} quantitySeenFriendContacts 
+ * @returns | object | 
+ ************************************************************/
+let retrieveMoreFriendContact = ( userID , quantitySeenFriendContacts)=>{
+    return new Promise( async ( resolve , reject)=>{
+        try 
+        {
+            let result = await contactSchema.retrieveMoreFriendContact( userID , quantitySeenFriendContacts );
+            let contacts = result.map( async (element)=>{
+                if( element.contactId == userID)
+                {
+                    return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.userId );
+                }
+                else
+                {
+                    return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.contactId );
+                }
+                
+            });
+            console.log("contactModel line:251")
+            console.log(await Promise.all(contacts));
+            resolve(await Promise.all(contacts) );
+        } 
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
 
 
 module.exports = {
@@ -228,5 +271,7 @@ module.exports = {
 
     countFriendContact : countFriendContact,
     countSentFriendContact : countSentFriendContact,
-    countReceivedFriendContact : countReceivedFriendContact
+    countReceivedFriendContact : countReceivedFriendContact,
+
+    retrieveMoreFriendContacts : retrieveMoreFriendContact
 }

@@ -69,10 +69,10 @@
                                         <div class="user-address">
                                             <span>&nbsp <%= element.address %></span>
                                         </div>
-                                        <div class="user-talk" data-uid="user._id">
+                                        <div class="user-talk" data-uid="<%= element._id %>">
                                             Trò chuyện
                                         </div>
-                                        <div class="user-remove-contact action-danger" data-uid="user._id">
+                                        <div class="user-remove-contact action-danger" data-uid="<%= element._id %>">
                                             Xóa liên hệ
                                         </div>
                                     </div>
@@ -80,7 +80,7 @@
                                 <% }) %>
                             </ul>
                             <div id="read-more-friend-contacts">
-                                <a href="#" id="btn-read-more-notifications" ><strong>Read more friend contacts</strong></a>
+                                <a href="#" id="btn-read-more-friend-contacts" ><strong>Read more friend contacts</strong></a>
                                 <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                             </div>
                         </div>
