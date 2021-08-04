@@ -227,8 +227,10 @@ let countReceivedFriendContact = (userID)=>{
     });
 }
 
+
+
 /************************************************************
- * @param {*} userID 
+ * @param {*} userID | string | who is logging in
  * @param {*} quantitySeenFriendContacts 
  * @returns | object | older friends of @userID
  ************************************************************/
@@ -260,9 +262,9 @@ let retrieveMoreFriendContact = ( userID , quantitySeenFriendContacts)=>{
 
 
 /************************************************************
- * @param {*} userID 
- * @param {*} quantitySeenSentFriendRequestContacts 
- * @returns 
+ * @param {*} userID | string | who is logging in
+ * @param {*} quantitySeenSentFriendRequestContacts | number | number of people whom user sent friend request
+ * @returns people are sent friend request by user but they does not appear
  ************************************************************/
 let retrieveMoreSentFriendContact = ( userID , quantitySeenSentFriendRequestContacts)=>{
     return new Promise( async ( resolve , reject)=>{
@@ -283,6 +285,11 @@ let retrieveMoreSentFriendContact = ( userID , quantitySeenSentFriendRequestCont
 
 
 
+/************************************************************
+ * @param {*} userID | string | who is logging in
+ * @param {*} quantitySeenReceivedFriendContacts | number | number of people sending friend request & appearing in the screen
+ * @returns people sending friend request but they does not appear
+ ************************************************************/
 let retrieveMoreReceivedFriendContact = ( userID , quantitySeenReceivedFriendContacts)=>{
     return new Promise( async ( resolve , reject)=>{
         try 
@@ -300,6 +307,9 @@ let retrieveMoreReceivedFriendContact = ( userID , quantitySeenReceivedFriendCon
         }
     });
 }
+
+
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,

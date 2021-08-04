@@ -1,6 +1,8 @@
 /***********************************************
+ * views/home/section/contact.ejs - line 54
  * @param {*} quantityOfSeenContacts | number | number of contacts that user have seen in their scree
- ***********************************************/
+ * @returns |template| friend contacts if user does not see all friends 
+ * **********************************************/
 let ajaxToRetrieveMoreFriendContacts = (quantityOfSeenFriendContacts)=>{
     $.get(`/read-more-friend-contacts/${quantityOfSeenFriendContacts}`,function(contacts){
             
@@ -45,6 +47,13 @@ let ajaxToRetrieveMoreFriendContacts = (quantityOfSeenFriendContacts)=>{
     });
 }
 
+
+
+/***********************************************
+ * @param {*} quantityOfSeenSentFriendContacts | number | people are sent friend request by user
+ * user is waiting for their response
+ * @return |template| people who are sent friend request & they does not appear in the screen
+ ***********************************************/
 let ajaxToRetrieveMoreSentFriendRequestContacts = (quantityOfSeenSentFriendContacts)=>{
     $.get(`/read-more-sent-friend-contacts/${quantityOfSeenSentFriendContacts}`,function(contacts){
             
@@ -86,6 +95,12 @@ let ajaxToRetrieveMoreSentFriendRequestContacts = (quantityOfSeenSentFriendConta
     });
 }
 
+
+
+/***********************************************
+ * @param {*} quantityOfSeenReceivedFriendContacts | number | people send friend request to user
+ * @returns |template| people sending friend request & does not appear in the screen
+ ***********************************************/
 let ajaxToRetrieveMoreReceivedFriendContacts = (quantityOfSeenReceivedFriendContacts)=>{
     $.get(`/read-more-received-friend-contacts/${quantityOfSeenReceivedFriendContacts}`,function(contacts){
             
@@ -129,6 +144,9 @@ let ajaxToRetrieveMoreReceivedFriendContacts = (quantityOfSeenReceivedFriendCont
         $(".lds-ring").css("display","none");
     });
 }
+
+
+
 /***********************************************
  * handleEventClickReadMoreFriendContacts listen event click "read more friend contacts"
  ***********************************************/
@@ -171,6 +189,11 @@ let handleEventClickReadMoreSentFriendContacts = ()=>{
     })
 }
 
+
+
+/***********************************************
+ * handleEventClickReadMoreReceivedFriendContacts listen event click "read more received friend request contacts"
+ ***********************************************/
 let handleEventClickReadMoreReceivedFriendContacts = ()=>{
     $("#btn-read-received-friend-contacts").bind("click" , function(){
         let quantityOfSeenReceivedFriendContacts = $("#request-contact-received").find("li").length;
@@ -180,6 +203,9 @@ let handleEventClickReadMoreReceivedFriendContacts = ()=>{
         ajaxToRetrieveMoreReceivedFriendContacts( quantityOfSeenReceivedFriendContacts );
     });
 }
+
+
+
 $(document).ready(function(){
 
     handleEventClickReadMoreFriendContacts();

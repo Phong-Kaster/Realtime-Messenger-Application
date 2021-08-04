@@ -152,7 +152,7 @@ contactSchema.statics = {
      * @param {*} quantitySeenSentFriendRequestContacts | number | number of friend contacts that user have sent friend request
      * @returns more contacts | object | that user have sent friend request but they have not seen by user
      ************************************************************/
-     retrieveMoreSentFriendContact(userId,quantitySeenSentFriendRequestContacts)
+    retrieveMoreSentFriendContact(userId,quantitySeenSentFriendRequestContacts)
     {
         return this.find({
             $and : [
