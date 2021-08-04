@@ -50,6 +50,7 @@ let ajaxToRetrieveMoreFriendContacts = (quantityOfSeenFriendContacts)=>{
 
 
 /***********************************************
+ * views/home/section/contact.ejs - line 88
  * @param {*} quantityOfSeenSentFriendContacts | number | people are sent friend request by user
  * user is waiting for their response
  * @return |template| people who are sent friend request & they does not appear in the screen
@@ -82,7 +83,7 @@ let ajaxToRetrieveMoreSentFriendRequestContacts = (quantityOfSeenSentFriendConta
                 <div class="user-address">
                     <span>&nbsp ${(element.address) !== null ? element.address : ""}</span>
                 </div>
-                <div class="user-remove-request-sent action-danger" data-uid="${element._id}">
+                <div class="user-remove-request-contact display-important action-danger" data-uid="${element._id}">
                     Hủy yêu cầu
                 </div>
             </div>
@@ -98,6 +99,7 @@ let ajaxToRetrieveMoreSentFriendRequestContacts = (quantityOfSeenSentFriendConta
 
 
 /***********************************************
+ * views/home/section/contact.ejs - line 119
  * @param {*} quantityOfSeenReceivedFriendContacts | number | people send friend request to user
  * @returns |template| people sending friend request & does not appear in the screen
  ***********************************************/
@@ -167,6 +169,7 @@ let handleEventClickReadMoreFriendContacts = ()=>{
         ajaxToRetrieveMoreFriendContacts(quantityOfSeenFriendContacts);
     });
 }
+
 
 
 /***********************************************

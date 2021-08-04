@@ -3,6 +3,7 @@
  * @targetID whose Username is sent friend request
  * @returns DOM Object for changing button from "send friend request" to "cancel friend request" 
  * and reverse for cancel function
+ * unbind("click") helps delete all request before triggering this event again.
  * @returns increase value indicating in contact management
  ************************************************************/
 function sendAddFriendRequest(){
@@ -30,7 +31,7 @@ function sendAddFriendRequest(){
     });
 }
 function cancelFriendRequest(){
-    $(".user-remove-request-contact").bind("click",function(){
+    $(".user-remove-request-contact").unbind("click").on("click",function(){
         let targetID = $(this).data("uid");
         
         $.ajax({
@@ -164,4 +165,7 @@ $(document).ready(function(){
     handleEventSearchUser();
    
     handleButtonSearchUser();
+
+    // listen event when wanna cancel request sent friend request contacts
+    cancelFriendRequest();
 });

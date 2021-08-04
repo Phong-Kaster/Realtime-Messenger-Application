@@ -1375,3 +1375,7 @@ label:focus,
 #read-more-received-friend-request-contacts {
   text-align: center;
 }
+
+.display-important{
+  display: inline-block !important;
+}
