@@ -110,9 +110,40 @@ let retrieveMoreFriendContacts = async ( req , res )=>{
 
 
 
+let retrieveMoreSentFriendContacts = async ( req , res )=>{
+    try 
+    {
+        let quantitySeenSentFriendContacts = Number(req.params.quantitySeenSentFriendContacts);
+        let receiverID = req.user._id;
+
+        let sentFriendContacts = await contactModel.retrieveMoreSentFriendContact( receiverID , quantitySeenSentFriendContacts );
+        return res.status(200).send(sentFriendContacts);
+    } 
+    catch (error) 
+    {
+        return res.status(500).send(error);
+    }
+}
+
+let retrieveMoreReceivedFriendContacts = async ( req , res )=>{
+    try 
+    {
+        let quantitySeenReceivedFriendContacts = Number(req.params.quantitySeenReceivedFriendContacts);
+        let receiverID = req.user._id;
+        let receivedFriendContacts = await contactModel.retrieveMoreReceivedFriendContact( receiverID , quantitySeenReceivedFriendContacts );
+        return res.status(200).send(receivedFriendContacts);
+    } 
+    catch (error) 
+    {
+        return res.status(500).send(error);
+    }
+}
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
     cancelFriendRequest : cancelFriendRequest,
-    retrieveMoreFriendContacts : retrieveMoreFriendContacts
+
+    retrieveMoreFriendContacts : retrieveMoreFriendContacts,
+    retrieveMoreSentFriendContacts : retrieveMoreSentFriendContacts,
+    retrieveMoreReceivedFriendContacts : retrieveMoreReceivedFriendContacts
 }

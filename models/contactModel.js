@@ -230,7 +230,7 @@ let countReceivedFriendContact = (userID)=>{
 /************************************************************
  * @param {*} userID 
  * @param {*} quantitySeenFriendContacts 
- * @returns | object | 
+ * @returns | object | older friends of @userID
  ************************************************************/
 let retrieveMoreFriendContact = ( userID , quantitySeenFriendContacts)=>{
     return new Promise( async ( resolve , reject)=>{
@@ -248,8 +248,6 @@ let retrieveMoreFriendContact = ( userID , quantitySeenFriendContacts)=>{
                 }
                 
             });
-            console.log("contactModel line:251")
-            console.log(await Promise.all(contacts));
             resolve(await Promise.all(contacts) );
         } 
         catch (error) 
@@ -260,6 +258,48 @@ let retrieveMoreFriendContact = ( userID , quantitySeenFriendContacts)=>{
 }
 
 
+
+/************************************************************
+ * @param {*} userID 
+ * @param {*} quantitySeenSentFriendRequestContacts 
+ * @returns 
+ ************************************************************/
+let retrieveMoreSentFriendContact = ( userID , quantitySeenSentFriendRequestContacts)=>{
+    return new Promise( async ( resolve , reject)=>{
+        try 
+        {
+            let result = await contactSchema.retrieveMoreSentFriendContact( userID , quantitySeenSentFriendRequestContacts );
+            let contacts = result.map( async (element)=>{
+                return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.contactId );
+            });
+            resolve(await Promise.all(contacts) );
+        } 
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+
+let retrieveMoreReceivedFriendContact = ( userID , quantitySeenReceivedFriendContacts)=>{
+    return new Promise( async ( resolve , reject)=>{
+        try 
+        {
+            let result = await contactSchema.retrieveMoreReceivedFriendContact( userID , quantitySeenReceivedFriendContacts );
+            let contacts = result.map( async (element)=>{
+                return await userSchema.findByIdentificationAndRetrieveSpecificFields( element.userId );
+            });
+
+            resolve(await Promise.all(contacts));
+        } 
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -273,5 +313,7 @@ module.exports = {
     countSentFriendContact : countSentFriendContact,
     countReceivedFriendContact : countReceivedFriendContact,
 
-    retrieveMoreFriendContacts : retrieveMoreFriendContact
+    retrieveMoreFriendContacts : retrieveMoreFriendContact,
+    retrieveMoreSentFriendContact : retrieveMoreSentFriendContact,
+    retrieveMoreReceivedFriendContact : retrieveMoreReceivedFriendContact
 }

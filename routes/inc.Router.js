@@ -106,6 +106,8 @@ let incRouters = (app) =>{
 
     // load more contact
     router.get("/read-more-friend-contacts/:quantitySeenFriendContacts" , loginValidation.isLogout , contactController.retrieveMoreFriendContacts);
+    router.get("/read-more-sent-friend-contacts/:quantitySeenSentFriendContacts" , loginValidation.isLogout , contactController.retrieveMoreSentFriendContacts);
+    router.get("/read-more-received-friend-contacts/:quantitySeenReceivedFriendContacts" , loginValidation.isLogout , contactController.retrieveMoreReceivedFriendContacts);
     return app.use("/",router);
 }
 

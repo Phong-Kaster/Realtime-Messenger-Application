@@ -128,6 +128,11 @@ contactSchema.statics = {
         })
         .exec()
     },
+    /************************************************************
+     * @param {*} userId | string | who is logging in
+     * @param {*} quantitySeenFriendContacts | number | number of friend contacts that user have seen
+     * @returns more friend contacts | object | that user have not seen in their screen
+     ************************************************************/
     retrieveMoreFriendContact(userId,quantitySeenFriendContacts)
     {
         return this.find({
@@ -141,6 +146,37 @@ contactSchema.statics = {
         .skip(quantitySeenFriendContacts)
         .limit(10)
         .exec();
+    },
+    /************************************************************
+     * @param {*} userId | string | who is logging in
+     * @param {*} quantitySeenSentFriendRequestContacts | number | number of friend contacts that user have sent friend request
+     * @returns more contacts | object | that user have sent friend request but they have not seen by user
+     ************************************************************/
+     retrieveMoreSentFriendContact(userId,quantitySeenSentFriendRequestContacts)
+    {
+        return this.find({
+            $and : [
+                {"userId" : userId},
+                {"status" : false}
+            ]
+        })
+        .limit(10)
+        .skip(quantitySeenSentFriendRequestContacts)
+        .sort({$natural:-1})
+        .exec();
+    },
+    retrieveMoreReceivedFriendContact(userId,quantitySeenReceivedFriendContacts)
+    {
+        return this.find({
+            $and : [
+                {"contactId" : userId},
+                {"status" : false}
+            ]
+        })
+        .limit(10)
+        .skip(quantitySeenReceivedFriendContacts)
+        .sort({$natural:-1})
+        .exec()
     }
 }
 
