@@ -65,6 +65,7 @@ let sendAddFriendRequest = async ( req , res )=>{
 }
 
 
+
 /*************************************************************
  * @currentUserID that account ID is logging in
  * @targetID is user ID whose we wanna cancel friend request 
@@ -88,10 +89,11 @@ let cancelFriendRequest = async ( req , res)=>{
 }
 
 
+
 /*************************************************************
- * @param {*} req 
- * @param {*} res 
- * @returns 
+ * @quantitySeenFriendContacts | number | number of friend contacts are appearing in screen
+ * @receiverID | string | who is logging in
+ * @returns |object | friend contact of @receiverID
  *************************************************************/
 let retrieveMoreFriendContacts = async ( req , res )=>{
     try 
@@ -110,6 +112,12 @@ let retrieveMoreFriendContacts = async ( req , res )=>{
 
 
 
+/*************************************************************
+ * @quantitySeenSentFriendContacts | number | number of contacts who are appearing in screen
+ * and were sent friend request from @receiverID
+ * @receiverID | string | who is logging in
+ * @returns |object | contact whom @receiverID sent friend request
+ *************************************************************/
 let retrieveMoreSentFriendContacts = async ( req , res )=>{
     try 
     {
@@ -125,6 +133,13 @@ let retrieveMoreSentFriendContacts = async ( req , res )=>{
     }
 }
 
+
+
+/*************************************************************
+ * @quantitySeenReceivedFriendContacts | number | number of contacts who sent friend request to @receiverID
+ * @receiverID | string | who is logging in
+ * @returns |object | contact who sent friend request to @receiverID
+ *************************************************************/
 let retrieveMoreReceivedFriendContacts = async ( req , res )=>{
     try 
     {

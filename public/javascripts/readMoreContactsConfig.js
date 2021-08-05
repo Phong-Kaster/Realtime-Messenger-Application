@@ -8,7 +8,7 @@ let ajaxToRetrieveMoreFriendContacts = (quantityOfSeenFriendContacts)=>{
             
         if( contacts.length < 0 )
         {
-            alertify.notify("No more contacts to show !");
+            alertify.notify("No more friend contacts to show !");
             $("#btn-read-more-friend-contacts").css("display","none");
             $(".lds-ring").css("display","none");
             return false;
