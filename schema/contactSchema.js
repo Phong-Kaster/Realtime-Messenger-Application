@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { retrieveReceivedFriendContact } = require('../models/contactModel');
 const { Schema } = mongoose;
 
 const contactSchema = new Schema({
@@ -177,6 +176,15 @@ contactSchema.statics = {
         .skip(quantitySeenReceivedFriendContacts)
         .sort({$natural:-1})
         .exec()
+    },
+    denyReceivedFriendContact(userId,contactId)
+    {
+        return this.deleteOne({
+            $and:[
+                {"userId" : contactId},
+                {"contactId" : userId}
+            ]
+        }).exec();
     }
 }
 

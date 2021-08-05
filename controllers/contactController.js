@@ -153,6 +153,23 @@ let retrieveMoreReceivedFriendContacts = async ( req , res )=>{
         return res.status(500).send(error);
     }
 }
+
+
+
+let denyReceivedFriendContact = async ( req ,res )=>{
+    try 
+    {
+        let userID = req.user._id;
+        let senderID = req.body.uid;
+        
+        let result = await contactModel.denyReceivedFriendContact( userID , senderID );
+        return res.status(200).send( { success : !!result });
+    } 
+    catch (error) 
+    {
+        return res.status(500).send(error);
+    }
+}
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -160,5 +177,7 @@ module.exports = {
 
     retrieveMoreFriendContacts : retrieveMoreFriendContacts,
     retrieveMoreSentFriendContacts : retrieveMoreSentFriendContacts,
-    retrieveMoreReceivedFriendContacts : retrieveMoreReceivedFriendContacts
+    retrieveMoreReceivedFriendContacts : retrieveMoreReceivedFriendContacts,
+
+    denyReceivedFriendContact : denyReceivedFriendContact
 }

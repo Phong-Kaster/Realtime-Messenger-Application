@@ -231,7 +231,8 @@ let countReceivedFriendContact = (userID)=>{
 
 /************************************************************
  * @param {*} userID | string | who is logging in
- * @param {*} quantitySeenFriendContacts 
+ * @param {*} quantitySeenFriendContacts
+ * each @element in @result will be used to find user
  * @returns | object | older friends of @userID
  ************************************************************/
 let retrieveMoreFriendContact = ( userID , quantitySeenFriendContacts)=>{
@@ -310,6 +311,21 @@ let retrieveMoreReceivedFriendContact = ( userID , quantitySeenReceivedFriendCon
 
 
 
+let denyReceivedFriendContact = ( userID , senderID )=>{
+    return new Promise( async (resolve , reject)=>{
+        let status = contactSchema.denyReceivedFriendContact( userID , senderID );
+        if( status.n === 0)
+        {
+            return reject(false);
+        }
+
+        await notificationSchema.model.deleteReceivedFriendContactNotification( userID , senderID);
+        resolve(true);
+    })
+}
+
+
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -325,5 +341,7 @@ module.exports = {
 
     retrieveMoreFriendContacts : retrieveMoreFriendContact,
     retrieveMoreSentFriendContact : retrieveMoreSentFriendContact,
-    retrieveMoreReceivedFriendContact : retrieveMoreReceivedFriendContact
+    retrieveMoreReceivedFriendContact : retrieveMoreReceivedFriendContact,
+
+    denyReceivedFriendContact : denyReceivedFriendContact
 }

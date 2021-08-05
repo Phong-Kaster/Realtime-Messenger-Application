@@ -131,7 +131,7 @@ let ajaxToRetrieveMoreReceivedFriendContacts = (quantityOfSeenReceivedFriendCont
                 <div class="user-address">
                     <span>&nbsp ${(element.address) !== null ? element.address : ""}</span>
                 </div>
-                <div class="user-acccept-contact-received" data-uid="${element._id}">
+                <div class="user-acccept-contact-received " data-uid="${element._id}">
                     Chấp nhận
                 </div>
                 <div class="user-reject-request-contact-received action-danger" data-uid="${element._id}">
@@ -140,8 +140,7 @@ let ajaxToRetrieveMoreReceivedFriendContacts = (quantityOfSeenReceivedFriendCont
             </div>
         </li>`);
         });
-
-
+        denyReceivedFriendContact();
         $("#btn-read-received-friend-contacts").css("display","block");
         $(".lds-ring").css("display","none");
     });

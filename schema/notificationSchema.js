@@ -57,6 +57,15 @@ notificationSchema.statics = {
                 {"senderId": {$in:senderIDs}}]
             },
             { "isRead":true }).exec();
+    },
+    deleteReceivedFriendContactNotification( receiverId , senderID )
+    {
+        return this.deleteOne({
+            $and : [
+                {"senderId" : senderID},
+                {"receiverId" : receiverId}
+            ]
+        }).exec();
     }
 }
 

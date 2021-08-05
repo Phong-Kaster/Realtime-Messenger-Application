@@ -19,17 +19,17 @@
                     <li><a data-toggle="tab" id="link-request-contact-sent" href="#request-contact-sent">
                         Đang chờ xác nhận
                         <% if(quantifyOfSentFriendRequestContact > 0){ %> 
-                            <span class="show-number-contacts count-contacts">(<strong><%= quantifyOfSentFriendRequestContact%></strong>)</span>
+                            <span class="show-number-contacts count-contacts count-sent-friend-contact">(<strong><%= quantifyOfSentFriendRequestContact%></strong>)</span>
                         <%}else{%>
-                            <span class="show-number-contacts count-contacts"></span>
+                            <span class="show-number-contacts count-contacts count-sent-friend-contact"></span>
                         <%}%>
                     </a></li>
                     <li><a data-toggle="tab" id="link-request-contact-received" href="#request-contact-received">
                         Yêu cầu kết bạn
                         <% if(quantityOfReceivedFriendRequestContacts > 0){ %> 
-                            <span class="show-number-contacts count-contacts">(<strong><%= quantityOfReceivedFriendRequestContacts%></strong>)</span>
+                            <span class="show-number-contacts count-contacts count-received-friend-contact">(<strong><%= quantityOfReceivedFriendRequestContacts%></strong>)</span>
                         <%}else{%>
-                            <span class="show-number-contacts count-contacts"></span>
+                            <span class="show-number-contacts count-contacts count-received-friend-contact"></span>
                         <%}%>
                     </a></li>
                 </ul>

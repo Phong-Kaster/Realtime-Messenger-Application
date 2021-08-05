@@ -19,7 +19,7 @@ function sendAddFriendRequest(){
                 // display "cancel request" button
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).css("display","inline-block");
                 
-                increaseResultNumber("count-request-contact-sent");
+                increaseResultNumber("count-sent-friend-contact");
                 
                 let userReceivedFriendRequest = $("#find-user").find(`ul li[data-uid = ${targetID} ]`).get(0).outerHTML;
                 $("#request-contact-sent").find("ul").prepend(userReceivedFriendRequest);
@@ -45,7 +45,7 @@ function cancelFriendRequest(){
                 // hide "cancel request" button
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).hide();
                 
-                decreaseResultNumber("count-request-contact-sent");
+                decreaseResultNumber("count-sent-friend-contact");
 
                 $("#request-contact-sent").find(`li[data-uid=${targetID}]`).remove();
 
