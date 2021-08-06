@@ -4,7 +4,8 @@ const userSchema = require('../schema/userSchema.js');
 const notificationSchema = require('../schema/notificationSchema.js');
 const _ = require('lodash');
 const { reject } = require('lodash');
-/* ======================= FUNCTION ======================= */
+
+
 
 /************************************************************
  * @param {*} currentUserID that account ID is logging in
@@ -38,10 +39,9 @@ let searchByKeyword = ( currentUserID , keyword )=>{
 
 /************************************************************
  * @senderID that account ID is logging in
- * @receiverID is user ID whose we wanna cancel friend request 
- * @param {*} senderID who send request to Object influenced
- * @param {*} receiverID is the Object who is influenced
- * @returns resolve cancel friend request if success
+ * @receiverID is user ID whose @senderID wanna send friend request 
+ * @type is the type of notification which is sent to @receiverID
+ * @returns create a contact record with its status is false
  ************************************************************/
 let sendAddFriendRequest = ( senderID , receiverID )=>{
     return new Promise( async ( resolve , reject ) =>{
@@ -67,6 +67,15 @@ let sendAddFriendRequest = ( senderID , receiverID )=>{
         return resolve(true);
     })
 }
+
+
+
+/************************************************************
+ * @senderID that account ID is logging in
+ * @receiverID is user ID whose @senderID wanna cancel friend request 
+ * @type is the type of notification which is sent to @receiverID
+ * @returns delete a contact record with its status is false
+ ************************************************************/
 let cancelFriendRequest = ( senderID , receiverID )=>{
     return new Promise( async ( resolve , reject )=>{
 
@@ -311,6 +320,12 @@ let retrieveMoreReceivedFriendContact = ( userID , quantitySeenReceivedFriendCon
 
 
 
+/*************************************************************
+ * views/home/section/contact.ejs - line 140
+ * @param {*} userID | string | who is logging in , send unfriend request
+ * @param {*} senderID | string | who send friend request to @userID & is refused request
+ * @returns delete a new contact record
+ *************************************************************/
 let denyReceivedFriendContact = ( userID , senderID )=>{
     return new Promise( async (resolve , reject)=>{
         let status = contactSchema.denyReceivedFriendContact( userID , senderID );
@@ -325,6 +340,13 @@ let denyReceivedFriendContact = ( userID , senderID )=>{
 }
 
 
+
+/*************************************************************
+ * views/home/section/contact.ejs - line 137
+ * @param {*} userID | string | who is logging in , send unfriend request
+ * @param {*} senderID | string | who send friend request to @userID & is accepted request
+ * @returns create a new contact record
+ *************************************************************/
 let acceptReceivedFriendContact = ( userID , senderID)=>{
     return new Promise( async (resolve , reject)=>{
         let status = contactSchema.acceptReceivedFriendContact( userID , senderID );
@@ -342,6 +364,28 @@ let acceptReceivedFriendContact = ( userID , senderID)=>{
         resolve(true);
     })
 }
+
+
+
+/*************************************************************
+ * @param {*} userID | string | who is logging in , send unfriend request
+ * @param {*} receiverID | string | whom @userID wanna unfriend
+ * views/home/section/contact.ejs - line 75
+ * @returns delete a contact record and its status is true
+ *************************************************************/
+let unfriend = ( userID , receiverID)=>{
+    return new Promise( async (resolve , reject)=>{
+        let status = contactSchema.unfriend( userID , receiverID );
+        if( status.nModified === 0)
+        {
+            return reject(false);
+        }
+        resolve(true);
+    })
+}
+
+
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -360,5 +404,6 @@ module.exports = {
     retrieveMoreReceivedFriendContact : retrieveMoreReceivedFriendContact,
 
     denyReceivedFriendContact : denyReceivedFriendContact,
-    acceptReceivedFriendContact : acceptReceivedFriendContact
+    acceptReceivedFriendContact : acceptReceivedFriendContact,
+    unfriend : unfriend
 }

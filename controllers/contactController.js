@@ -156,6 +156,12 @@ let retrieveMoreReceivedFriendContacts = async ( req , res )=>{
 
 
 
+/*************************************************************
+ * views/home/section/contact.ejs - line 140
+ * @param {*} userID | string | who is logging in , send unfriend request
+ * @param {*} senderID | string | who send friend request to @userID & is refused request
+ * @returns delete a new contact record
+ *************************************************************/
 let denyReceivedFriendContact = async ( req ,res )=>{
     try 
     {
@@ -173,7 +179,13 @@ let denyReceivedFriendContact = async ( req ,res )=>{
 
 
 
-let acceptReceivedFriendContact = async ( req , res)=>{
+/*************************************************************
+ * views/home/section/contact.ejs - line 137
+ * @param {*} userID | string | who is logging in , send unfriend request
+ * @param {*} senderID | string | who send friend request to @userID & is accepted request
+ * @returns create a new contact record
+ *************************************************************/
+let acceptReceivedFriendContact = async ( req , res )=>{
     try 
     {
         let userID = req.user._id;
@@ -190,6 +202,27 @@ let acceptReceivedFriendContact = async ( req , res)=>{
 
 
 
+/*************************************************************
+ * @param {*} userID | string | who is logging in , send unfriend request
+ * @param {*} receiverID | string | whom @userID wanna unfriend
+ * views/home/section/contact.ejs - line 75
+ * @returns delete a contact record
+ *************************************************************/
+let unfriend = async ( req , res )=>{
+    try 
+    {
+        let userID = req.user._id;
+        let receiverID = req.body.receiver;
+       
+        let result = await contactModel.unfriend( userID , receiverID );
+        return res.status(200).send({success: !!result});
+    } 
+    catch (error) 
+    {
+        return res.status(500).send(error);
+    }
+} 
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -200,5 +233,6 @@ module.exports = {
     retrieveMoreReceivedFriendContacts : retrieveMoreReceivedFriendContacts,
 
     denyReceivedFriendContact : denyReceivedFriendContact,
-    acceptReceivedFriendContact : acceptReceivedFriendContact
+    acceptReceivedFriendContact : acceptReceivedFriendContact,
+    unfriend : unfriend
 }

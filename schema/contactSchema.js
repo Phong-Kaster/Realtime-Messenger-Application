@@ -197,6 +197,15 @@ contactSchema.statics = {
             ]},
             {"status" : true})
         .exec();
+    },
+    unfriend(userId,contactId)
+    {
+        return this.deleteOne({
+            $or : [
+                { $and : [{"userId" : contactId}, {"contactId" : userId}, {status:true}] },
+                { $and : [{"userId" : userId}, {"contactId": contactId}, {status:true}] }
+            ]
+        }).exec();
     }
 }
 

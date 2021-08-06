@@ -167,6 +167,7 @@ let handleEventClickReadMoreFriendContacts = ()=>{
         $(".lds-ring").css("display","inline-block");
 
         ajaxToRetrieveMoreFriendContacts(quantityOfSeenFriendContacts);
+        unfriend();
     });
 }
 

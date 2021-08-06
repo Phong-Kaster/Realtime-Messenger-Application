@@ -10,6 +10,7 @@ let incSocket = (io)=>{
     /* accept | deny received friend request */
     acceptOrDenyFriendContact.denyReceivedFriendContact(io);
     acceptOrDenyFriendContact.acceptReceivedFriendContact(io);
+    acceptOrDenyFriendContact.unfriend(io);
 }
 
 module.exports = incSocket;
