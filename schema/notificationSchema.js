@@ -70,7 +70,8 @@ notificationSchema.statics = {
 }
 
 const notificationType = {
-    friendRequest : "send add friend request"
+    friendRequest : "send friend request",
+    acceptFriendRequest : " accept friend request"
 }
 
 const notificationTemplate = ( sender , type , isRead)=>{
@@ -88,6 +89,21 @@ const notificationTemplate = ( sender , type , isRead)=>{
         return `<span data-uid="${ sender._id }">
                 <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
                 <strong> ${sender.username} </strong> sent to you a friend request
+                </span><br><br>`;
+    }
+
+    if( type == notificationType.acceptFriendRequest)
+    {
+        if( !isRead )
+        {
+            return `<span class="unseen-notification" data-uid="${ sender._id }">
+                <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
+                <strong> ${sender.username} </strong> accepted your friend request
+                </span><br><br>`;
+        }
+        return `<span data-uid="${ sender._id }">
+                <img class="avatar-small" src="/images/users/${sender.avatar}" alt=""> 
+                <strong> ${sender.username} </strong> accepted your friend request
                 </span><br><br>`;
     }
 }

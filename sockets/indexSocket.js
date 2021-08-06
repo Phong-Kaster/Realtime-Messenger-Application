@@ -9,6 +9,7 @@ let incSocket = (io)=>{
 
     /* accept | deny received friend request */
     acceptOrDenyFriendContact.denyReceivedFriendContact(io);
+    acceptOrDenyFriendContact.acceptReceivedFriendContact(io);
 }
 
 module.exports = incSocket;

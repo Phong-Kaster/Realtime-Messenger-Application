@@ -112,6 +112,7 @@ let incRouters = (app) =>{
     
     // accept & deny received friend request 
     router.delete("/deny-received-friend-contact" , loginValidation.isLogout , contactController.denyReceivedFriendContact);
+    router.put("/accept-received-friend-contact" , loginValidation.isLogout , contactController.acceptReceivedFriendContact);
     return app.use("/",router);
 }
 

@@ -141,6 +141,7 @@ let ajaxToRetrieveMoreReceivedFriendContacts = (quantityOfSeenReceivedFriendCont
         </li>`);
         });
         denyReceivedFriendContact();
+        acceptReceivedFriendContact();
         $("#btn-read-received-friend-contacts").css("display","block");
         $(".lds-ring").css("display","none");
     });

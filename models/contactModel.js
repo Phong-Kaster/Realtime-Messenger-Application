@@ -325,7 +325,23 @@ let denyReceivedFriendContact = ( userID , senderID )=>{
 }
 
 
-
+let acceptReceivedFriendContact = ( userID , senderID)=>{
+    return new Promise( async (resolve , reject)=>{
+        let status = contactSchema.acceptReceivedFriendContact( userID , senderID );
+        if( status.nModified === 0)
+        {
+            return reject(false);
+        }
+        
+        let informationNotification = {
+            senderId : userID,
+            receiverId : senderID,
+            type : notificationSchema.type.acceptFriendRequest
+        }
+        await notificationSchema.model.createNew(informationNotification);
+        resolve(true);
+    })
+}
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -343,5 +359,6 @@ module.exports = {
     retrieveMoreSentFriendContact : retrieveMoreSentFriendContact,
     retrieveMoreReceivedFriendContact : retrieveMoreReceivedFriendContact,
 
-    denyReceivedFriendContact : denyReceivedFriendContact
+    denyReceivedFriendContact : denyReceivedFriendContact,
+    acceptReceivedFriendContact : acceptReceivedFriendContact
 }

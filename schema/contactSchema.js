@@ -182,9 +182,21 @@ contactSchema.statics = {
         return this.deleteOne({
             $and:[
                 {"userId" : contactId},
-                {"contactId" : userId}
+                {"contactId" : userId},
+                {"status" : false}
             ]
         }).exec();
+    },
+    acceptReceivedFriendContact(userId,contactId)
+    {
+        return this.updateOne({
+            $and : [
+                {"userId":contactId},
+                {"contactId":userId},
+                {"status" : false}
+            ]},
+            {"status" : true})
+        .exec();
     }
 }
 

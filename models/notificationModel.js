@@ -21,6 +21,7 @@ let retrieveNotifications = ( receiverID )=>{
                
                 return notificationSchema.notificationTemplate( sender , element.type , element.isRead );
             });
+            
             resolve( await Promise.all(contentOfNotifications) );
         }
         catch(error)

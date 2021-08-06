@@ -103,9 +103,10 @@ socket.on("response-send-add-friend-request", function(sender){
                                             </div>
                                         </div>
                                     </li>`;
-    console.log(userReceivedFriendRequest);
     $("#request-contact-received").find("ul").prepend(userReceivedFriendRequest);
 })
+
+
 socket.on("response-cancel-friend-request" , function(sender){
     // notification icons
     $(".noti_content").find(`span[data-uid = ${sender.id}]`).html("");

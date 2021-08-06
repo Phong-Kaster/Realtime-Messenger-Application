@@ -6,12 +6,12 @@
  ************************************************************/
 function increaseResultNumber(className){
 
-    let value =  +$(`.${className}`).find("strong").text();
-    value = value+1;
+    let value = $(`.${className}`).find("strong").text();
+    value++;
     
     if(value === 0)
     {
-        +$(`.${className}`).html("");
+        $(`.${className}`).html("");
     }
     +$(`.${className}`).html(`(<strong>${value}</strong>)`);
 }
