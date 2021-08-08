@@ -21,4 +21,20 @@ const chatGroupSchema = new Schema({
     deletedAt : { type : Number, default : null } 
 });
 
+chatGroupSchema.statics = {
+    retrieveGroupConversation(userId)
+    {
+        return this.find({
+            member: {$elemMatch: {"userId": userId}}
+        })
+        .sort({$natural:-1})
+        .limit(10)
+        .exec();
+    },
+    createNew(information)
+    {
+        return this.create(information);
+    }
+}
+
 module.exports = mongoose.model('chatGroup',chatGroupSchema);

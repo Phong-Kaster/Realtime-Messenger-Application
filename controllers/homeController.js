@@ -1,6 +1,7 @@
 /* ======================= LIBRARY ======================= */
 const notificationModel = require('../models/notificationModel.js');
 const contactModel = require('../models/contactModel.js');
+const conversationModel = require('../models/conversationModel.js');
 
 
 
@@ -23,7 +24,6 @@ let home = async (req,res) =>{
     
     let notifications = await notificationModel.retrieveNotifications(req.user._id);
     let quantityOfUnreadNotification = await notificationModel.countUnreadNotifications(req.user._id);
-
     let friendContacts = await contactModel.retrieveFriendContact(req.user._id);
     let sentFriendRequestContacts = await contactModel.retrieveSentFriendContact(req.user._id);
     let receivedFriendRequestContacts = await contactModel.retrieveReceivedFriendContact(req.user._id);
@@ -32,6 +32,10 @@ let home = async (req,res) =>{
     let quantifyOfSentFriendRequestContact = await contactModel.countSentFriendContact(req.user._id);
     let quantityOfReceivedFriendRequestContacts = await contactModel.countReceivedFriendContact(req.user._id);
     
+    let conversation = await conversationModel.retrieveConversation(req.user._id);
+    let allChat = conversation.allConversation;
+    let personalChat = conversation.personalConversation;
+    let groupChat = conversation.groupConversation;
 
     return res.render("./home/section/content.ejs", {
         success : req.flash("success"),
@@ -47,7 +51,11 @@ let home = async (req,res) =>{
 
         quantityOfFriendContacts : quantityOfFriendContacts,
         quantifyOfSentFriendRequestContact : quantifyOfSentFriendRequestContact,
-        quantityOfReceivedFriendRequestContacts : quantityOfReceivedFriendRequestContacts
+        quantityOfReceivedFriendRequestContacts : quantityOfReceivedFriendRequestContacts,
+
+        allChat : allChat,
+        personalChat : personalChat,
+        groupChat : groupChat
     });
 };
 
