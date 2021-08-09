@@ -16,13 +16,13 @@ let retrieveConversation = ( userID )=>{
                 if( element.contactId == userID)
                 {
                     let user = await userSchema.findByIdentificationAndRetrieveSpecificFields( element.userId );
-                    user.createdAt = element.createdAt;
+                    user.updatedAt = element.updatedAt;
                     return user;
                 }
                 else
                 {
                     let user = await userSchema.findByIdentificationAndRetrieveSpecificFields( element.contactId );
-                    user.createdAt = element.createdAt;
+                    user.updatedAt = element.updatedAt;
                     return user;
                 }
             });
@@ -34,7 +34,7 @@ let retrieveConversation = ( userID )=>{
 
             
             allConversation = _.sortBy( allConversation , (element)=>{
-                return -element.createdAt;
+                return -element.updatedAt;
             });
 
 

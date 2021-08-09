@@ -17,7 +17,7 @@ const chatGroupSchema = new Schema({
     userId : String, // host of group
     member : [ { userId : String } ], // array of userId
     createdAt : { type : Number, default : Date.now },
-    updatedAt : { type : Number, default : null },
+    updatedAt : { type : Number, default : Date.now },
     deletedAt : { type : Number, default : null } 
 });
 
@@ -27,7 +27,7 @@ chatGroupSchema.statics = {
         return this.find({
             member: {$elemMatch: {"userId": userId}}
         })
-        .sort({$natural:-1})
+        .sort({"updatedAt" : -1})
         .limit(10)
         .exec();
     },

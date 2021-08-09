@@ -22,7 +22,13 @@
                                     <img src="./images/users/groupChat.png" alt="">
                                 </div>
                                 <span class="name">
-                                    <span class="group-chat-name">Group:</span> <%= element.name %>
+                                    <span class="group-chat-name">
+                                        <% if( element.name.length > 15){ %> 
+                                            <%= element.name.substr(0,15).concat("......") %>
+                                        <% }else{ %>
+                                            <%= element.name %>
+                                        <%}%>
+                                    </span>
                                 </span>
                                 <span class="time">Hai giờ trước</span>
                                 <span class="preview">Chào cả nhóm</span>
@@ -35,7 +41,13 @@
                                 <div class="dot online"></div>
                                 <img class="avatar-online" src="./images/users/<%= element.avatar %>" alt="avatar">
                             </div>
-                            <span class="name"> <%= element.username %></span>
+                            <span class="name">
+                                <% if( element.username.length > 15){ %> 
+                                    <%= element.username.substr(0,15).concat("......") %>
+                                <% }else{ %>
+                                    <%= element.username %>
+                                <%}%>
+                            </span>
                             <span class="time">Bây giờ</span>
                             <span class="preview">Xin chào <strong>Pontifex</strong>...</span>
                         </li>
@@ -57,7 +69,11 @@
                                 <img src="./images/users/<%= element.avatar %>" alt="avatar">
                             </div>
                             <span class="name">
-                                <%= element.username %>
+                                <% if( element.username.length > 15){ %> 
+                                    <%= element.username.substr(0,15).concat("......") %>
+                                <% }else{ %>
+                                    <%= element.username %>
+                                <%}%>
                             </span>
                             <span class="time">Một phút trước</span>
                             <span class="preview">Xin chào</span>
@@ -80,7 +96,13 @@
                                     <img src="./images/users/groupChat.png" alt="">
                                 </div>
                                 <span class="name">
-                                    <span class="group-chat-name">Group:</span> <%= element.name %>
+                                    <span class="group-chat-name">
+                                        <% if( element.name.length > 15){ %> 
+                                            <%= element.name.substr(0,15).concat("......") %>
+                                        <% }else{ %>
+                                            <%= element.name %>
+                                        <%}%>
+                                    </span>
                                 </span>
                                 <span class="time">Hai giờ trước</span>
                                 <span class="preview">Chào cả nhóm</span>

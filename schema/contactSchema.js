@@ -68,7 +68,7 @@ contactSchema.statics = {
             ]
         })
         .limit(10)
-        .sort({$natural:-1})
+        .sort({"updatedAt": -1})
         .exec();
     },
     retrieveSentFriendContact(userId)
@@ -161,7 +161,7 @@ contactSchema.statics = {
         })
         .limit(10)
         .skip(quantitySeenSentFriendRequestContacts)
-        .sort({$natural:-1})
+        .sort({"updatedAt" : -1})
         .exec();
     },
     retrieveMoreReceivedFriendContact(userId,quantitySeenReceivedFriendContacts)
@@ -195,7 +195,7 @@ contactSchema.statics = {
                 {"contactId":userId},
                 {"status" : false}
             ]},
-            {"status" : true})
+            { "status" : true, updatedAt : Date.now() })
         .exec();
     },
     unfriend(userId,contactId)
