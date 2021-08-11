@@ -166,8 +166,15 @@ function selectTypeConversation()
       $(".create-group-chat").show();
     }
   });
-  
-  
+}
+
+function selectChatScreen()
+{
+  $(".room-chat").unbind("click").on("click",function(){
+    $(".person").removeClass("active");
+    $(this).find("li").addClass("active");
+    $(this).tab("show");
+  });
 }
 
 $(document).ready(function() {
@@ -205,4 +212,10 @@ $(document).ready(function() {
 
   // select type conversation: all - personal - group
   selectTypeConversation();
+
+  // select chat conversation screen
+  selectChatScreen();
+
+  //alway click first friend contact - views/home/section/contentLeft.ejs
+  $("ul.people").find("li").first().click();
 });

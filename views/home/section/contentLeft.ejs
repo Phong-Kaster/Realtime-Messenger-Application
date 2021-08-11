@@ -15,7 +15,7 @@
                 <ul class="people no-padding-start">
                     <% allChat.forEach( (element)=>{ %>
                     <% if( element.member ){ %>
-                        <a href="#uid_<%= element._id %>" class="room-chat">
+                        <a href="#uid_<%= element._id %>" class="room-chat" data-target="#to_<%= element._id %>">
                             <li class="person group-chat" data-chat="<%= element._id %>">
                                 <div class="left-avatar">
                                     <!-- <div class="dot"></div> -->
@@ -35,7 +35,7 @@
                             </li>
                         </a>
                     <%} else {%>
-                    <a href="#uid_<%= element._id %>" class="room-chat" id="null-contact">
+                    <a href="#uid_<%= element._id %>" class="room-chat" id="null-contact" data-target="#to_<%= element._id %>">
                         <li class="person active" data-chat="<%= element._id %>">
                             <div class="left-avatar">
                                 <div class="dot online"></div>
@@ -62,7 +62,7 @@
             <div class="tab-pane" id="personal-chat">
                 <ul class="people no-padding-start">
                     <% personalChat.forEach((element)=>{ %>
-                    <a href="#uid_<%= element._id %>" class="room-chat">
+                    <a href="#uid_<%= element._id %>" class="room-chat" data-target="#to_<%= element._id %>">
                         <li class="person" data-chat="<%= element._id %>">
                             <div class="left-avatar">
                                 <div class="dot"></div>
@@ -89,7 +89,7 @@
             <div class="tab-pane" id="group-chat">
                 <ul class="people no-padding-start">
                     <% groupChat.forEach((element)=>{ %>
-                        <a href="#uid_<%= element._id %>" class="room-chat">
+                        <a href="#uid_<%= element._id %>" class="room-chat" data-target="#to_<%= element._id %>">
                             <li class="person group-chat" data-chat="<%= element._id %>">
                                 <div class="left-avatar">
                                     <!-- <div class="dot"></div> -->

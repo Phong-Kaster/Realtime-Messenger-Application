@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const messengerSchema = new Schema({
+    senderId : String,
+    receivedId : String,
+    type : String,
     sender: // who send
     {
         id : String,
@@ -14,11 +17,11 @@ const messengerSchema = new Schema({
         username : String,
         avatar : String
     },
-    text : String, // messenger's content
+    content : String, // messenger's content
     file :
     {
         data : Buffer,
-        contentType : String,
+        fileType : String,
         fileName : String
     },
     status : 
@@ -31,4 +34,34 @@ const messengerSchema = new Schema({
     deletedAt : { type : Number, default : null }
 });
 
-module.exports = mongoose.model('messenger',messengerSchema);
+const typeConversation = {
+    individual : "individual",
+    group : "group"
+}
+
+const typeMessenger = {
+    text : "text",
+    photo : "photo",
+    document : "document"
+}
+
+messengerSchema.statics = {
+    retrieveContentMessenger(senderId , receiverId)
+    {
+        return this.find({
+            $or: [
+                {$and: [ {"senderId":senderId},{"receiverId":receiverId} ]},
+                {$and: [ {"senderId":receiverId},{"receiverId":senderId} ]}
+            ]
+        })
+        .sort({"createdAt" : 1})
+        .limit(10)
+        .exec()
+    }
+}
+
+module.exports = {
+    model : mongoose.model('messenger',messengerSchema),
+    typeConversation : typeConversation,
+    typeMessenger : typeMessenger
+}

@@ -2,7 +2,7 @@
 const notificationModel = require('../models/notificationModel.js');
 const contactModel = require('../models/contactModel.js');
 const conversationModel = require('../models/conversationModel.js');
-
+const bufferBase64ToString = require('../models/bufferBase64ToString.js');
 
 
 /*************************************************************
@@ -17,6 +17,8 @@ const conversationModel = require('../models/conversationModel.js');
  * @quantifyOfSentFriendRequestContact | number | indicates how many people user sent friend request & wait for their response
  * @quantityOfReceivedFriendRequestContacts | number | indicates how many friend requests user received
  * 
+ * @allChat | @personalChat | @groupChat | object | contain information about friend contact
+ * @allContentChat | object | contain content of all message belong to user._id
  * @param {*} req 
  * @param {*} res 
  *************************************************************/
@@ -34,6 +36,8 @@ let home = async (req,res) =>{
     
     let conversation = await conversationModel.retrieveConversation(req.user._id);
     let allChat = conversation.allConversation;
+    
+    let allContentChat = conversation.allContentConversation;
     let personalChat = conversation.personalConversation;
     let groupChat = conversation.groupConversation;
 
@@ -54,8 +58,11 @@ let home = async (req,res) =>{
         quantityOfReceivedFriendRequestContacts : quantityOfReceivedFriendRequestContacts,
 
         allChat : allChat,
+        allContentChat : allContentChat,
         personalChat : personalChat,
-        groupChat : groupChat
+        groupChat : groupChat,
+
+        bufferBase64ToString : bufferBase64ToString
     });
 };
 

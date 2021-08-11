@@ -55,7 +55,7 @@ let updateAvatar = ( req,res ) =>{
             let user = await userModel.updateUserInformation( req.user._id , userInformation );
 
             // remove former avatar
-            await fsExtra.remove(`public/images/users/${user.avatar}`);
+            // await fsExtra.remove(`public/images/users/${user.avatar}`);
             let result = {
                 messenge : notice.updatedInformation,
                 imageSource : `/images/users/${req.file.filename}`
