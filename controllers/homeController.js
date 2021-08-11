@@ -2,9 +2,9 @@
 const notificationModel = require('../models/notificationModel.js');
 const contactModel = require('../models/contactModel.js');
 const conversationModel = require('../models/conversationModel.js');
-const bufferBase64ToString = require('../models/bufferBase64ToString.js');
-
-
+import {bufferBase64ToString } from '../helpers/bufferBase64ToString.js';
+import {retrieveTheLastOfArray} from '../helpers/retrieveTheLastOfArray.js';
+import {convertTimestamp} from '../helpers/convertTimestamp.js';
 /*************************************************************
  * @notifications | array | notifications appear in notice icon
  * @quantityOfUnreadNotification | number | how many notification user have not read ?
@@ -35,11 +35,8 @@ let home = async (req,res) =>{
     let quantityOfReceivedFriendRequestContacts = await contactModel.countReceivedFriendContact(req.user._id);
     
     let conversation = await conversationModel.retrieveConversation(req.user._id);
-    let allChat = conversation.allConversation;
-    
     let allContentChat = conversation.allContentConversation;
-    let personalChat = conversation.personalConversation;
-    let groupChat = conversation.groupConversation;
+
 
     return res.render("./home/section/content.ejs", {
         success : req.flash("success"),
@@ -57,12 +54,11 @@ let home = async (req,res) =>{
         quantifyOfSentFriendRequestContact : quantifyOfSentFriendRequestContact,
         quantityOfReceivedFriendRequestContacts : quantityOfReceivedFriendRequestContacts,
 
-        allChat : allChat,
         allContentChat : allContentChat,
-        personalChat : personalChat,
-        groupChat : groupChat,
 
-        bufferBase64ToString : bufferBase64ToString
+        bufferBase64ToString : bufferBase64ToString,
+        retrieveTheLastOfArray : retrieveTheLastOfArray,
+        convertTimestamp : convertTimestamp
     });
 };
 

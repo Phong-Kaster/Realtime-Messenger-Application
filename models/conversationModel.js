@@ -59,7 +59,6 @@ let retrieveConversation = ( userID )=>{
                 element.messenger = content;
                 return element;
             });
-
             /* Step 5 */
             allContentConversation = await Promise.all(allContentConversation);
             allContentConversation = _.sortBy(allContentConversation,(element)=>{

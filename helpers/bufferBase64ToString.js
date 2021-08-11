@@ -5,4 +5,4 @@
  *******************************************************/
 export let bufferBase64ToString = (href)=>{
     return Buffer.from(href).toString("base64");
-}
+};

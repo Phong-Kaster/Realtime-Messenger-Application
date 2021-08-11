@@ -14,7 +14,7 @@ import { validationResult } from "express-validator/check";
  ************************************************************/
 let searchByKeyword = async ( req , res )=>{
 
-    let currentUserID = req.user._id;
+    let userID = req.user._id;
     let keyword = req.params.keyword;
 
     // handle errors server-side
@@ -32,7 +32,7 @@ let searchByKeyword = async ( req , res )=>{
 
     try 
     {
-       let users = await contactModel.searchByKeyword( currentUserID , keyword );
+       let users = await contactModel.searchByKeyword( userID , keyword );
        
        // render html lists users include their avatar , username, address,id
        return res.render("home/section/contactResultSearchUser", {users} );

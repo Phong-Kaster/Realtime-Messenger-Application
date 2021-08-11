@@ -5,25 +5,35 @@
  * and reverse for cancel function
  * unbind("click") helps delete all request before triggering this event again.
  * @returns increase value indicating in contact management
+ * Step 1 : retrieve receiver ID
+ * Step 2 : send AJAX post request to create a friend request record
+ * Step 3 : if step 2 success, hide "send request" button & show "cancel request"
+ * Step 4 : update number of sent friend request
+ * Step 5 : prepend this tab into modal "sent fiend request"
+ * Step 6 : emit a event named "send-add-friend-request" to server
  ************************************************************/
 function sendAddFriendRequest(){
 
     $(".user-add-new-contact").bind("click",function(){
+        /* Step 1 */
         let targetID = $(this).data("uid");
         
+        /* Step 2 */
         $.post("/send-add-friend-request", {uid:targetID} ,function(data){
             if( data.success )
             {
-                // hide "send request" button
+                /* Step 3 */
                 $("#find-user").find(`div.user-add-new-contact[data-uid = ${targetID} ]`).hide();
-                // display "cancel request" button
                 $("#find-user").find(`div.user-remove-request-contact[data-uid = ${targetID} ]`).css("display","inline-block");
                 
+                /* Step 4 */
                 increaseResultNumber("count-sent-friend-contact");
                 
+                /* Step 5 */
                 let userReceivedFriendRequest = $("#find-user").find(`ul li[data-uid = ${targetID} ]`).get(0).outerHTML;
                 $("#request-contact-sent").find("ul").prepend(userReceivedFriendRequest);
 
+                /* Step 6 */
                 // (1)emit an event & send targetID -> javascript/contactSocket.js (2)
                 socket.emit("send-add-friend-request",{ contactId : targetID });
             }
@@ -139,7 +149,7 @@ function search(element){
 
         if( !regexUsername.test(keyword) )
         {
-            alertify.alert().set('message','Your keyword  is not valid.Only letter & number').show();
+            alertify.alert().set('message','Your keyword is not valid.Only letter & number').show();
             return false;
         }
 

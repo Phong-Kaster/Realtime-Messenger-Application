@@ -8,21 +8,21 @@ const { reject } = require('lodash');
 
 
 /************************************************************
- * @param {*} currentUserID that account ID is logging in
+ * @param {*} userID that account is logging in
  * @param {*} keyword that is condition we input to search
  * @invalidUserIDs is an array that contains User IDs who are our friends
- * @friendsOfCurrentUserID is an array that is result from query searchFriendsByID
+ * @friendsOfUserID is an array that is result from query searchFriendsByID
  * @validUserIDs is an array that include User IDs who are not our friends
  * @returns validUserIDs
  ************************************************************/
-let searchByKeyword = ( currentUserID , keyword )=>{
+let searchByKeyword = ( userID , keyword )=>{
     return new Promise( async ( resolve , reject )=>{
 
-        let invalidUserIDs = [currentUserID];
-        let friendsOfCurrentUserID = await contactSchema.searchFriendsByID( currentUserID , keyword );
+        let invalidUserIDs = [userID];
+        let friendsOfUserID = await contactSchema.searchFriendsByID( userID , keyword );
         
        
-        friendsOfCurrentUserID.forEach( (friend)=>{
+        friendsOfUserID.forEach( (friend)=>{
             invalidUserIDs.push( friend.userId );
             invalidUserIDs.push( friend.contactId ); 
         })
