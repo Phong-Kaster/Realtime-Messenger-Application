@@ -11,15 +11,15 @@ function nineScrollLeft() {
   });
 }
 
-function nineScrollRight() {
-  $('.right .chat').niceScroll({
+function nineScrollRight(dataChat) {
+  $(`.right .chat[data-chat = ${dataChat}]`).niceScroll({
     smoothscroll: true,
     horizrailenabled: false,
     cursorcolor: '#ECECEC',
     cursorwidth: '7px',
     scrollspeed: 50
   });
-  $('.right .chat').scrollTop($('.right .chat')[0].scrollHeight);
+  $(`.right .chat[data-chat = ${dataChat}]`).scrollTop($(`.right .chat[data-chat = ${dataChat}]`)[0].scrollHeight);
 }
 
 function enableEmojioneArea(chatId) {
@@ -82,25 +82,33 @@ function configNotification() {
 }
 
 function gridPhotos(layoutNumber) {
-  let countRows = Math.ceil($('#imagesModal').find('div.all-images>img').length / layoutNumber);
-  let layoutStr = new Array(countRows).fill(layoutNumber).join("");
-  $('#imagesModal').find('div.all-images').photosetGrid({
-    highresLinks: true,
-    rel: 'withhearts-gallery',
-    gutter: '2px',
-    layout: layoutStr,
-    onComplete: function() {
-      $('.all-images').css({
-        'visibility': 'visible'
+  $(".show-images").unbind("click").on("click", function(){
+    let href = $(this).attr("href");// input: #imagesModal_60f922515b66641d989a4f5b
+    let modalID = href.replace("#","");// output: imagesModal_60f922515b66641d989a4f5b
+
+    let countRows = Math.ceil($(`${modalID}`).find('div.all-images>img').length / layoutNumber);
+    let layoutStr = new Array(countRows).fill(layoutNumber).join("");
+
+    $(`${modalID}`).find('div.all-images').photosetGrid({
+        highresLinks: true,
+        rel: 'withhearts-gallery',
+        gutter: '2px',
+        layout: layoutStr,
+        onComplete: function() {
+          $(`${modalID}`).find('.all-images').css({
+            'visibility': 'visible'
+          });
+          $(`${modalID}`).find('.all-images a').colorbox({
+            photo: true,
+            scalePhotos: true,
+            maxHeight: '90%',
+            maxWidth: '90%'
+          });
+        }
       });
-      $('.all-images a').colorbox({
-        photo: true,
-        scalePhotos: true,
-        maxHeight: '90%',
-        maxWidth: '90%'
-      });
-    }
   });
+
+  
 }
 
 // function showButtonGroupChat() {
@@ -174,6 +182,8 @@ function selectChatScreen()
     $(".person").removeClass("active");
     $(this).find("li").addClass("active");
     $(this).tab("show");
+    let dataChat = $(this).find("li").data("chat");
+    nineScrollRight(dataChat);
   });
 }
 
@@ -186,7 +196,6 @@ $(document).ready(function() {
 
   // Cấu hình thanh cuộn
   nineScrollLeft();
-  nineScrollRight();
 
   // Bật emoji, tham số truyền vào là id của box nhập nội dung tin nhắn
   enableEmojioneArea("17071995");

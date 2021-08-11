@@ -19,8 +19,7 @@ const _ = require('lodash');
  * Step 3 : sort all conversation by "updatedAt" field
  * Step 4 : retrieve content of all conversation
  * Step 5 : sort all content conversation by "updatedAt"
- * Step 6 : retrieve content of messenger between sender and receiver
- * Step 7 : resolve all results
+ * Step 6 : return all results
  ********************************************************/
 let retrieveConversation = ( userID )=>{
     return new Promise( async ( resolve , reject )=>{
@@ -60,13 +59,14 @@ let retrieveConversation = ( userID )=>{
                 element.messenger = content;
                 return element;
             });
+
             /* Step 5 */
             allContentConversation = await Promise.all(allContentConversation);
             allContentConversation = _.sortBy(allContentConversation,(element)=>{
                 return -element.updatedAt;
             });
 
-            /* Step 7 */
+            /* Step 6 */
             resolve({
                 allConversation : allConversation,
                 allContentConversation : allContentConversation,

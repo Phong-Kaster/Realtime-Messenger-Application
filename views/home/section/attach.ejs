@@ -1,26 +1,26 @@
-<div class="modal fade" id="attachsModal" role="dialog">
+<% allContentChat.forEach( (element,index)=>{ %>
+<div class="modal fade" id="attachsModal_<%= element._id %>" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">All Attachs in this conversation.</h4>
+                <h4 class="modal-title">Shared Files</h4>
             </div>
             <div class="modal-body">
                 <ul class="list-attachs">
-                    <li>
-                        <a href="./fileExample/Tệp văn bản - trungquandev.pdf" 
-                        download="${ item.file.fileName }">
-                            Tệp văn bản - trungquandev.pdf
-                        </a>
-                    </li>
-                    <li>
-                        <a href="./fileExample/Tệp văn bản - trungquandev.docx" 
-                        download="${ item.file.fileName }">
-                            Tệp văn bản - trungquandev.docx
-                        </a>
-                    </li>
+                    <% element.messenger.forEach( (message)=>{ %>
+                        <% if(message.typeMessenger === "document"){ %> 
+                            <li>
+                                <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
+                                    download="<%= message.fileName %>">
+                                    <%= message.fileName %> 
+                                </a>
+                            </li>
+                        <% } %>
+                    <% }); %>
                 </ul>
             </div>
         </div>
     </div>
 </div>
+<% }); %>

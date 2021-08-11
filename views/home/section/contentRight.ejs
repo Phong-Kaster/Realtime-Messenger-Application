@@ -5,10 +5,13 @@
             <% if( element.member ){ %>
                 <div class="right tab-pane <% if(index === 0){ %> active <% } %>" data-chat="<%= element._id %>" id="to_<%= element._id %>">
                     <div class="top">
-                        <span>To: <span class="name"><%= element.name %></span></span>
+                        <span>To:
+                            <img src="./images/users/groupChat.png" class="avatar-small" alt="avatar">
+                            <span class="name"><%= element.name %></span>
+                        </span>
                         <span class="chat-menu-right">
-                            <a href="#attachsModal" id="show-attachs" data-toggle="modal">
-                                Tệp đính kèm
+                            <a href="#attachsModal_<%= element._id %>" class="show-attachs" data-toggle="modal">
+                                Files
                                 <i class="fa fa-paperclip"></i>
                             </a>
                         </span>
@@ -16,8 +19,8 @@
                             <a href="javascript:void(0)">&nbsp;</a>
                         </span>
                         <span class="chat-menu-right">
-                            <a href="#imagesModal" id="show-images" data-toggle="modal">
-                                Hình ảnh
+                            <a href="#imagesModal_<%= element._id %>" class="show-images" data-toggle="modal">
+                                Media
                                 <i class="fa fa-photo"></i>
                             </a>
                         </span>
@@ -74,10 +77,14 @@
             <% } else { %>
                 <div class="right tab-pane <% if(index === 0){ %> active <%}%>" data-chat="<%= element._id %>" id="to_<%= element._id %>">
                     <div class="top">
-                        <span>To: <span class="name"><%= element.username %></span></span>
+                        <span>To:
+                            <img src="/images/users/<%= element.avatar %>" class="avatar-small">
+                            <span class="name"><%= element.username %>
+                        </span>
+                    </span>
                         <span class="chat-menu-right">
-                            <a href="#attachsModal" id="show-attachs" data-toggle="modal">
-                                Tệp đính kèm
+                            <a href="#attachsModal_<%= element._id %>" class="show-attachs" data-toggle="modal">
+                                Files
                                 <i class="fa fa-paperclip"></i>
                             </a>
                         </span>
@@ -85,8 +92,8 @@
                             <a href="javascript:void(0)">&nbsp;</a>
                         </span>
                         <span class="chat-menu-right">
-                            <a href="#imagesModal" id="show-images" data-toggle="modal">
-                                Hình ảnh
+                            <a href="#imagesModal_<%= element._id %>" class="show-images" data-toggle="modal">
+                                Media
                                 <i class="fa fa-photo"></i>
                             </a>
                         </span>

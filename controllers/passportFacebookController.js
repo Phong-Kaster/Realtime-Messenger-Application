@@ -62,7 +62,7 @@ let verifyFacebookAccount = () =>
     // find user by id & store 
     passport.deserializeUser( async (id,done)=>
     {
-        userSchema.findByIdentification(id)
+        userSchema.findByIdentificationSession(id)
             .then( (user) =>{ return done(null,user) })
             .catch( (error) =>{ return done(error,null) })
     });

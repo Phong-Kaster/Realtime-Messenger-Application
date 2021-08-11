@@ -1,16 +1,21 @@
-<div class="modal fade" id="imagesModal" role="dialog">
+<% allContentChat.forEach( (element,index)=>{ %>
+<div class="modal fade" id="imagesModal_<%= element._id %>" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">All Images in this conversation.</h4>
+                <h4 class="modal-title">Shared Media</h4>
             </div>
             <div class="modal-body">
                 <div class="all-images" style="visibility: hidden;">
-                    <img src="./images/users/Blue.jpg">
-                    <img src="./images/users/defaultAvatar2.png">
+                    <% element.messenger.forEach( (message)=>{ %>
+                        <% if(message.typeMessenger === "photo"){ %>
+                            <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>">
+                        <% } %>
+                    <% }); %>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<% }); %>
