@@ -686,8 +686,8 @@ label:focus,
   width: 40px;
   height: 40px;
   margin-left: 10px;
-  border: 1px solid #2ECC71;
-  background-color: #2ECC71;
+  border: 1px solid  #0078FF;
+  background-color:  #0078FF;
   background-image: url("../images/icons/name-type.png");
   background-repeat: no-repeat;
   background-position: top 11px left 12.5px;
@@ -1047,7 +1047,7 @@ label:focus,
   font-size: 20px;
   font-weight: 500;
   margin-right: 10px;
-  color: #2ECC81;
+  color: #0077ff;
 }
 
 .right .bubble {
@@ -1093,7 +1093,7 @@ label:focus,
 .right .bubble.me {
   float: right;
   color: #1a1a1a;
-  background-color: #2ECC71;
+  background-color: #0077ff;
   -ms-flex-item-align: end;
   align-self: flex-end;
   -webkit-animation-name: slideFromRight;
@@ -1102,7 +1102,7 @@ label:focus,
 
 .right .bubble.me:before {
   right: -3px;
-  background-color: #2ECC71;
+  background-color: #0078FF;
 }
 
 .right .bubble.me img {
