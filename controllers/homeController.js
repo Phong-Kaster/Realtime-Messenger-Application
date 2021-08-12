@@ -22,7 +22,7 @@ import {convertTimestamp} from '../helpers/convertTimestamp.js';
  * @param {*} res 
  *************************************************************/
 let home = async (req,res) =>{
-    
+
     let notifications = await notificationModel.retrieveNotifications(req.user._id);
     let quantityOfUnreadNotification = await notificationModel.countUnreadNotifications(req.user._id);
 

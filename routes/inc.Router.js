@@ -11,13 +11,14 @@ const passportGoogleController = require('../controllers/passportGoogleControlle
 const userController = require('../controllers/userController.js');
 const contactController = require('../controllers/contactController.js');
 const notificationController = require('../controllers/notificationController');
+const conversationController = require('../controllers/conversationController.js');
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
 const informationValidation = require('../middlewares/informationValidation.js');
 const passwordValidation = require('../middlewares/passwordValidation.js');
 const searchValidation = require('../middlewares/searchValidation');
-
+const messageValidation = require('../middlewares/messageValidation.js');
 /* ======================= FUNCTIONS ======================= */
 // verify local account
 passportLocalController();
@@ -114,6 +115,9 @@ let incRouters = (app) =>{
     router.delete("/deny-received-friend-contact" , loginValidation.isLogout , contactController.denyReceivedFriendContact);
     router.put("/accept-received-friend-contact" , loginValidation.isLogout , contactController.acceptReceivedFriendContact);
     router.delete("/unfriend" , loginValidation.isLogout , contactController.unfriend);
+
+    // message
+    router.post("/send-message" , loginValidation.isLogout , messageValidation , conversationController.sendMessage)
     return app.use("/",router);
 }
 

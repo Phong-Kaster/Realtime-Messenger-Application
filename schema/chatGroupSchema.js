@@ -9,7 +9,7 @@ const chatGroupSchema = new Schema({
         min : 3,
         max : 200
     },
-    messengerAmount : // how many messenger do we have ?
+    messageAmount : // how many messenger do we have ?
     {
         type : Number,
         default : 0
@@ -34,6 +34,17 @@ chatGroupSchema.statics = {
     createNew(information)
     {
         return this.create(information);
+    },
+    findByIdentification(id)
+    {
+        return this.findById(id).exec();
+    },
+    getTheLatestMessage(id, messageAmount)
+    {
+        return this.findByIdAndUpdate(id,{
+            "messageAmount":messageAmount,
+            "updatedAt": Date.now()
+        }).exec();
     }
 }
 

@@ -3,8 +3,9 @@ const { Schema } = mongoose;
 
 const messengerSchema = new Schema({
     senderId : String,
-    receivedId : String,
-    type : String,
+    receiverId : String,
+    typeConversation : String,
+    typeMessenger : String,
     sender: // who send
     {
         id : String,
@@ -46,6 +47,10 @@ const typeMessenger = {
 }
 
 messengerSchema.statics = {
+    createNew(information)
+    {
+        return this.create(information)
+    },
     retrieveIndividualContentMessenger(senderId , receiverId)
     {
         return this.find({

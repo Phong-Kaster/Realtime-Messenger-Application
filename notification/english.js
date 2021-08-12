@@ -14,13 +14,15 @@ export const userError = {
     standardAddress : "Address length is from 3 to 30 character !",
     standardPhone : "Phone has from 10 to 11 number",
     incorrectCurrentEmail : "Your current password is not correct !",
-    invalidKeyword : "Your keyword include invalid character !"
+    invalidKeyword : "Your keyword include invalid character !",
+    emptyMessage : "Enter your message"
 };
 export const systemError = {
     unsentEmail : "The email can't be send.Please get contact with our customer service",
     overloadedSystem : "The system is overload ! Please wait a minute and reconnected",
     avatarOversize : "File size can larger than 5 MB",
-    unavailableFileExtension : "File extension is not available ! Only png - jpg - jpeg accepted"
+    unavailableFileExtension : "File extension is not available ! Only png - jpg - jpeg accepted",
+    inexistentGroup : "This group is not available"
 }
 export const notice = {
     userCreated : (email) =>{

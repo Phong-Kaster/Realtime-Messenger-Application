@@ -3,7 +3,7 @@ const contactSchema = require('../schema/contactSchema.js');
 const userSchema = require('../schema/userSchema.js');
 const messengerSchema = require('../schema/messengerSchema.js');
 const _ = require('lodash');
-
+import {systemError, userError} from '../notification/english.js';
 
 
 /********************************************************
@@ -45,7 +45,6 @@ let retrieveConversation = ( userID )=>{
 
             /* Step 2 */
             let groupConversation = await chatGroupSchema.retrieveGroupConversation(userID);
-
             /* Step 3 */
             let allConversation = personalConversation.concat(groupConversation);
             allConversation = _.sortBy( allConversation , (element)=>{
@@ -72,7 +71,6 @@ let retrieveConversation = ( userID )=>{
             allContentConversation = _.sortBy(allContentConversation,(element)=>{
                 return -element.updatedAt;
             });
-
             /* Step 6 */
             resolve(allContentConversation);
         } 
@@ -83,6 +81,86 @@ let retrieveConversation = ( userID )=>{
     });
 }
 
+
+/********************************************************
+ * @param {*} sender | object | contain information about sender
+ * @param {*} receiverID | string | who receive message from @sender
+ * @param {*} content | string | what sender wanna say to @receiverID
+ * @param {*} sendToGroup | boolean | is a message for individual or group ?
+ ********************************************************/
+let sendMessage = ( sender , receiverID , content , sendToGroup )=>{
+    return new Promise ( async ( resolve, reject )=>{
+
+        if( !sender || !receiverID || !content ){
+            reject(false);
+        }
+
+        try
+        {
+            if( sendToGroup == "true" ){
+                
+                let group = await chatGroupSchema.findByIdentification(receiverID);
+                if( !group ){
+                    reject(systemError.inexistentGroup);
+                }
+                
+                let receiver = {
+                    id: group._id,
+                    name: group.name,
+                    avatar: "groupChat.png"
+                }
+                let information = {
+                    senderId : sender.id,
+                    receiverId : receiverID,
+                    typeConversation : messengerSchema.typeConversation.group,
+                    typeMessenger : messengerSchema.typeMessenger.text,
+                    sender: sender,
+                    receiver : receiver,
+                    content : content, // messenger's content
+                    createdAt : Date.now()
+                }
+
+                let message = await messengerSchema.model.createNew(information);
+                await chatGroupSchema.getTheLatestMessage(group._id, group.messageAmount + 1 );
+                resolve(message);
+            }
+            else
+            {
+                let user = await userSchema.findByIdentificationAndRetrieveSpecificFields(receiverID);
+                if( !user ){
+                    reject(userError.inexistentAccount);
+                }
+
+
+                let receiver = {
+                    id: user._id,
+                    name: user.username,
+                    avatar: user.avatar
+                }
+
+                let information = {
+                    senderId : sender.id,
+                    receiverId : receiverID,
+                    typeConversation : messengerSchema.typeConversation.individual,
+                    typeMessenger : messengerSchema.typeMessenger.text,
+                    sender: sender,
+                    receiver : receiver,
+                    content : content, // messenger's content
+                    createdAt : Date.now()
+                }
+                let message = await messengerSchema.model.createNew(information);
+                await contactSchema.updateStatusConversation( sender.id, receiver.id );
+                resolve(message);
+            }
+        } 
+        catch (error) 
+        {
+            console.log(error);
+            reject(error);
+        }
+    });
+}
 module.exports = {
-    retrieveConversation : retrieveConversation
+    retrieveConversation : retrieveConversation,
+    sendMessage : sendMessage
 }

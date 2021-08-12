@@ -35,7 +35,11 @@ function enableEmojioneArea(dataChat) {
     shortnames: false,
     events: {
       keyup: function(editor, event) {
+        // convert input into unicode format
         $(`#write-chat-${dataChat}`).val(this.getText());
+      },
+      click: function(){
+        handleEventWriteMessage(dataChat);
       }
     },
   });
