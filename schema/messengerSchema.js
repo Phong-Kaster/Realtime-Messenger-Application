@@ -46,7 +46,7 @@ const typeMessenger = {
 }
 
 messengerSchema.statics = {
-    retrieveContentMessenger(senderId , receiverId)
+    retrieveIndividualContentMessenger(senderId , receiverId)
     {
         return this.find({
             $or: [
@@ -56,7 +56,14 @@ messengerSchema.statics = {
         })
         .sort({"createdAt" : 1})
         .limit(10)
-        .exec()
+        .exec();
+    },
+    retrieveGroupContentMessenger(receiverId)
+    {
+        return this.find({"receiverId": receiverId})
+        .sort({"createdAt" : 1})
+        .limit(10)
+        .exec();
     }
 }
 

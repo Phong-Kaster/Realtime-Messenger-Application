@@ -17,7 +17,6 @@ import {convertTimestamp} from '../helpers/convertTimestamp.js';
  * @quantifyOfSentFriendRequestContact | number | indicates how many people user sent friend request & wait for their response
  * @quantityOfReceivedFriendRequestContacts | number | indicates how many friend requests user received
  * 
- * @allChat | @personalChat | @groupChat | object | contain information about friend contact
  * @allContentChat | object | contain content of all message belong to user._id
  * @param {*} req 
  * @param {*} res 
@@ -26,6 +25,7 @@ let home = async (req,res) =>{
     
     let notifications = await notificationModel.retrieveNotifications(req.user._id);
     let quantityOfUnreadNotification = await notificationModel.countUnreadNotifications(req.user._id);
+
     let friendContacts = await contactModel.retrieveFriendContact(req.user._id);
     let sentFriendRequestContacts = await contactModel.retrieveSentFriendContact(req.user._id);
     let receivedFriendRequestContacts = await contactModel.retrieveReceivedFriendContact(req.user._id);
@@ -34,8 +34,8 @@ let home = async (req,res) =>{
     let quantifyOfSentFriendRequestContact = await contactModel.countSentFriendContact(req.user._id);
     let quantityOfReceivedFriendRequestContacts = await contactModel.countReceivedFriendContact(req.user._id);
     
-    let conversation = await conversationModel.retrieveConversation(req.user._id);
-    let allContentChat = conversation.allContentConversation;
+    let allContentChat = await conversationModel.retrieveConversation(req.user._id);
+
 
 
     return res.render("./home/section/content.ejs", {

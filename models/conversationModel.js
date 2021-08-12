@@ -18,7 +18,7 @@ const _ = require('lodash');
  * Step 2 : retrieve group conversation
  * Step 3 : sort all conversation by "updatedAt" field
  * Step 4 : retrieve content of all conversation
- * Step 5 : sort all content conversation by "updatedAt"
+ * Step 5 : sort all content conversation by "updatedAt". from old to new
  * Step 6 : return all results
  ********************************************************/
 let retrieveConversation = ( userID )=>{
@@ -54,9 +54,17 @@ let retrieveConversation = ( userID )=>{
 
             /* Step 4 */
             let allContentConversation = allConversation.map( async (element)=>{
-                let content = await messengerSchema.model.retrieveContentMessenger(userID, element._id);
                 element = element.toObject();
-                element.messenger = content;
+                if( element.member )
+                {
+                    let content = await messengerSchema.model.retrieveGroupContentMessenger(element._id);
+                    element.messenger = content;
+                }
+                else
+                {
+                    let content = await messengerSchema.model.retrieveIndividualContentMessenger(userID, element._id);
+                    element.messenger = content;
+                }
                 return element;
             });
             /* Step 5 */
@@ -66,12 +74,7 @@ let retrieveConversation = ( userID )=>{
             });
 
             /* Step 6 */
-            resolve({
-                allConversation : allConversation,
-                allContentConversation : allContentConversation,
-                personalConversation : personalConversation,
-                groupConversation : groupConversation
-            });
+            resolve(allContentConversation);
         } 
         catch (error) 
         {

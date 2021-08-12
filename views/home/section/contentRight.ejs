@@ -31,21 +31,21 @@
                                 <% element.messenger.forEach( (message)=>{ %>
                                     <% if(message.typeMessenger === "text"){ %>
                                         <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%>" data-mess-id="<%= message._id %>">
-                                            <img src="/images/users/<%= message.sender.avatar %> class="avatar-small">
+                                            <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
                                             <%= messenger.content %>
                                         </div>
                                     <% } %>
 
                                     <% if(message.typeMessenger === "photo"){ %> 
                                         <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id=<%= message._id %>">
-                                            <img src="/images/users/<%= message.sender.avatar %> class="avatar-small">
+                                            <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
                                             <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>" class="show-image-chat">
                                         </div>
                                     <% } %>
 
                                     <% if(message.typeMessenger === "document"){ %> 
                                         <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id="<%= message._id %>">
-                                            <img src="/images/users/<%= message.sender.avatar %> class="avatar-small">
+                                            <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
                                             <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
                                                 download="<%= message.fileName %>">
                                                 <%= message.fileName %> 
