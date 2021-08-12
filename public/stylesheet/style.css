@@ -32,14 +32,14 @@ body {
 }
 
 .custom-background-btn-primary {
-  background-color: #2ECC71;
-  border-color: #2ECC71;
+  background-color: #0078FF;
+  border-color: #0078FF;
 }
 
 .custom-background-btn-primary:hover,
 .custom-background-btn-primary:focus {
-  background-color: #2ECC71 !important;
-  border-color: #2ECC71 !important;
+  background-color: #0077FF !important;
+  border-color: #0078FF !important;
 }
 
 .custom-background-btn-reset {
@@ -529,7 +529,7 @@ label:focus,
 /* When the radio button is checked, add a blue background */
 
 .radio-inline input:checked~.checkmark {
-  background-color: #2ECC71;
+  background-color: #0078FF;
 }
 
 

@@ -7,7 +7,7 @@ function showRegisterForm() {
       $('.login-footer').fadeOut('fast', function() {
         $('.register-footer').fadeIn('fast');
       });
-      $('.modal-title').html('Đăng ký tài khoản');
+      $('.modal-title').html('Sign up');
     });
     $('.error').removeClass('alert alert-danger').html('');
   
@@ -20,7 +20,7 @@ function showRegisterForm() {
         $('.login-footer').fadeIn('fast');
       });
   
-      $('.modal-title').html('Đăng nhập');
+      $('.modal-title').html('Log In');
     });
     $('.error').removeClass('alert alert-danger').html('');
   }

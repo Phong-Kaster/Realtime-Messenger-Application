@@ -261,7 +261,7 @@ function handleButtonUpdateUserPassword(){
             text: "You won't be able to revert this!",
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#2ECC71',
+            confirmButtonColor: '#0078FF',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
           }).then((result) => {

@@ -3,12 +3,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Tài khoản cá nhân</h4>
+                <h4 class="modal-title">Account Settings</h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#seting-profile">Cài đặt chung</a></li>
-                    <li><a data-toggle="tab" id="link-to-password-profile" href="#password-profile">Quản lý mật khẩu</a></li>
+                    <li class="active"><a data-toggle="tab" href="#seting-profile">Information</a></li>
+                    <li><a data-toggle="tab" id="link-to-password-profile" href="#password-profile">Security</a></li>
                 </ul>
                 
                 <div class="tab-content">
@@ -22,7 +22,7 @@
                                         <div id="image-edit-profile">
                                             <img src="./images/users/<%= user.avatar %>" id="user-avatar" class="avatar img-circle" alt="avatar">
                                         </div>
-                                        <h6>Tải lên một ảnh mới...</h6>
+                                        <h6>Upload a new avatar</h6>
                                         <input type="file" class="form-control" id="input-change-avatar" name="avatar"><br>
                                         <div id="show-button-update-avatar"></div>
                                     </div>
@@ -73,26 +73,26 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">Giới tính:</label>
+                                        <label class="col-lg-3 control-label">Gender:</label>
                                         <div class="col-lg-8">
-                                            <label class="radio-inline col-lg-2">Nam
+                                            <label class="radio-inline col-lg-2">Male
                                                 <input type="radio" id="male-gender" name="gender" value="male" <% if(user.gender === "male") {%> checked <%}%>  required>
                                                 <span class="checkmark"></span>
                                             </label>
-                                            <label class="radio-inline col-lg-2">Nữ
+                                            <label class="radio-inline col-lg-2">Female
                                                 <input type="radio" id="female-gender" name="gender" value="female" <% if(user.gender === "female") {%> checked <%}%>  required>
                                                 <span class="checkmark"></span>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">Địa chỉ:</label>
+                                        <label class="col-lg-3 control-label">Address:</label>
                                         <div class="col-lg-8">
                                             <input class="form-control" id="address" type="text" name="address" value="<%= user.address %>">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-lg-3 control-label">Số điện thoại:</label>
+                                        <label class="col-lg-3 control-label">Phone:</label>
                                         <div class="col-lg-8">
                                             <input class="form-control" id="phone" type="text" name="phone" value="<%= user.phone %>">
                                         </div>
@@ -100,9 +100,9 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label"></label>
                                         <div class="col-md-8">
-                                            <input type="button" id="input-btn-update-user" class="btn btn-primary custom-background-btn-primary" name="submit" value="Lưu lại">
+                                            <input type="button" id="input-btn-update-user" class="btn btn-primary custom-background-btn-primary" name="submit" value="Save">
                                             <span></span>
-                                            <input type="button" id="input-btn-cancel-update-user" class="btn btn-default custom-background-btn-reset" value="Hủy bỏ">
+                                            <input type="button" id="input-btn-cancel-update-user" class="btn btn-default custom-background-btn-reset" value="Cancel">
                                         </div>
                                     </div>
                                 </div>
@@ -125,23 +125,22 @@
                                 <span>Update user success example</span> 
                             </div>
 
-                            <h3>Thay đổi mật khẩu</h3>
                             <br>
                             <form class="form-horizontal" method="post" role="form" action="">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Mật khẩu hiện tại</label>
+                                    <label class="col-md-4 control-label">Current Password</label>
                                     <div class="col-md-8">
                                         <input id="currentPassword" class="form-control" type="password" name="current_password" placeholder="Enter your curent password...">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Mật khẩu mới</label>
+                                    <label class="col-md-4 control-label">New Password</label>
                                     <div class="col-md-8">
                                         <input id="newPassword" class="form-control" type="password" name="new_password" placeholder="Enter new password...">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Nhập lại mật khẩu mới</label>
+                                    <label class="col-md-4 control-label">Confirm New Password</label>
                                     <div class="col-md-8">
                                         <input id="confirmNewPassword" class="form-control" type="password" name="confirm_new_password" placeholder="Enter confirm new password...">
                                     </div>
@@ -149,9 +148,9 @@
                                 <div class="form-group">
                                     <label class="col-md-4 control-label"></label>
                                     <div class="col-md-8">
-                                        <input type="button" id="password-btn-confirm" class="btn btn-primary custom-background-btn-primary" value="Lưu lại">
+                                        <input type="button" id="password-btn-confirm" class="btn btn-primary custom-background-btn-primary" value="Save">
                                         <span></span>
-                                        <input type="button" id="password-btn-cancel" class="btn btn-default custom-background-btn-reset" value="Hủy bỏ">
+                                        <input type="button" id="password-btn-cancel" class="btn btn-default custom-background-btn-reset" value="Cancel">
                                     </div>
                                 </div>
                             </form>
