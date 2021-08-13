@@ -31,21 +31,34 @@
                                     </span>
                                 </span>
                                 <span class="time"><%= convertTimestamp( retrieveTheLastOfArray(element.messenger).createdAt )%></span>
-                                <span class="preview">
+                                <span class="preview convert-emoji">
                                     <% if( !element.messenger.length ) { %> 
                                         Say "hi" to group "<%= element.name %>" 
                                     <% } %>
+                                    <% if( retrieveTheLastOfArray(element.messenger).senderId != user._id){ %> 
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        <%= retrieveTheLastOfArray(element.messenger).content %>    
-                                    <% } %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have received a photo from group "<%= element.name %>" 
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
-                                        You have received a photo from group "<%= element.name %>" 
-                                    <% } %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have received a file from group "<%= element.name %>"   
+                                        <% } %>
+                                    <% } else {%>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            You: <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        You have received a file from group "<%= element.name %>"   
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have sent a photo to group
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have sent a file to group   
+                                        <% } %>
                                     <% } %>
                                 </span>
                             </li>
@@ -65,21 +78,35 @@
                                 <%}%>
                             </span>
                             <span class="time"><%= convertTimestamp( retrieveTheLastOfArray(element.messenger).createdAt )%></span>
-                                <span class="preview">
+                                <span class="preview convert-emoji">
                                     <% if( !element.messenger.length ) { %> 
                                         Say "hi" to  <%= element.username %>
                                     <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        <%= retrieveTheLastOfArray(element.messenger).content %>    
-                                    <% } %>
+                                    <% if( retrieveTheLastOfArray(element.messenger).senderId != user._id){ %> 
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
-                                        <%= element.username %> sent to you a photo
-                                    <% } %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have received a photo from group "<%= element.name %>" 
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        <%= element.username %> sent to you a file
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have received a file from group "<%= element.name %>"   
+                                        <% } %>
+                                    <% } else { %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            You: <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have sent a photo to group
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have sent a file to group   
+                                        <% } %>
                                     <% } %>
                                 </span>
                         </li>
@@ -109,21 +136,35 @@
                                     <%}%>
                                 </span>
                                 <span class="time"><%= convertTimestamp( retrieveTheLastOfArray(element.messenger).createdAt )%></span>
-                                <span class="preview">
+                                <span class="preview convert-emoji">
                                     <% if( !element.messenger.length ) { %> 
                                         Say "hi" to  <%= element.username %>
                                     <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        <%= retrieveTheLastOfArray(element.messenger).content %>    
-                                    <% } %>
+                                    <% if( retrieveTheLastOfArray(element.messenger).senderId != user._id){ %> 
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
-                                        <%= element.username %> sent to you a photo
-                                    <% } %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have received a photo from group "<%= element.name %>" 
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        <%= element.username %> sent to you a file
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have received a file from group "<%= element.name %>"   
+                                        <% } %>
+                                    <% } else { %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            You: <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have sent a photo to group
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have sent a file to group   
+                                        <% } %>
                                     <% } %>
                                 </span>
                             </li>
@@ -156,21 +197,35 @@
                                     </span>
                                 </span>
                                 <span class="time"><%= convertTimestamp( retrieveTheLastOfArray(element.messenger).createdAt )%></span>
-                                <span class="preview">
+                                <span class="preview convert-emoji">
                                     <% if( !element.messenger.length ) { %> 
                                         Say "hi" to group "<%= element.name %>" 
                                     <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        <%= retrieveTheLastOfArray(element.messenger).content %>    
-                                    <% } %>
+                                    <% if( retrieveTheLastOfArray(element.messenger).senderId != user._id){ %> 
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
-                                        You have received a photo from group "<%= element.name %>" 
-                                    <% } %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have received a photo from group "<%= element.name %>" 
+                                        <% } %>
 
-                                    <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
-                                        You have received a file from group "<%= element.name %>"   
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have received a file from group "<%= element.name %>"   
+                                        <% } %>
+                                    <% } else {%>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            You: <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have sent a photo to group
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have sent a file to group   
+                                        <% } %>
                                     <% } %>
                                 </span>
                             </li>

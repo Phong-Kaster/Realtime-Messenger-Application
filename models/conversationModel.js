@@ -57,16 +57,16 @@ let retrieveConversation = ( userID )=>{
                 if( element.member )
                 {
                     let content = await messengerSchema.model.retrieveGroupContentMessenger(element._id);
-                    element.messenger = content;
+                    element.messenger = _.reverse(content);
                 }
                 else
                 {
                     let content = await messengerSchema.model.retrieveIndividualContentMessenger(userID, element._id);
-                    element.messenger = content;
+                    element.messenger = _.reverse(content);
                 }
                 return element;
             });
-            /* Step 5 */
+            /* Step 5 */         
             allContentConversation = await Promise.all(allContentConversation);
             allContentConversation = _.sortBy(allContentConversation,(element)=>{
                 return -element.updatedAt;
@@ -80,6 +80,7 @@ let retrieveConversation = ( userID )=>{
         }
     });
 }
+
 
 
 /********************************************************
@@ -160,6 +161,9 @@ let sendMessage = ( sender , receiverID , content , sendToGroup )=>{
         }
     });
 }
+
+
+
 module.exports = {
     retrieveConversation : retrieveConversation,
     sendMessage : sendMessage

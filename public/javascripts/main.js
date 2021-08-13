@@ -42,7 +42,7 @@ function enableEmojioneArea(dataChat) {
         handleEventWriteMessage(dataChat);
       }
     },
-  });
+  });i
   $('.icon-chat').bind('click', function(event) {
     event.preventDefault();
     $('.emojionearea-button').click();
@@ -183,18 +183,26 @@ function selectTypeConversation()
 function selectChatScreen()
 {
   $(".room-chat").unbind("click").on("click",function(){
+    let dataChat = $(this).find("li").data("chat");
     $(".person").removeClass("active");
-    $(this).find("li").addClass("active");
+    $(`.person[data-chat=${dataChat}]`).find("li").addClass("active");
     $(this).tab("show");
 
-    let dataChat = $(this).find("li").data("chat");
+    
     nineScrollRight(dataChat);
-
+ 
     // call button emoji
     enableEmojioneArea(dataChat);
   });
 }
-
+function convertUnicodeEmojiToImage()
+{
+  $(".convert-emoji").each(function() {
+    var original = $(this).html();
+    var converted = emojione.toImage(original);
+    $(this).html(converted);
+  });
+}
 $(document).ready(function() {
   // Hide số thông báo trên đầu icon mở modal contact
   showModalContacts();
@@ -234,4 +242,6 @@ $(document).ready(function() {
 
   //alway click first friend contact - views/home/section/contentLeft.ejs
   $("ul.people").find("li").first().click();
+
+  convertUnicodeEmojiToImage();
 });

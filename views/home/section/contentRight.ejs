@@ -11,8 +11,7 @@
                         </span>
                         <span class="chat-menu-right">
                             <a href="#attachsModal_<%= element._id %>" class="show-attachs" data-toggle="modal">
-                                Files
-                                <i class="fa fa-paperclip"></i>
+                                <i class="fa fa-paperclip">&nbsp; <strong>Files</strong></i>
                             </a>
                         </span>
                         <span class="chat-menu-right">
@@ -20,9 +19,19 @@
                         </span>
                         <span class="chat-menu-right">
                             <a href="#imagesModal_<%= element._id %>" class="show-images" data-toggle="modal">
-                                Media
-                                <i class="fa fa-photo"></i>
+                                <i class="fa fa-photo">&nbsp; <strong>Media</strong></i>
                             </a>
+                        </span>
+                        <span class="chat-menu-right">
+                            <a href="javascript:void(0)">&nbsp;</a>
+                        </span>
+                        <span class="chat-menu-right">
+                            <a href="javascript:void(0)" class="show-images" data-toggle="modal" title="there are <%= element.member.length %> people in this conversation">
+                                <i class="fa fa-users" aria-hidden="true">&nbsp;: <strong><%= element.member.length %></strong></i>
+                            </a>
+                        </span>
+                        <span class="chat-menu-right">
+                            <a href="javascript:void(0)">&nbsp;</a>
                         </span>
                     </div>
                     <div class="content-chat">
@@ -30,22 +39,28 @@
                             <% if( element.messenger ) { %> 
                                 <% element.messenger.forEach( (message)=>{ %>
                                     <% if(message.typeMessenger === "text"){ %>
-                                        <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%>" data-mess-id="<%= message._id %>">
-                                            <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">&nbsp
-                                            <%= message.content %>&nbsp
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%>" data-mess-id="<%= message._id %>">
+                                            <% if(message.senderId != user._id){ %>
+                                                <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+                                            <% } %>
+                                                    &nbsp<%= message.content %>&nbsp
                                         </div>
                                     <% } %>
 
                                     <% if(message.typeMessenger === "photo"){ %> 
-                                        <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id=<%= message._id %>">
-                                            <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id=<%= message._id %>">
+                                            <% if(message.senderId != user._id){ %>
+                                                <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+                                            <% } %>
                                             <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>" class="show-image-chat">
                                         </div>
                                     <% } %>
 
                                     <% if(message.typeMessenger === "document"){ %> 
-                                        <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id="<%= message._id %>">
-                                            <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id="<%= message._id %>">
+                                            <% if(message.senderId != user._id){ %>
+                                                <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+                                            <% } %>
                                             <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
                                                 download="<%= message.fileName %>">
                                                 <%= message.fileName %> 
@@ -84,8 +99,7 @@
                     </span>
                         <span class="chat-menu-right">
                             <a href="#attachsModal_<%= element._id %>" class="show-attachs" data-toggle="modal">
-                                Files
-                                <i class="fa fa-paperclip"></i>
+                                <i class="fa fa-paperclip">&nbsp; <strong>Files</strong></i>
                             </a>
                         </span>
                         <span class="chat-menu-right">
@@ -93,8 +107,7 @@
                         </span>
                         <span class="chat-menu-right">
                             <a href="#imagesModal_<%= element._id %>" class="show-images" data-toggle="modal">
-                                Media
-                                <i class="fa fa-photo"></i>
+                                <i class="fa fa-photo">&nbsp; <strong>Media</strong></i>
                             </a>
                         </span>
                     </div>
@@ -103,19 +116,19 @@
                             <% if( element.messenger ) { %> 
                                 <% element.messenger.forEach( (message)=>{ %>
                                     <% if(message.typeMessenger === "text"){ %>
-                                        <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%>" data-mess-id="<%= message._id %>">
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> " data-mess-id="<%= message._id %>">
                                             <%= message.content %>
                                         </div>
                                     <% } %>
 
                                     <% if(message.typeMessenger === "photo"){ %> 
-                                        <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id=<%= message._id %>">
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id=<%= message._id %>">
                                             <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>" class="show-image-chat">
                                         </div>
                                     <% } %>
 
                                     <% if(message.typeMessenger === "document"){ %> 
-                                        <div class="bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id="<%= message._id %>">
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id="<%= message._id %>">
                                             <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
                                                 download="<%= message.fileName %>">
                                                 <%= message.fileName %> 

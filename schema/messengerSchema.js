@@ -59,14 +59,14 @@ messengerSchema.statics = {
                 {$and: [ {"senderId":receiverId},{"receiverId":senderId} ]}
             ]
         })
-        .sort({"createdAt" : 1})
+        .sort({"createdAt" : -1})
         .limit(10)
         .exec();
     },
     retrieveGroupContentMessenger(receiverId)
     {
         return this.find({"receiverId": receiverId})
-        .sort({"createdAt" : 1})
+        .sort({"createdAt" : -1})
         .limit(10)
         .exec();
     }

@@ -12,3 +12,6 @@ chatTemplate.zip
 
 #ignore bower_components
 public/bower_components/
+
+#ignore emojione library
+public/emojione
