@@ -45,6 +45,13 @@ chatGroupSchema.statics = {
             "messageAmount":messageAmount,
             "updatedAt": Date.now()
         }).exec();
+    },
+    retrieveChatGroupIDs(userId)
+    {
+        return this.find({
+            "member": {$elemMatch: {"userId": userId}}
+        }, {_id: 1})
+        .exec();
     }
 }
 

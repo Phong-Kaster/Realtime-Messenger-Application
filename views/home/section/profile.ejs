@@ -42,11 +42,11 @@
                                         <h3>Local account.</h3>
                                     <%}%>
 
-                                    <% if( user.facebook.uid ) {%>
+                                    <% if( user.facebook ) {%>
                                         <h3>Facebook account.</h3>
                                     <%}%>
                                     
-                                    <% if( user.google.uid ) {%>
+                                    <% if( user.google ) {%>
                                         <h3>Google account.</h3>
                                     <%}%>
                                     <br>
@@ -57,11 +57,11 @@
                                                 <div class="form-control" disabled><%= user.local.email %></div>
                                             <%}%>
                                             
-                                            <% if( user.facebook.uid) {%>
+                                            <% if( user.facebook) {%>
                                                 <div class="form-control" disabled><%= user.facebook.uid %></div>
                                             <%}%>
 
-                                            <% if( user.google.uid) {%>
+                                            <% if( user.google) {%>
                                                 <div class="form-control" disabled><%= user.google.email %></div>
                                             <%}%>
                                         </div>

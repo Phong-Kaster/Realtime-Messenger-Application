@@ -59,9 +59,19 @@ let verifyGoogleAccount = () =>
     // find user by id & store 
     passport.deserializeUser( async (id,done)=>
     {
-        userSchema.findByIdentificationSession(id)
-            .then( (user) =>{ return done(null,user) })
-            .catch( (error) =>{ return done(error,null) })
+        try 
+        {
+            let user = await userSchema.findByIdentificationSession(id);
+            let chatGroupIDs = chatGroupSchema.retrieveChatGroupIDs(user._id);
+
+            user = user.toObject();
+            user.chatGroupIDs = chatGroupIDs;
+            return done(null,user);
+        } 
+        catch (error) 
+        {
+            return done(error,null)
+        }
     });
 };
 

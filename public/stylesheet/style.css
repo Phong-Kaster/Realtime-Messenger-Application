@@ -1394,3 +1394,8 @@ label:focus,
   width: 100%;
   height: 100%; 
 }
+
+.realtime-received-message{
+  color:#000000 !important;
+  font-weight:bold;
+}

@@ -42,7 +42,7 @@ function enableEmojioneArea(dataChat) {
         handleEventWriteMessage(dataChat);
       }
     },
-  });i
+  });
   $('.icon-chat').bind('click', function(event) {
     event.preventDefault();
     $('.emojionearea-button').click();

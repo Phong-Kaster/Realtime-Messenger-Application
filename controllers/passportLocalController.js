@@ -5,6 +5,7 @@ const passport = require('passport');
 const passportLocal = require('passport-local');
 const localStrategy = passportLocal.Strategy;
 const userSchema = require('../schema/userSchema.js');
+const chatGroupSchema = require('../schema/chatGroupSchema.js');
 import {userError,notice,systemError} from '../notification/english.js';
 /* ======================= FUNCTION ======================= */
 let verifyLocalAccount = () =>
@@ -63,9 +64,20 @@ let verifyLocalAccount = () =>
     // find user by id & store 
     passport.deserializeUser( async (id,done)=>
     {
-        userSchema.findByIdentificationSession(id)
-            .then( (user) =>{ return done(null,user) })
-            .catch( (error) =>{ return done(error,null) })
+        try 
+        {
+            let user = await userSchema.findByIdentificationSession(id);
+            let chatGroupIDs = await chatGroupSchema.retrieveChatGroupIDs(user._id);
+
+            user = user.toObject();
+            
+            user.chatGroupIDs = chatGroupIDs;
+            return done(null,user);
+        } 
+        catch (error) 
+        {
+            return done(error,null)
+        }
     });
 };
 
