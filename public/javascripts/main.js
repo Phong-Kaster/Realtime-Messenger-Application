@@ -197,6 +197,9 @@ function selectChatScreen()
  
     // call button emoji
     enableEmojioneArea(dataChat);
+
+    // call button photo to send
+    handleEventWritePhotoMessage(dataChat);
   });
 }
 function convertUnicodeEmojiToImage()

@@ -117,7 +117,8 @@ let incRouters = (app) =>{
     router.delete("/unfriend" , loginValidation.isLogout , contactController.unfriend);
 
     // message
-    router.post("/send-message" , loginValidation.isLogout , messageValidation , conversationController.sendMessage)
+    router.post("/send-message" , loginValidation.isLogout , messageValidation , conversationController.sendMessage);
+    router.post("/send-photo-message" , loginValidation.isLogout , conversationController.sendPhotoMessage);
     return app.use("/",router);
 }
 

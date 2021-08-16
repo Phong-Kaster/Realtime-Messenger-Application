@@ -4,7 +4,7 @@ const userSchema = require('../schema/userSchema.js');
 const messengerSchema = require('../schema/messengerSchema.js');
 const _ = require('lodash');
 import {systemError, userError} from '../notification/english.js';
-
+const fsExtra = require('fs-extra');
 
 /********************************************************
  * @param {*} userID | string | who is logging in
@@ -164,7 +164,104 @@ let sendMessage = ( sender , receiverID , content , sendToGroup )=>{
 
 
 
+/********************************************************
+ * @param {*} sender | object | contain information about sender
+ * @param {*} receiverID | string | who receive message from @sender
+ * @param {*} content | string | what sender wanna say to @receiverID
+ * @param {*} sendToGroup | boolean | is a message for individual or group ?
+ ********************************************************/
+let sendPhotoMessage = ( sender , receiverID , photo , sendToGroup )=>{
+    return new Promise ( async ( resolve, reject )=>{
+        let photoBuffer = await fsExtra.readFile(photo.path);
+        let photoType = photo.mimetype;
+        let photoName = photo.originalname;
+
+        if( !sender || !receiverID || !photo ){
+            reject(false);
+        }
+
+        try
+        {
+            if( sendToGroup == "true" ){
+                let group = await chatGroupSchema.findByIdentification(receiverID);
+                if( !group ){
+                    reject(systemError.inexistentGroup);
+                }
+                
+                let receiver = {
+                    id: group._id,
+                    name: group.name,
+                    avatar: "groupChat.png"
+                }
+
+                let information = {
+                    senderId : sender.id,
+                    receiverId : receiverID,
+                    typeConversation : messengerSchema.typeConversation.group,
+                    typeMessenger : messengerSchema.typeMessenger.photo,
+                    sender: sender,
+                    receiver : receiver,
+                    file :
+                        {
+                            data : photoBuffer,
+                            fileType : photoType,
+                            fileName : photoName
+                        }, // messenger's photo
+                    createdAt : Date.now()
+                }
+
+                let message = await messengerSchema.model.createNew(information);
+                await chatGroupSchema.getTheLatestMessage(group._id, group.messageAmount + 1 );
+                resolve(message);
+            }
+            else
+            {
+                
+
+                let user = await userSchema.findByIdentificationAndRetrieveSpecificFields(receiverID);
+                if( !user ){
+                    reject(userError.inexistentAccount);
+                }
+
+
+                let receiver = {
+                    id: user._id,
+                    name: user.username,
+                    avatar: user.avatar
+                }
+
+                
+
+                let information = {
+                    senderId : sender.id,
+                    receiverId : receiverID,
+                    typeConversation : messengerSchema.typeConversation.individual,
+                    typeMessenger : messengerSchema.typeMessenger.photo,
+                    sender: sender,
+                    receiver : receiver,
+                    file :
+                        {
+                            data : photoBuffer,
+                            fileType : photoType,
+                            fileName : photoName
+                        }, // messenger's photo
+                    createdAt : Date.now()
+                }
+
+                let message = await messengerSchema.model.createNew(information);
+                await contactSchema.updateStatusConversation( sender.id, receiver.id );
+                resolve(message);
+            }
+        } 
+        catch (error) 
+        {
+            console.log(error);
+            reject(error);
+        }
+    });
+}
 module.exports = {
     retrieveConversation : retrieveConversation,
-    sendMessage : sendMessage
+    sendMessage : sendMessage,
+    sendPhotoMessage : sendPhotoMessage
 }
