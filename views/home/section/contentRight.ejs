@@ -10,7 +10,7 @@
                             <span class="name"><%= element.name %></span>
                         </span>
                         <span class="chat-menu-right">
-                            <a href="#attachsModal_<%= element._id %>" class="show-attachs" data-toggle="modal">
+                            <a href="#attachmentsModal_<%= element._id %>" class="show-attachments" data-toggle="modal">
                                 <i class="fa fa-paperclip">&nbsp; <strong>Files</strong></i>
                             </a>
                         </span>
@@ -57,13 +57,13 @@
                                     <% } %>
 
                                     <% if(message.typeMessenger === "document"){ %> 
-                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id="<%= message._id %>">
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-attachment-file" data-mess-id="<%= message._id %>">
                                             <% if(message.senderId != user._id){ %>
                                                 <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
                                             <% } %>
                                             <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
                                                 download="<%= message.fileName %>">
-                                                <%= message.fileName %> 
+                                                <%= message.file.fileName %> 
                                             </a>
                                         </div>
                                     <% } %>                            
@@ -78,8 +78,8 @@
                                 <input type="file" id="image-chat-<%= element._id %>" name="my-image-chat" class="image-chat chat-in-group" data-chat="<%= element._id %>">
                                 <i class="fa fa-photo"></i>
                             </label>
-                            <label for="attach-chat">
-                                <input type="file" id="attach-chat" name="my-attach-chat" class="attach-chat" data-chat="<%= element._id %>">
+                            <label for="attachment-chat-<%= element._id %>">
+                                <input type="file" id="attachment-chat-<%= element._id %>" name="my-attachment-chat" class="attachment-chat chat-in-group" data-chat="<%= element._id %>">
                                 <i class="fa fa-paperclip"></i>
                             </label>
                             <a href="#streamModal" id="video-chat" class="video-chat" data-chat="<%= element._id %>" data-toggle="modal">
@@ -98,7 +98,7 @@
                         </span>
                     </span>
                         <span class="chat-menu-right">
-                            <a href="#attachsModal_<%= element._id %>" class="show-attachs" data-toggle="modal">
+                            <a href="#attachmentsModal_<%= element._id %>" class="show-attachments" data-toggle="modal">
                                 <i class="fa fa-paperclip">&nbsp; <strong>Files</strong></i>
                             </a>
                         </span>
@@ -128,10 +128,10 @@
                                     <% } %>
 
                                     <% if(message.typeMessenger === "document"){ %> 
-                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id="<%= message._id %>">
+                                        <div class="convert-emoji bubble <% if(message.senderId == user._id){ %> me <%}else{%> you <%}%> bubble-attachment-file" data-mess-id="<%= message._id %>">
                                             <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
-                                                download="<%= message.fileName %>">
-                                                <%= message.fileName %> 
+                                                download="<%= message.file.fileName %>">
+                                                <%= message.file.fileName %>
                                             </a>
                                         </div>
                                     <% } %>                            
@@ -146,8 +146,8 @@
                                 <input type="file" id="image-chat-<%= element._id %>" name="my-image-chat" class="image-chat" data-chat="<%= element._id %>">
                                 <i class="fa fa-photo"></i>
                             </label>
-                            <label for="attach-chat">
-                                <input type="file" id="attach-chat" name="my-attach-chat" class="attach-chat" data-chat="<%= element._id %>">
+                            <label for="attachment-chat-<%= element._id %>">
+                                <input type="file" id="attachment-chat-<%= element._id %>" name="my-attachment-chat" class="attachment-chat" data-chat="<%= element._id %>">
                                 <i class="fa fa-paperclip"></i>
                             </label>
                             <a href="#streamModal" id="video-chat" class="video-chat" data-chat="<%= element._id %>" data-toggle="modal">

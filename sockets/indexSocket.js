@@ -3,6 +3,7 @@ const contactSocket = require('../sockets/contactSocket.js');
 const acceptOrDenyFriendContact = require('../sockets/acceptOrDenyFriendContactSocket');
 const messageSocket = require('../sockets/messageSocket.js');
 const photoMessageSocket = require('../sockets/photoMessageSocket.js');
+const documentMessageSocket = require('../sockets/documentMessageSocket.js');
 /* ======================= FUNCTION ======================= */
 let incSocket = (io)=>{
     /* contactSocket handle realtime events like send friend request , cancel friend */
@@ -21,6 +22,9 @@ let incSocket = (io)=>{
 
     /* send photo message */
     photoMessageSocket.sendPhotoMessage(io);
+
+    /* send document message */
+    documentMessageSocket.sendPhotoMessage(io);
 }
 
 module.exports = incSocket;

@@ -205,8 +205,20 @@ function selectChatScreen()
 
     // call button photo to send
     handleEventWritePhotoMessage(dataChat);
+
+    handleEventWriteDocumentMessage(dataChat);
   });
 }
+
+/*****************************************************
+ * convert buffer data to photo
+ * @param {*} buffer 
+ * @returns 
+ *****************************************************/
+ function bufferBase64(buffer){
+  return btoa( new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '') );
+}
+
 function convertUnicodeEmojiToImage()
 {
   $(".convert-emoji").each(function() {

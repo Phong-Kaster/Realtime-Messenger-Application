@@ -119,6 +119,7 @@ let incRouters = (app) =>{
     // message
     router.post("/send-message" , loginValidation.isLogout , messageValidation , conversationController.sendMessage);
     router.post("/send-photo-message" , loginValidation.isLogout , conversationController.sendPhotoMessage);
+    router.post("/send-document-message" , loginValidation.isLogout , conversationController.sendDocumentMessage);
     return app.use("/",router);
 }
 

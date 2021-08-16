@@ -1,12 +1,4 @@
 /*****************************************************
- * convert buffer data to photo
- * @param {*} buffer 
- * @returns 
- *****************************************************/
-function bufferBase64(buffer){
-    return btoa( new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '') );
-}
-/*****************************************************
  * execute a AJAX post request to send photo as a message
  * @param {*} photoFormData | is used to send data as: photo, document to server
  /******************************************************/
@@ -86,7 +78,10 @@ let handleEventWritePhotoMessage = (dataChat)=>{
     $(`#image-chat-${dataChat}`).unbind("change").on("change", function(){
         /* Step 1 */
         let file = $(this).prop("files")[0];
-
+        if( !file )
+        {
+            return false;
+        }
         /* Step 2 */
         let fileExtension = ["image/png","image/jpg","image/jpeg"];
         let fileMaxSize = 5242880; // 1024 BYTE = 1 KB | 1024KB = 1 MB
@@ -122,6 +117,8 @@ let handleEventWritePhotoMessage = (dataChat)=>{
     });
 }
 
+
+
 $(document).ready(function(){
     socket.on("response-send-photo-message" , function(sender){
         /* Step 1 */
@@ -153,7 +150,8 @@ $(document).ready(function(){
         /* Step 3 */
         $(`.right .chat[data-chat = ${dataChat}]`).append(photo);
         nineScrollRight(dataChat);
-
+        let photoModal = `<img src="data: ${sender.message.file.fileType}; base64, ${ bufferBase64(sender.message.file.data.data) }">`;
+        $(`#imagesModal_${dataChat}`).find("div.all-images").append(photoModal);
         /* Step 4 */
         $(`.person[data-chat = ${dataChat}]`).find("span.time").addClass("realtime-received-message").html( moment(sender.message.createdAt).locale("en").startOf("seconds").fromNow() );
         let preview = (sender.groupId) ? (sender.username + " sent a photo") : ("You have received a photo")
