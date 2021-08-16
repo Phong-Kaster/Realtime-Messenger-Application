@@ -91,9 +91,9 @@ function configNotification() {
 
 function gridPhotos(layoutNumber) {
   $(".show-images").unbind("click").on("click", function(){
-    let href = $(this).attr("href");// input: #imagesModal_60f922515b66641d989a4f5b
-    let modalID = href.replace("#","");// output: imagesModal_60f922515b66641d989a4f5b
-
+    let modalID = $(this).attr("href");// input: #imagesModal_60f922515b66641d989a4f5b
+    let originImage = $(`${modalID}`).find("div.modal-body").html();
+    //let modalID = href.replace("#","");// output: imagesModal_60f922515b66641d989a4f5b
     let countRows = Math.ceil($(`${modalID}`).find('div.all-images>img').length / layoutNumber);
     let layoutStr = new Array(countRows).fill(layoutNumber).join("");
 
@@ -114,6 +114,11 @@ function gridPhotos(layoutNumber) {
           });
         }
       });
+
+      //listen event close this modal
+      $(`${modalID}`).on('hidden.bs.modal', function () {
+          $(this).find("div.modal-body").html(originImage);
+      })
   });
 
   

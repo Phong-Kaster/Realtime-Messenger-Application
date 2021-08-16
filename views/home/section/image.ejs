@@ -7,12 +7,12 @@
                 <h4 class="modal-title">Shared Media</h4>
             </div>
             <div class="modal-body">
-                <div class="all-images" style="visibility: hidden;">
-                    <% element.messenger.forEach( (message)=>{ %>
-                        <% if(message.typeMessenger === "photo"){ %>
-                            <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>">
-                        <% } %>
-                    <% }); %>
+                <div class="all-images" style="visibility:visible;">
+                        <% element.messenger.forEach( (message)=>{ %>
+                            <% if(message.typeMessenger == "photo"){ %> 
+                                <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>">
+                            <% } %>                         
+                        <% }) %>
                 </div>
             </div>
         </div>

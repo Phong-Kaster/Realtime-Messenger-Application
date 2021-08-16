@@ -1,8 +1,16 @@
 /*****************************************************
+ * convert buffer data to photo
+ * @param {*} buffer 
+ * @returns 
+ *****************************************************/
+function bufferBase64(buffer){
+    return btoa( new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '') );
+}
+/*****************************************************
  * execute a AJAX post request to send photo as a message
  * @param {*} photoFormData | is used to send data as: photo, document to server
  /******************************************************/
-function ajaxToSendPhotoMessage(photoFormData){
+function ajaxToSendPhotoMessage( photoFormData , dataChat , isChatGroup){
     $.ajax({
         url : "/send-photo-message",
         type : "post",
@@ -12,7 +20,45 @@ function ajaxToSendPhotoMessage(photoFormData){
         data : photoFormData,
         success : function(data)
         {
-          console.log(data);
+            /* Step 1 */
+            let emittedData =  { message : data.message };
+            if( isChatGroup ){
+                emittedData.groupId = data.message.receiverId;
+                
+            }else{
+                emittedData.receiverId = data.message.receiverId;
+            }
+
+            /* Step 2 */
+            let photo = 
+            $(`<div class="convert-emoji bubble me bubble-image-file data-mess-id="${data.message._id}">
+                    <img src="data: ${data.message.file.fileType}; base64, 
+                    ${ bufferBase64(data.message.file.data.data) }" class="show-image-chat">
+            </div>`);
+            convertedMessage = emojione.toImage(photo.html());
+            photo.html(`${convertedMessage}`);
+
+            /* Step 3 */
+            $(`.right .chat[data-chat = ${dataChat}]`).append(photo);
+            nineScrollRight(dataChat);
+
+            let photoModal = `<img src="data: ${data.message.file.fileType}; base64, ${ bufferBase64(data.message.file.data.data) }">`;
+            $(`#imagesModal_${dataChat}`).find("div.all-images").append(photoModal);
+            
+            /* Step 3 */
+            $(`.person[data-chat = ${dataChat}]`).find("span.time").removeClass("realtime-received-message").html( moment(data.message.createdAt).locale("en").startOf("seconds").fromNow() );
+            $(`.person[data-chat = ${dataChat}]`).find("span.preview").removeClass("realtime-received-message").html(`You sent a photo`);
+
+            /* Step 4 */
+            $(`.person[data-chat = ${dataChat}]`).on("click.moveToTop", function(){
+                let conversationTab = $(this).parent();
+                $(this).closest("ul").prepend(conversationTab);
+                $(this).off("click.moveToTop");
+            });
+            $(`.person[data-chat = ${dataChat}]`).click();
+
+            /* Step 5 */
+            socket.emit("send-photo-message" , emittedData );
         },
         error : function(error)
         {
@@ -60,7 +106,7 @@ let handleEventWritePhotoMessage = (dataChat)=>{
         }
         /* Step 3 */
         let receiverId = $(this).data("chat");
-
+        let isChatGroup = false;
         /* Step 4 */
         let photoFormData = new FormData();
         photoFormData.append("my-image-chat",file);
@@ -68,9 +114,59 @@ let handleEventWritePhotoMessage = (dataChat)=>{
 
         if( $(this).hasClass("chat-in-group")){
             photoFormData.append("sendToGroup", true);
+            isChatGroup = true;
         }
 
         /* Step 5 */
-        ajaxToSendPhotoMessage(photoFormData);
+        ajaxToSendPhotoMessage( photoFormData , dataChat , isChatGroup );
     });
 }
+
+$(document).ready(function(){
+    socket.on("response-send-photo-message" , function(sender){
+        /* Step 1 */
+        let dataChat;
+        let photo;
+        
+        /* Step 2 */
+        if( sender.groupId ){
+            dataChat = sender.groupId;
+            photo = 
+            $(`<div class="convert-emoji bubble you bubble-image-file data-mess-id="${sender.message._id}">
+                    <img src="/images/users/${sender.avatar}" class="avatar-small" title="#"></img>
+                    &nbsp;&nbsp;
+                    <img src="data: ${sender.message.file.fileType}; base64, 
+                    ${ bufferBase64(sender.message.file.data.data) }" class="show-image-chat">
+            </div>`);
+            
+        }
+        else{
+            dataChat = sender.id;
+            photo = $(`<div class="convert-emoji bubble you bubble-image-file data-mess-id="${sender.message._id}">
+                            <img src="data: ${sender.message.file.fileType}; base64, 
+                            ${ bufferBase64(sender.message.file.data.data) }" class="show-image-chat">
+                        </div>`);
+        }        
+        convertedMessage = emojione.toImage(photo.html());
+        photo.html(`${convertedMessage}`);
+
+        /* Step 3 */
+        $(`.right .chat[data-chat = ${dataChat}]`).append(photo);
+        nineScrollRight(dataChat);
+
+        /* Step 4 */
+        $(`.person[data-chat = ${dataChat}]`).find("span.time").addClass("realtime-received-message").html( moment(sender.message.createdAt).locale("en").startOf("seconds").fromNow() );
+        let preview = (sender.groupId) ? (sender.username + " sent a photo") : ("You have received a photo")
+        $(`.person[data-chat = ${dataChat}]`).find("span.preview").addClass("realtime-received-message").html(`${preview}`);
+
+        /* Step 5 */
+        $(`.person[data-chat = ${dataChat}]`).on("auto.moveToTop", function(){
+            let conversationTab = $(this).parent();
+            $(this).closest("ul").prepend(conversationTab);
+            $(this).off("auto.moveToTop");
+        });
+        $(`.person[data-chat = ${dataChat}]`).trigger("auto.moveToTop");
+
+        handleEventClickOnConversation(dataChat);
+    });
+});

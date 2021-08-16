@@ -52,7 +52,7 @@
                                             <% if(message.senderId != user._id){ %>
                                                 <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
                                             <% } %>
-                                            <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>" class="show-image-chat">
+                                                <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>" class="show-image-chat">
                                         </div>
                                     <% } %>
 
