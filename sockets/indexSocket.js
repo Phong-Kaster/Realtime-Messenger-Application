@@ -15,6 +15,8 @@ let incSocket = (io)=>{
 
     /* send message */
     messageSocket.sendMessage(io);
+    messageSocket.typeMessageOn(io);
+    messageSocket.typeMessageOff(io);
 }
 
 module.exports = incSocket;

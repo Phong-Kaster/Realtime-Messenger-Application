@@ -54,6 +54,12 @@ function ajaxToSendMessage(message, dataChat, receiverID)
 
         /* Step 6 */
         socket.emit("send-message" , emittedData);
+
+        typingMessageOff(dataChat);
+
+        if( $(`.chat[data-chat = ${dataChat}]`).find(".bubble-typing-gif").length){
+            $(`.chat[data-chat = ${dataChat}]`).find(".bubble-typing-gif").remove();
+        }
     }).fail(function(error){
         alertify.notify(error.responseJSON[0], "error" , 7);
     });
@@ -125,12 +131,13 @@ function handleEventClickOnConversation(dataChat){
 
         $(this)
             .find("span.time")
-            .removeClass("realtime-received-message")
+            .removeClass("realtime-received-message");
 
         $(this)
             .find("span.preview")
-            .removeClass("realtime-received-message")
+            .removeClass("realtime-received-message");
     });
+
 }
 
 
@@ -182,7 +189,8 @@ $(document).ready(function(){
 
         /* Step 4 */
         $(`.person[data-chat = ${dataChat}]`).find("span.time").addClass("realtime-received-message").html( moment(sender.message.createdAt).locale("en").startOf("seconds").fromNow() );
-        $(`.person[data-chat = ${dataChat}]`).find("span.preview").addClass("realtime-received-message").html(`${sender.username}: ${sender.message.content}`);
+        let preview = (sender.groupId) ? ( sender.username+": "+sender.message.content) : (sender.message.content);
+        $(`.person[data-chat = ${dataChat}]`).find("span.preview").addClass("realtime-received-message").html(`${preview}`);
 
         /* Step 5 */
         $(`.person[data-chat = ${dataChat}]`).on("auto.moveToTop", function(){

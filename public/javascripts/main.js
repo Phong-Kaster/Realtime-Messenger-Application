@@ -39,7 +39,11 @@ function enableEmojioneArea(dataChat) {
         $(`#write-chat-${dataChat}`).val(this.getText());
       },
       click: function(){
+        typingMessageOn(dataChat);
         handleEventWriteMessage(dataChat);
+      },
+      blur: function(){
+        typingMessageOff(dataChat);
       }
     },
   });
