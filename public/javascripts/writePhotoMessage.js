@@ -150,8 +150,10 @@ $(document).ready(function(){
         /* Step 3 */
         $(`.right .chat[data-chat = ${dataChat}]`).append(photo);
         nineScrollRight(dataChat);
+        
         let photoModal = `<img src="data: ${sender.message.file.fileType}; base64, ${ bufferBase64(sender.message.file.data.data) }">`;
         $(`#imagesModal_${dataChat}`).find("div.all-images").append(photoModal);
+
         /* Step 4 */
         $(`.person[data-chat = ${dataChat}]`).find("span.time").addClass("realtime-received-message").html( moment(sender.message.createdAt).locale("en").startOf("seconds").fromNow() );
         let preview = (sender.groupId) ? (sender.username + " sent a photo") : ("You have received a photo")

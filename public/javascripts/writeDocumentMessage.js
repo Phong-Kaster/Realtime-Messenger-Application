@@ -67,6 +67,20 @@
     })
 }
 
+
+
+/*****************************************************
+ * Listen & handle event click "photo" button to send a photo message
+ * @param {*} dataChat | [data-chat="ha378"] | is a property in HTML used to 
+ * indicate what conversation user is chatting
+ * 
+ * Step 0 : listen event change 
+ * Step 1 : retrieve photo
+ * Step 2 : define fileExtension & fileMaxSize to check input data
+ * Step 3 : retrieve user ID who receive the photo
+ * Step 4 : defile a form data to wrap information
+ * Step 5 : call ajax to send photo to server
+ /******************************************************/
 let handleEventWriteDocumentMessage = (dataChat)=>{
     $(`#attachment-chat-${dataChat}`).unbind("change").on("change" , function(){
         /* Step 1 */
@@ -85,9 +99,12 @@ let handleEventWriteDocumentMessage = (dataChat)=>{
             return false;
         }
 
+        
         /* Step 3 */
         let receiverId = $(this).data("chat");
         let isChatGroup = false;
+
+
         /* Step 4 */
         let documentFormData = new FormData();
         documentFormData.append("my-attachment-chat",file);
@@ -120,15 +137,16 @@ $(document).ready(function(){
                         download="${sender.message.file.fileName}">
                                  ${sender.message.file.fileName}
                     </a>
-                </div>`;
+            </div>`;
         }else{
             dataChat = sender.id;
-            document = `<div class="convert-emoji bubble you bubble-attachment-file" data-mess-id="${sender.message._id}">
-                            <a href="data:${sender.message.file.fileType}; base64, ${bufferBase64(sender.message.file.data.data)}" 
-                                download="${sender.message.file.fileName}">
-                                ${sender.message.file.fileName}
-                            </a>
-                        </div>`
+            document = 
+            `<div class="convert-emoji bubble you bubble-attachment-file" data-mess-id="${sender.message._id}">
+                <a href="data:${sender.message.file.fileType}; base64, ${bufferBase64(sender.message.file.data.data)}" 
+                    download="${sender.message.file.fileName}">
+                    ${sender.message.file.fileName}
+                </a>
+            </div>`;
         }        
 
         /* Step 3 */
@@ -142,6 +160,7 @@ $(document).ready(function(){
                                 </a>
                             </li>`;
         $(`#attachmentsModal_${dataChat}`).find("ul.list-attachments").prepend(documentModal);
+        
         /* Step 4 */
         $(`.person[data-chat = ${dataChat}]`).find("span.time").addClass("realtime-received-message").html( moment(sender.message.createdAt).locale("en").startOf("seconds").fromNow() );
         let preview = (sender.groupId) ? (sender.username + " sent a document") : ("You have received a document")
