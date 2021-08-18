@@ -4,6 +4,7 @@ const acceptOrDenyFriendContact = require('../sockets/acceptOrDenyFriendContactS
 const messageSocket = require('../sockets/messageSocket.js');
 const photoMessageSocket = require('../sockets/photoMessageSocket.js');
 const documentMessageSocket = require('../sockets/documentMessageSocket.js');
+const videoCallSocket = require('../sockets/videoCallSocket.js');
 /* ======================= FUNCTION ======================= */
 let incSocket = (io)=>{
     /* contactSocket handle realtime events like send friend request , cancel friend */
@@ -25,6 +26,8 @@ let incSocket = (io)=>{
 
     /* send document message */
     documentMessageSocket.sendPhotoMessage(io);
+
+    videoCallSocket.videoCall(io);
 }
 
 module.exports = incSocket;

@@ -26,6 +26,8 @@ const passportSocketIoConfigure = require('./config/passportSocketIo.js');
 
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
+
+const event = require("events");
 /* ======================= FUNCTION ======================= */
 // pem.config({
 //   pathOpenSSL: '/usr/local/ssl'
@@ -96,6 +98,9 @@ incRouter(app);
 
 // configure passport socket io to retrieve information user from passportJS
 passportSocketIoConfigure( io , cookieParser , session.sessionStore );
+
+// increase maximum event the application can listen a mean while
+event.EventEmitter.defaultMaxListeners = 30;
 
 // initialize socket io
 incSocket(io);

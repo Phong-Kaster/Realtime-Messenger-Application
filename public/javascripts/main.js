@@ -207,6 +207,9 @@ function selectChatScreen()
     handleEventWritePhotoMessage(dataChat);
 
     handleEventWriteDocumentMessage(dataChat);
+
+    // call button call video
+    handleEventCallVideo(dataChat);
   });
 }
 

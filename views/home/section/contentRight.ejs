@@ -82,10 +82,10 @@
                                 <input type="file" id="attachment-chat-<%= element._id %>" name="my-attachment-chat" class="attachment-chat chat-in-group" data-chat="<%= element._id %>">
                                 <i class="fa fa-paperclip"></i>
                             </label>
-                            <a href="#streamModal" id="video-chat" class="video-chat" data-chat="<%= element._id %>" data-toggle="modal">
+                            <!-- <a href="javascript:void(0)" id="video-chat" class="video-chat" data-chat="<%= element._id %>" data-toggle="modal">
                                 <i class="fa fa-video-camera"></i>
                             </a>
-                            <input type="hidden" id="peer-id" value="">
+                            <input type="hidden" id="peer-id" value=""> -->
                         </div>
                     </div>
                 </div>
@@ -150,10 +150,12 @@
                                 <input type="file" id="attachment-chat-<%= element._id %>" name="my-attachment-chat" class="attachment-chat" data-chat="<%= element._id %>">
                                 <i class="fa fa-paperclip"></i>
                             </label>
-                            <a href="#streamModal" id="video-chat" class="video-chat" data-chat="<%= element._id %>" data-toggle="modal">
+                            
+                            <a href="javascript:void(0)" id="video-chat" class="video-chat-<%= element._id %>" data-chat="<%= element._id %>">
                                 <i class="fa fa-video-camera"></i>
                             </a>
-                            <input type="hidden" id="peer-id" value="">
+
+                            <!-- <input type="hidden" id="peer-id" value=""> -->
                         </div>
                     </div>
                 </div>
