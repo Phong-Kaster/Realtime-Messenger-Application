@@ -5,6 +5,9 @@ const conversationModel = require('../models/conversationModel.js');
 import {bufferBase64ToString } from '../helpers/bufferBase64ToString.js';
 import {retrieveTheLastOfArray} from '../helpers/retrieveTheLastOfArray.js';
 import {convertTimestamp} from '../helpers/convertTimestamp.js';
+import {establishTurnServer} from '../helpers/establishTurnServer.js'
+
+
 /*************************************************************
  * @notifications | array | notifications appear in notice icon
  * @quantityOfUnreadNotification | number | how many notification user have not read ?
@@ -18,6 +21,9 @@ import {convertTimestamp} from '../helpers/convertTimestamp.js';
  * @quantityOfReceivedFriendRequestContacts | number | indicates how many friend requests user received
  * 
  * @allContentChat | object | contain content of all message belong to user._id
+ * 
+ * @iceServers | string | contains information about TURN server to replay traffic network.
+ * it helps the application can make a call 
  * @param {*} req 
  * @param {*} res 
  *************************************************************/
@@ -36,6 +42,8 @@ let home = async (req,res) =>{
     
     let allContentChat = await conversationModel.retrieveConversation(req.user._id);
 
+    let iceServers = await establishTurnServer();
+    iceServers = JSON.stringify(iceServers);
 
 
     return res.render("./home/section/content.ejs", {
@@ -58,7 +66,9 @@ let home = async (req,res) =>{
 
         bufferBase64ToString : bufferBase64ToString,
         retrieveTheLastOfArray : retrieveTheLastOfArray,
-        convertTimestamp : convertTimestamp
+        convertTimestamp : convertTimestamp,
+
+        iceServers : iceServers
     });
 };
 
