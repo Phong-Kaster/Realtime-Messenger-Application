@@ -30,7 +30,6 @@ function ajaxToSendMessage(message, dataChat, receiverID)
 
         if( message.sendToGroup ){
             emittedData.groupId = receiverID;
-            
         }
         else{
             emittedData.receiverId = receiverID;

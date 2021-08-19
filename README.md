@@ -200,8 +200,27 @@ Note : 25-07-2021 to 31-07-2021 I did not do any thing because revising for Comp
 
        14.Unfriend function
  ## **Phase 3** : **08-08-2021 to 16-08-2021**
+       1.Simulate some individual & group conversations
 
+       2.Sort conversation by time created
+
+       3.A Special modal for photos & documents
+
+       4.Preview message
+
+       5.Send message with emoji
+
+       6.Real-time typing message
+
+       7.Send a photo as message
+
+       8.Send a document as message
  ## **Phase 4** : **17-08-2021 to 19-08-2021**
+       1.Client-side, handle events with jQuery for caller & listener
+       
+       2.Server-side, handle logic with SocketIO in the same local network
+
+       3.Set up a simple TURN server - a protocol for relaying network traffic
  ## **Phase 5** : **xx-xx-2021 to xx-xx-2021**
 
 
