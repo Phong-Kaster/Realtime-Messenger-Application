@@ -212,6 +212,4 @@ let videoCall = (io)=>{
     });
 }
 
-module.exports = {
-    videoCall : videoCall
-}
+module.exports = videoCall ;

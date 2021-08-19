@@ -1,4 +1,11 @@
-let photoMessageSocket = (io)=>{
+/*************************************************************
+ * @param {*} io
+ * 
+ * Step 1:  Server send SocketID of active user to all client
+ * Step 2:  If a user have just logged in, server also notify this event
+ * Step 3:  If a user have just logged out, event "server-send-a-new-inactive-user" is activated
+ *************************************************************/
+let activeStatus = (io)=>{
     let SocketIDClientSide = {};
     
     io.on("connection", async (socket)=>{
@@ -12,7 +19,6 @@ let photoMessageSocket = (io)=>{
         {
             SocketIDClientSide[senderID] = [socket.id];
         }
-        /* Step 3 - for group conversation */
         socket.request.user.chatGroupIDs.forEach( (element)=>{
             if( SocketIDClientSide[element._id] )
             {
@@ -24,36 +30,15 @@ let photoMessageSocket = (io)=>{
             }
         });
         
+        let activeUsers = Object.keys(SocketIDClientSide);
 
+        /* Step 1 */
+        socket.emit("server-send-active-users", activeUsers);
 
-        socket.on("send-photo-message", (emittedData)=>{
-            let sender = {};
-            let receiver ;
+        /* Step 2 */
+        socket.broadcast.emit("server-send-a-new-active-user", socket.request.user._id);
 
-            if( emittedData.groupId ){
-                sender.groupId = emittedData.groupId;
-                sender.id = socket.request.user._id;
-                sender.message = emittedData.message;
-                sender.username = socket.request.user.username;
-                sender.avatar = socket.request.user.avatar;
-                receiver = emittedData.groupId;
-            }
-
-            if( emittedData.receiverId ){
-                sender.id = socket.request.user._id;
-                sender.message = emittedData.message;
-                receiver = emittedData.receiverId;
-            }
-
-            if( SocketIDClientSide[receiver] )
-            {
-                SocketIDClientSide[receiver].forEach((element)=>{
-                    socket.broadcast.to(element).emit("response-send-photo-message", sender);
-                });
-            }
-        });
-
-
+        
         /* trigged if F5 , open new tab, close browser ,...
         * delete old socketId of sender & receiver
         */ 
@@ -69,7 +54,7 @@ let photoMessageSocket = (io)=>{
                 delete SocketIDClientSide[senderID];
             }
 
-            /* Step 3 - for group conversation */
+            /* for group conversation */
             socket.request.user.chatGroupIDs.forEach( (element)=>{
                 // delete old socketId when tabs closed
                 SocketIDClientSide[element._id] = SocketIDClientSide[element._id].filter((socketId)=>{
@@ -81,8 +66,10 @@ let photoMessageSocket = (io)=>{
                     delete SocketIDClientSide[element._id];
                 }
             });
+            /* Step 3 */
+            socket.broadcast.emit("server-send-a-new-inactive-user", socket.request.user._id)
         })
     });
 }
 
-module.exports = photoMessageSocket;
+module.exports = activeStatus;

@@ -1,4 +1,4 @@
-let sendPhotoMessage = (io)=>{
+let documentMessageSocket = (io)=>{
     let SocketIDClientSide = {};
     
     io.on("connection", async (socket)=>{
@@ -85,6 +85,4 @@ let sendPhotoMessage = (io)=>{
     });
 }
 
-module.exports = {
-    sendPhotoMessage : sendPhotoMessage
-}
+module.exports = documentMessageSocket;

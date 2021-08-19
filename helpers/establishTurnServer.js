@@ -7,7 +7,7 @@ The term stands for Traversal Using Relay NAT, and it is a protocol for relaying
 
 URL: https://global.xirsys.net/dashboard/services
 
-API Credentials
+API Credentials:
 + ident: n18dccn147
 + secret: 71820f88-002c-11ec-9995-0242ac130003
 + channel: RealtimeMessengerApplication
@@ -41,13 +41,7 @@ export let establishTurnServer = ()=>{
                 reject(error);
             }
             
-            //console.error('error:', error); // Print the error if one occurred
-            //console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-            //console.log(body.v.iceServers); // Print the HTML for the Google homepage.
-            //console.log( typeof(body.v.iceServers) );
             let bodyJSON = JSON.parse(body);
-            //console.log(bodyJSON.v.iceServers); // Print the HTML for the Google homepage.
-            //console.log( typeof(bodyJSON.v.iceServers) );
             resolve(bodyJSON.v.iceServers);
         });
     });
