@@ -2,23 +2,34 @@
 const express = require('express');
 const passport = require('passport');
 const router = express.Router();
+
 /* ======================= CONTROLLERS ======================= */
 const authenticationController = require('../controllers/authenticationController.js');
 const homeController = require('../controllers/homeController.js');
+
 const passportLocalController = require('../controllers/passportLocalController.js');
 const passportFacebookController = require('../controllers/passportFacebookController.js');
+
 const passportGoogleController = require('../controllers/passportGoogleController.js');
 const userController = require('../controllers/userController.js');
+
 const contactController = require('../controllers/contactController.js');
 const notificationController = require('../controllers/notificationController');
+
 const conversationController = require('../controllers/conversationController.js');
+const groupChatController = require('../controllers/groupChatController.js');
+
 /* ======================= MIDDLEWARES ======================= */
 const signUpValidation = require('../middlewares/signUpValidation.js');
 const loginValidation = require('../middlewares/loginValidation.js');
+
 const informationValidation = require('../middlewares/informationValidation.js');
 const passwordValidation = require('../middlewares/passwordValidation.js');
+
 const searchValidation = require('../middlewares/searchValidation');
 const messageValidation = require('../middlewares/messageValidation.js');
+
+const groupChatValidation = require('../middlewares/groupChatValidation.js');
 /* ======================= FUNCTIONS ======================= */
 // verify local account
 passportLocalController();
@@ -121,6 +132,9 @@ let incRouters = (app) =>{
     router.post("/send-message" , loginValidation.isLogout , messageValidation , conversationController.sendMessage);
     router.post("/send-photo-message" , loginValidation.isLogout , conversationController.sendPhotoMessage);
     router.post("/send-document-message" , loginValidation.isLogout , conversationController.sendDocumentMessage);
+
+    // create group chat
+    router.post("/create-group-chat" , loginValidation.isLogout , groupChatValidation , groupChatController.createGroupChat);
     return app.use("/",router);
 }
 

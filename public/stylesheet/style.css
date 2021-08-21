@@ -1240,8 +1240,8 @@ label:focus,
   min-height: 26px;
   line-height: 26px;
   font-size: 13px;
-  border-color: #2ACC77;
-  background-color: #2ACC77;
+  border-color: #0078FF;
+  background-color: #0078FF;
   color: #fff;
   fill: #fff;
   margin: 10px 0px 5px 2px;
@@ -1269,12 +1269,12 @@ label:focus,
   border-color: #ccc;
 }
 
-.list-user-added button#create-group-chat {
-  border-color: #2ACC77;
-  background-color: #2ACC77;
+.list-user-added button#btn-create-group-chat {
+  border-color: #0078FF;
+  background-color: #0078FF;
 }
 
-.list-user-added button#cancel-group-chat {
+.list-user-added button#btn-cancel-group-chat {
   border-color: #ff7675;
   background-color: #ff7675;
   margin-left: 5px;

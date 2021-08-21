@@ -18,8 +18,8 @@ function addFriendsToGroup(){
 
 
 
-function cancelCreateGroup(){
-    $('#cancel-group-chat').bind('click', function() {
+function handleEventCancelCreateGroupChat(){
+    $('#btn-cancel-group-chat').bind('click', function() {
       $('#groupChatModal .list-user-added').hide();
       if ($('ul#friends-added>li').length) {
         $('ul#friends-added>li').each(function(index) {
@@ -28,6 +28,69 @@ function cancelCreateGroup(){
       }
     });
 }
+
+
+
+function ajaxToCreateGroupChat( friendIDs , groupChatName ){
+  $.post("/create-group-chat", { friendIDs , groupChatName } , function(data){
+      console.log(data);
+  });
+}
+
+
+
+function handleEventCreateGroup(){
+  $("#btn-create-group-chat").bind("click", function()
+  {
+      let quantityAddedFriend = $("ul#friends-added").find("li").length;
+      if( quantityAddedFriend < 2)
+      {
+          alertify.notify("Group chat must have at least 3 people !", "error" , 7);
+          return false;
+      }
+
+
+
+      let groupChatName = $("#name-group-chat").val();
+      let regexGroupChatName = new RegExp(/^[\s0-9a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ ]+$/);
+      if( !groupChatName.length )
+      {
+          alertify.notify("Name must have at least 1 letter !", "error" , 7);
+          return false;
+      }
+      if( !regexGroupChatName.test(groupChatName))
+      {
+          alertify.notify("Name should not have had special letter like @, #, $...","error",7);
+          return false;
+      }
+
+       
+
+      let friendIDs = [];
+      $("ul#friends-added").find("li").each( (index , element)=>{
+          friendIDs.push( {"userId": $(element).data("uid")} );
+      });
+
+
+      // show a notification asks user if they are sure ?
+      Swal.fire({
+        title: `Are you sure to create &nbsp; <span style="color: #0077ff"> ${groupChatName} </span>?`,
+        icon: "information",
+        showCancelButton: true,
+        confirmButtonColor: '#0078FF',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Yes",
+        cancelButtonText: "No"
+      }).then((result) => {
+            // if cancel then empty everything
+            if( !result.value ){
+                return false;
+            }
+            ajaxToCreateGroupChat( friendIDs , groupChatName );
+      });
+  });
+}
+
 
 
 /************************************************************************
@@ -58,11 +121,16 @@ function searchFriend(event){
             $("#group-chat-friends").html(data);
 
             addFriendsToGroup();
-            cancelCreateGroup();
+            handleEventCancelCreateGroupChat();
         });
     }
 }
 
+
+
+
 $(document).ready(function(){
     $("#btn-search-friend-to-add-group-chat").bind("click" , searchFriend);
+
+    handleEventCreateGroup();
 });

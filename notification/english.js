@@ -15,7 +15,8 @@ export const userError = {
     standardPhone : "Phone has from 10 to 11 number",
     incorrectCurrentEmail : "Your current password is not correct !",
     invalidKeyword : "Your keyword include invalid character !",
-    emptyMessage : "Enter your message"
+    emptyMessage : "Enter your message",
+    notEnoughPeople : "Group chat must have at least 2 people"
 };
 export const systemError = {
     unsentEmail : "The email can't be send.Please get contact with our customer service",

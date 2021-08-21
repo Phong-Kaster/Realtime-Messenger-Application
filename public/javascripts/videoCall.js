@@ -239,7 +239,7 @@ $(document).ready(function(){
 
         Swal.fire(
         {
-            title : ` <span span style="color: #0077ff">${callInformation.callerName}</span> is calling
+            title : ` <span style="color: #0077ff">${callInformation.callerName}</span> is calling
             <i class="fa fa-volume-control-phone"></i>`,
             html : 
             `   Countdown : <strong style="color: #0077ff;"></strong> seconds </br></br>
