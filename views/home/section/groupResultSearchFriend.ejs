@@ -1,0 +1,24 @@
+<!-- list information about users that we can send friend request-->
+<% friends.forEach( function(element){ %> 
+    <div data-uid="<%= element._id %>">
+        <li data-uid="<%= element._id %>">
+            <div class="contactPanel">
+                <div class="user-avatar">
+                    <img src="./images/users/<%= element.avatar %>" alt="avatar">
+                </div>
+                <div class="user-name">
+                    <p>
+                        <%= element.username %>
+                    </p>
+                </div>
+                <br>
+                <div class="user-address">
+                    <span>&nbsp <%= element.address %></span>
+                </div>
+                <div class="add-user" data-uid="<%= element._id %>">
+                    Add
+                </div>
+            </div>
+        </li>
+    </div>
+<% }); %>

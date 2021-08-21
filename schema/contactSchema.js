@@ -215,6 +215,17 @@ contactSchema.statics = {
                 { $and: [{"userId": contactId},{"contactId": userId}] }
             ]
         },{"updatedAt": Date.now()})
+    },
+    searchFriendByID(userId)
+    {
+        return this.find({
+            $and: [
+                { $or:[ {"userId" : userId} , {"contactId" : userId}] },
+                { "status" : true }
+            ]
+        })
+        .sort({"updatedAt" : -1})
+        .exec();
     }
 }
 

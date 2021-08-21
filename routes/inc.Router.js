@@ -96,6 +96,7 @@ let incRouters = (app) =>{
 
     // search
     router.get("/search/:keyword" , loginValidation.isLogout , searchValidation , contactController.searchByKeyword);
+    router.get("/search-friend/:keyword" , loginValidation.isLogout , searchValidation , contactController.searchFriendByKeyword);
 
     router.post("/send-add-friend-request" , loginValidation.isLogout , contactController.sendAddFriendRequest);
     router.delete("/cancel-friend-request" , loginValidation.isLogout , contactController.cancelFriendRequest);

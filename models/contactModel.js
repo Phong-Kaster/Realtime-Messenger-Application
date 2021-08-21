@@ -29,7 +29,7 @@ let searchByKeyword = ( userID , keyword )=>{
 
 
         // filter duplicate ID
-        invalidUserIDs = _.unionBy(invalidUserIDs);
+        invalidUserIDs = _.uniqBy(invalidUserIDs);
         let validUserIDs = await userSchema.searchByInvalidUserIDsAndKeyword( invalidUserIDs , keyword );
         resolve(validUserIDs);
     });
@@ -386,6 +386,36 @@ let unfriend = ( userID , receiverID)=>{
 
 
 
+
+/*************************************************************
+ * @param {*} userID 
+ * @param {*} keyword 
+ * @returns 
+ /*************************************************************/
+let searchFriendByKeyword = ( userID , keyword )=>{
+    return new Promise( async ( resolve , reject )=>{
+        let friendIDs = [];
+        let friends = await contactSchema.searchFriendByID( userID );
+
+        friends.forEach( (element)=>{
+            friendIDs.push(element.userId);
+            friendIDs.push(element.contactId);
+        });
+
+
+        // filter duplicate ID
+        friendIDs = _.uniqBy(friendIDs);
+        // filter userID
+        friendIDs = friendIDs.filter( element => element != userID );
+
+
+        let users = await userSchema.searchByFriendIDsAndKeyword( friendIDs , keyword );
+        resolve(users);
+    })
+}
+
+
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -405,5 +435,7 @@ module.exports = {
 
     denyReceivedFriendContact : denyReceivedFriendContact,
     acceptReceivedFriendContact : acceptReceivedFriendContact,
-    unfriend : unfriend
+    unfriend : unfriend,
+
+    searchFriendByKeyword : searchFriendByKeyword
 }

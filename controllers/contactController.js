@@ -223,6 +223,43 @@ let unfriend = async ( req , res )=>{
     }
 } 
 
+
+/*************************************************************
+ * this function is used to search friend of @userID , then @userID can create a group chat
+ * @param {*} req 
+ * @param {*} res 
+ *************************************************************/
+let searchFriendByKeyword = async ( req , res )=>{
+    // handle errors server-side
+    let errorsArray = [];
+    let errorValidation = validationResult(req);
+    
+    if( !errorValidation.isEmpty() )
+    {
+        let errors = Object.values(errorValidation.mapped());
+        errors.forEach( (element)=>{
+            errorsArray.push(element.msg);
+        })
+        return res.status(500).send(errorsArray);
+    }
+    
+
+    try
+    {
+        let keyword = req.params.keyword;
+        let userID = req.user._id;
+
+        let friends = await contactModel.searchFriendByKeyword( userID , keyword );
+        return res.render("home/section/groupResultSearchFriend.ejs" , {friends} );
+    }
+    catch(error)
+    {
+        return res.status(500).send(error);
+    }
+}
+
+
+
 module.exports = {
     searchByKeyword : searchByKeyword,
     sendAddFriendRequest : sendAddFriendRequest,
@@ -234,5 +271,7 @@ module.exports = {
 
     denyReceivedFriendContact : denyReceivedFriendContact,
     acceptReceivedFriendContact : acceptReceivedFriendContact,
-    unfriend : unfriend
+    unfriend : unfriend,
+
+    searchFriendByKeyword : searchFriendByKeyword
 }

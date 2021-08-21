@@ -119,7 +119,7 @@ $(document).ready(function(){
         host: "peerjs-server-trungquandev.herokuapp.com",
         secure: true,
         port: 443,
-        config:{ "iceServers":iceTurnServer }
+        //config:{ "iceServers":iceTurnServer }
     });
     peer.on("open" , function(ID){
         PeerID = ID;
