@@ -8,19 +8,21 @@
  * 
  * 
  * Step 1 : define senderID because socket only understand IDs created by it
- * Step 2 : check for individual conversations of @sender
- * Step 3 : check for group conversation of @sender
- * Step 4 : catch "send-message" from client-side & handle by @emittedData include: groupId or receiverId
- * Step 5 : socket.broadcast.to(element).emit("response-send-message", sender) to 
- * emit "response-send-message" to correct receiver
+ * Step 2 : push socket.id for @senderID
+ * Step 3 : push socket.id for @senderID 's group chat
+ * Step 4 : only when a group have been create, catch "member-join-group-chat" & push socket.id 
+ * to SocketIDClientSide[groupID] to emit event  to correct member
+ * Step 5 : catch "send-message" from client-side & handle by @emittedData include: groupId or receiverId
  * Step 6 : check if receiver loges out, remove their socket IDs
  *********************************************************************/
 let sendMessage = (io)=>{
     let SocketIDClientSide = {};
     
     io.on("connection", async (socket)=>{
+        /* Step 1 */
         let senderID = socket.request.user._id;
 
+        /* Step 2 */
         if( SocketIDClientSide[senderID] )
         {
             SocketIDClientSide[senderID].push(socket.id);
@@ -29,7 +31,8 @@ let sendMessage = (io)=>{
         {
             SocketIDClientSide[senderID] = [socket.id];
         }
-        /* Step 3 - for group conversation */
+
+        /* Step 3 */
         socket.request.user.chatGroupIDs.forEach( (element)=>{
             if( SocketIDClientSide[element._id] )
             {
@@ -41,8 +44,31 @@ let sendMessage = (io)=>{
             }
         });
         
+        // socket.on("create-group-chat", (emittedData)=>{
+        //     let returnedData = emittedData;
+        //     emittedData.member.forEach( (element)=>{
+        //         if( SocketIDClientSide[element.userId] && element.userId != senderID)
+        //         {
+        //             SocketIDClientSide[element.userId].forEach( (e)=>{
+        //                 socket.broadcast.to(e).emit("response-create-group-chat", returnedData);
+        //             })
+        //         }
+        //     });
+        // });
+        /* Step 4 */
+        socket.on("member-join-group-chat", (emittedData)=>{
+            let groupID = emittedData;
+            if(SocketIDClientSide[groupID])
+            {
+                SocketIDClientSide[groupID].push(socket.id);
+            }
+            else
+            {
+                SocketIDClientSide[groupID] = [socket.id];
+            }
+        });
 
-
+        /* Step 5 */
         socket.on("send-message", (emittedData)=>{
             let sender = {};
             let receiver ;
@@ -70,7 +96,8 @@ let sendMessage = (io)=>{
             }
         });
 
-
+        
+        /* Step 6 */
         /* trigged if F5 , open new tab, close browser ,...
         * delete old socketId of sender & receiver
         */ 

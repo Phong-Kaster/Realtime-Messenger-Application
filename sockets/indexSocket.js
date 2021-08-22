@@ -6,6 +6,7 @@ const photoMessageSocket = require('../sockets/photoMessageSocket.js');
 const documentMessageSocket = require('../sockets/documentMessageSocket.js');
 const videoCallSocket = require('../sockets/videoCallSocket.js');
 const activeStatusSocket = require('../sockets/activeStatusSocket.js');
+const groupChatSocket = require('../sockets/groupChatSocket.js');
 /* ======================= FUNCTION ======================= */
 let incSocket = (io)=>{
     /* contactSocket handle realtime events like send friend request , cancel friend */
@@ -31,6 +32,8 @@ let incSocket = (io)=>{
     videoCallSocket(io);
 
     activeStatusSocket(io);
+
+    groupChatSocket(io);
 }
 
 module.exports = incSocket;

@@ -12,6 +12,9 @@
  * 
  * socket.on("listener-side-refuse-video-call"): Server notify to caller-side that listener-side can not answer
  * socket.on("listener-side-accept-video-call": Server handle both caller-side & listener-side
+ * 
+ * socket.on("member-join-group-chat"): only when a group have been create, catch "member-join-group-chat" & push socket.id 
+ * to SocketIDClientSide[groupID] to emit event  to correct member
  * @param {*} io 
  **************************************************************************/
 let videoCall = (io)=>{
@@ -29,6 +32,18 @@ let videoCall = (io)=>{
         {
             SocketIDClientSide[callerID] = [socket.id];
         }
+
+        socket.on("member-join-group-chat", (emittedData)=>{
+            let groupID = emittedData;
+            if(SocketIDClientSide[groupID])
+            {
+                SocketIDClientSide[groupID].push(socket.id);
+            }
+            else
+            {
+                SocketIDClientSide[groupID] = [socket.id];
+            }
+        });
 
         /* Step 3 - for group conversation */
         socket.request.user.chatGroupIDs.forEach( (element)=>{
