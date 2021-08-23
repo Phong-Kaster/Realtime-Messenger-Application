@@ -28,6 +28,15 @@
     - [**2.3.Contact Management**](#23contact-management)
     - [**2.4.Notification & notifications Management**](#24notification--notifications-management)
     - [**2.5.Unfriend**](#25unfriend)
+  - [**3.User-to-user chat Function**](#3user-to-user-chat-function)
+    - [**3.1.Sorting Conversation reasonably**](#31sorting-conversation-reasonably)
+    - [**3.2.Preview**](#32preview)
+    - [**3.3.Emoji**](#33emoji)
+    - [**3.4.Photo**](#34photo)
+    - [**3.5.Document**](#35document)
+  - [**4.Video Call Function**](#4video-call-function)
+  - [**5.Active Status**](#5active-status)
+  - [**6.Chat Group**](#6chat-group)
 - [**Timeline**](#timeline)
   - [**Phase 1** : **24-06-2021 to 16-07-2021**](#phase-1--24-06-2021-to-16-07-2021)
   - [**Phase 2** : **19-07-2021 to 06-08-2021**](#phase-2--19-07-2021-to-06-08-2021)
@@ -123,6 +132,44 @@ User could access all content of notification with icon or get a full-scaled tab
 ### [**2.5.Unfriend**](#25unfriend)
 
 Nothing lasts forever ! If you don't want to be friend with some one.Just unfriend them ! 🙋‍♂️🙋‍♀️ Say google and go separate ways 👻👻. Whom you unfriend does not know anything about it.Every thing is secret
+Every message is the past & the past must be remove. Good-bye
+
+##  [**3.User-to-user chat Function**](#3user-to-user-chat-function)
+
+### [**3.1.Sorting Conversation reasonably**](#31sorting-conversation-reasonably)
+
+Every single conversation will be sorted by time when they are created. You never miss any new message 📩
+
+### [**3.2.Preview**](#32preview)
+
+Take a glance some new messages. If you don't have time to read whole message.😎
+
+### [**3.3.Emoji**](#33emoji)
+
+Ya-hoo 😱 ! Send message only transfer information. So send your message with emoji. 
+Now words can fly 🕊🕊
+
+### [**3.4.Photo**](#34photo)
+
+Not only text but photo also can be sent as a message. Just click, choose your photo & send. Easy📸📸📸
+
+### [**3.5.Document**](#35document)
+
+Now, the last miracle is file. Files | Documents can also be sent & downloaded simply by receiver.
+
+
+##  [**4.Video Call Function**](#4video-call-function)
+
+Two people could make a video call with video & voice. Every moment is always real-time. There is no distance between you and me.👭💘
+
+## [**5.Active Status**](#5active-status)
+
+You can know which friend is active or not ? Look at the dot, green means online🦢.
+
+## [**6.Chat Group**](#6chat-group)
+
+Have the same hobby ? Create a chat group now ! From this moment, we are united 🤝.
+
 
 # [**Timeline**](#timeline)
 
