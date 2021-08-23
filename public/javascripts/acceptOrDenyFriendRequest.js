@@ -482,6 +482,12 @@ socket.on("response-deny-received-friend-contact" , function(sender){
 /************************************************************
  * @sender | object | contains information of who emit this event
  * @sender is the one send unfriend request
+ * Step 1 : remove the tab in friend contact 
+ * Step 2 : update number of friends
+ * Step 3 : remove the left conversation tab
+ * Step 4 : remove the right conversation tab
+ * Step 5 : remove media modal where stores all shared photos
+ * Step 6 : remove file modal where stores all shared files
  ************************************************************/
 socket.on("response-unfriend", function(sender){
     $("#contacts").find(`ul li[data-uid = ${sender.id}]`).remove();
