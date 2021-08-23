@@ -33,7 +33,7 @@
   - [**Phase 2** : **19-07-2021 to 06-08-2021**](#phase-2--19-07-2021-to-06-08-2021)
   - [**Phase 3** : **08-08-2021 to 16-08-2021**](#phase-3--08-08-2021-to-16-08-2021)
   - [**Phase 4** : **17-08-2021 to 19-08-2021**](#phase-4--17-08-2021-to-19-08-2021)
-  - [**Phase 5** : **xx-xx-2021 to xx-xx-2021**](#phase-5--xx-xx-2021-to-xx-xx-2021)
+  - [**Phase 5** : **21-08-2021 to xx-08-2021**](#phase-5--21-08-2021-to-xx-08-2021)
 - [**Third-party libraries**](#third-party-libraries)
 - [**Post script**](#post-script)
 - [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with--and-javascript-)
@@ -221,7 +221,11 @@ Note : 25-07-2021 to 31-07-2021 I did not do any thing because revising for Comp
        2.Server-side, handle logic with SocketIO in the same local network
 
        3.Set up a simple TURN server - a protocol for relaying network traffic
- ## **Phase 5** : **xx-xx-2021 to xx-xx-2021**
+ ## **Phase 5** : **21-08-2021 to xx-08-2021**
+       
+       1.Create a new group chat & chat immediately
+
+       2.Create a new conversation tab after accepting friend request
 
 
 

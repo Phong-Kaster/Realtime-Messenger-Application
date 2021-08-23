@@ -3,13 +3,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Quản lý liên lạc</h4>
+                <h4 class="modal-title">Contact Management</h4>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#find-user">Tìm người dùng</a></li>
+                    <li class="active"><a data-toggle="tab" href="#find-user">Search Messenger</a></li>
                     <li><a data-toggle="tab" id="link-contacts" href="#contacts">
-                        Danh bạ
+                        Friends
                         <% if(quantityOfFriendContacts > 0){ %> 
                             <span class="show-number-contacts count-contacts count-friend-contact">(<strong><%= quantityOfFriendContacts%></strong>)</span>
                         <%}else{%>
@@ -17,7 +17,7 @@
                         <%}%>
                     </a></li>
                     <li><a data-toggle="tab" id="link-request-contact-sent" href="#request-contact-sent">
-                        Đang chờ xác nhận
+                        Wait For Confirmation
                         <% if(quantifyOfSentFriendRequestContact > 0){ %> 
                             <span class="show-number-contacts count-contacts count-sent-friend-contact">(<strong><%= quantifyOfSentFriendRequestContact%></strong>)</span>
                         <%}else{%>
@@ -25,7 +25,7 @@
                         <%}%>
                     </a></li>
                     <li><a data-toggle="tab" id="link-request-contact-received" href="#request-contact-received">
-                        Yêu cầu kết bạn
+                        Friend Requests
                         <% if(quantityOfReceivedFriendRequestContacts > 0){ %> 
                             <span class="show-number-contacts count-contacts count-received-friend-contact">(<strong><%= quantityOfReceivedFriendRequestContacts%></strong>)</span>
                         <%}else{%>
@@ -37,7 +37,7 @@
                     <div id="find-user" class="tab-pane fade in active">
                         <div class="find-user-top">
                             <div class="input-group col-md-12">
-                                <input id="keyword" type="text" class="form-control" placeholder="Nhập E-mail hoặc username..." />
+                                <input id="keyword" type="text" class="form-control" placeholder="Enter a username or e-mail" />
                                 <span class="input-group-btn">
                                     <button id="btn-search-keyword" class="btn btn-lg" type="button">
                                         <i class="glyphicon glyphicon-search"></i>
@@ -104,7 +104,7 @@
                                             <span>&nbsp <%= element.address %></span>
                                         </div>
                                         <div class="user-remove-request-contact display-important action-danger" data-uid="<%= element._id %>">
-                                            Hủy yêu cầu
+                                            Cancel Friend Request
                                         </div>
                                     </div>
                                 </li>

@@ -84,7 +84,7 @@ let ajaxToRetrieveMoreSentFriendRequestContacts = (quantityOfSeenSentFriendConta
                     <span>&nbsp ${(element.address) !== null ? element.address : ""}</span>
                 </div>
                 <div class="user-remove-request-contact display-important action-danger" data-uid="${element._id}">
-                    Hủy yêu cầu
+                    Cancel Friend Request
                 </div>
             </div>
         </li>`);
