@@ -106,10 +106,10 @@ socket.on("response-send-add-friend-request", function(sender){
                                                 <span>&nbsp ${sender.address}</span>
                                             </div>
                                             <div class="user-acccept-contact-received" data-uid="${sender.id}">
-                                                Chấp nhận
+                                                Accept
                                             </div>
                                             <div class="user-reject-request-contact-received action-danger" data-uid="${sender.id}">
-                                                Xóa yêu cầu
+                                                Refuse
                                             </div>
                                         </div>
                                     </li>`;

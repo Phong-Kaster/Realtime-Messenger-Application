@@ -32,10 +32,10 @@ let ajaxToRetrieveMoreFriendContacts = (quantityOfSeenFriendContacts)=>{
                     <span>&nbsp ${(element.address) !== null ? element.address : ""}</span>
                 </div>
                 <div class="user-talk" data-uid="${element._id}">>
-                    Trò chuyện
+                    Chat
                 </div>
                 <div class="user-remove-contact action-danger" data-uid="${element._id}">
-                    Xóa liên hệ
+                    Remove
                 </div>
             </div>
         </li>`);
@@ -132,10 +132,10 @@ let ajaxToRetrieveMoreReceivedFriendContacts = (quantityOfSeenReceivedFriendCont
                     <span>&nbsp ${(element.address) !== null ? element.address : ""}</span>
                 </div>
                 <div class="user-acccept-contact-received " data-uid="${element._id}">
-                    Chấp nhận
+                    Accept
                 </div>
                 <div class="user-reject-request-contact-received action-danger" data-uid="${element._id}">
-                    Xóa yêu cầu
+                    Refuse
                 </div>
             </div>
         </li>`);

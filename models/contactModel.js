@@ -4,6 +4,7 @@ const userSchema = require('../schema/userSchema.js');
 const notificationSchema = require('../schema/notificationSchema.js');
 const _ = require('lodash');
 const { reject } = require('lodash');
+const messengerSchema = require('../schema/messengerSchema.js');
 
 
 
@@ -370,6 +371,8 @@ let acceptReceivedFriendContact = ( userID , senderID)=>{
 /*************************************************************
  * @param {*} userID | string | who is logging in , send unfriend request
  * @param {*} receiverID | string | whom @userID wanna unfriend
+ * remove contact between @user and @receiver
+ * remove all messages between @user and @receiver
  * views/home/section/contact.ejs - line 75
  * @returns delete a contact record and its status is true
  *************************************************************/
@@ -380,6 +383,7 @@ let unfriend = ( userID , receiverID)=>{
         {
             return reject(false);
         }
+        await messengerSchema.model.removeMessageOfConversation(userID , receiverID );
         resolve(true);
     })
 }

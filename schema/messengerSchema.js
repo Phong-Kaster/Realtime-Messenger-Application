@@ -69,6 +69,15 @@ messengerSchema.statics = {
         .sort({"createdAt" : -1})
         .limit(10)
         .exec();
+    },
+    removeMessageOfConversation(senderId , receiverId)
+    {
+        return this.deleteMany({
+            $or: [
+                {$and: [ {"senderId":senderId},{"receiverId":receiverId} ]},
+                {$and: [ {"senderId":receiverId},{"receiverId":senderId} ]}
+            ]
+        }).exec();
     }
 }
 
