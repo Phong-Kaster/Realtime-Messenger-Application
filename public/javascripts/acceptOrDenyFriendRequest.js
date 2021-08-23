@@ -221,6 +221,13 @@ let acceptReceivedFriendContact = ()=>{
  * @param {*} receiverID | string | whom user unfriend
  * listen event click unfriend button & send a DELETE request
  * views/home/section/contact.ejs - line 75
+ * 
+ * Step 1 : remove the tab in friend contact 
+ * Step 2 : update number of friends
+ * Step 3 : remove the left conversation tab
+ * Step 4 : remove the right conversation tab
+ * Step 5 : remove media modal where stores all shared photos
+ * Step 6 : remove file modal where stores all shared files
  ************************************************************/
 let ajaxToUnfriend = (receiverID)=>{
     $.ajax({
@@ -235,17 +242,17 @@ let ajaxToUnfriend = (receiverID)=>{
                 decreaseResultNumber("count-friend-contact");
                 
 
-                /* Step 4 */
+                /* Step 3 */
                 $("#all-chat").find(`ul a[data-target="#to_${receiverID}"]`).remove();
                 $("#personal-chat").find(`ul a[data-target="#to_${receiverID}"]`).remove();
 
-                /* Step 5 */
+                /* Step 4 */
                 $("#chat-screen").find(`div#to_${receiverID}`).remove();
 
-                /* Step 6 */
+                /* Step 5 */
                 $("body").find(`div#imagesModal_${receiverID}`).remove();
 
-                /* Step 7 */
+                /* Step 6 */
                 $("body").find(`div#attachmentsModal_${receiverID}`).remove();
                 socket.emit("unfriend" , {contactId : receiverID});
             }
