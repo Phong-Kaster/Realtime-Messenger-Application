@@ -135,6 +135,9 @@ let incRouters = (app) =>{
 
     // create group chat
     router.post("/create-group-chat" , loginValidation.isLogout , groupChatValidation , groupChatController.createGroupChat);
+
+    // read more conversation
+    router.get("/read-more-conversation-all-chat/:quantityIndividualTab/:quantityGroupTab" , loginValidation.isLogout , conversationController.readMoreConversationAllChat);
     return app.use("/",router);
 }
 

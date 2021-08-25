@@ -1,0 +1,26 @@
+<% conversation.forEach( (element,index)=>{ %>
+    <div class="modal fade" id="attachmentsModal_<%= element._id %>" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Shared Files</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-attachments">
+                        <% element.messenger.forEach( (message)=>{ %>
+                            <% if(message.typeMessenger === "document"){ %> 
+                                <li>
+                                    <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
+                                        download="<%= message.fileName %>">
+                                        <%= message.file.fileName %> 
+                                    </a>
+                                </li>
+                            <% } %>
+                        <% }); %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% }); %>

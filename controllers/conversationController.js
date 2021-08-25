@@ -2,11 +2,15 @@
 const conversationModel = require('../models/conversationModel.js');
 const multer = require('multer');
 const fsExtra = require('fs-extra');
-import { validationResult } from "express-validator/check";
+const ejs = require("ejs");
+import {validationResult} from "express-validator/check";
 import {systemError,notice} from '../notification/english.js';
-
-
-
+import {retrieveTheLastOfArray} from "../helpers/retrieveTheLastOfArray.js";
+import {convertTimestamp} from "../helpers/convertTimestamp.js"
+import {bufferBase64ToString} from "../helpers/bufferBase64ToString.js";
+import {promisify} from "util";
+// make "ejs.renderFile" function available to be await function
+const renderedHTML = promisify(ejs.renderFile).bind(ejs);
 /**************************************************************
  * handle function send text message
  * @param {*} req 
@@ -186,8 +190,64 @@ let sendDocumentMessage = ( req , res )=>{
         }
     });
 }
+
+/***************************************
+ * @param {*} req 
+ * @param {*} res 
+ * retrieve more conversation - combo box = all chat
+ * @userID | string | who is logging in
+ * @quantityIndividualTab | number | quantity of individual conversation which appears in the screen
+ * @quantityGroupTab | number | quantity of group conversation which appears in the screen
+ * 
+ * @conversation | object | contain information about unseen conversation
+ * 
+ * content left | rendered HTML | conversation left tab of screen chat
+ * content right | rendered HTML | screen is used to chat
+ * photoModal | rendered HTML |  modal includes all photo shared
+ * documentModal | rendered HTML | modal include all document shared
+ ***************************************/
+let readMoreConversationAllChat = async ( req , res )=>{
+    try 
+    {
+        let userID = req.user._id;
+        let quantityIndividualTab = Number(req.params.quantityIndividualTab);
+        let quantityGroupTab = Number(req.params.quantityGroupTab);
+
+
+        let conversation = await conversationModel.readMoreConversationAllChat(userID , quantityIndividualTab , quantityGroupTab);
+        let data = {
+            retrieveTheLastOfArray : retrieveTheLastOfArray,
+            convertTimestamp : convertTimestamp,
+            bufferBase64ToString : bufferBase64ToString,
+            conversation : conversation,
+            userID : userID
+        }
+        
+        let contentLeft = await renderedHTML("views/home/section/readMoreConversation/contentLeft.ejs", data);
+        let contentRight = await renderedHTML("views/home/section/readMoreConversation/contentRight.ejs", data);
+        let photoModal = await renderedHTML("views/home/section/readMoreConversation/photoModal.ejs", data);
+        let documentModal = await renderedHTML("views/home/section/readMoreConversation/documentModal.ejs", data);
+        
+        return res.status(200).send({
+            contentLeft : contentLeft,
+            contentRight : contentRight,
+            photoModal : photoModal,
+            documentModal : documentModal 
+        });
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        return res.status(500).send(error);
+    }
+    
+}
+
+
+
 module.exports = {
     sendMessage : sendMessage,
     sendPhotoMessage : sendPhotoMessage,
-    sendDocumentMessage : sendDocumentMessage
+    sendDocumentMessage : sendDocumentMessage,
+    readMoreConversationAllChat : readMoreConversationAllChat
 }

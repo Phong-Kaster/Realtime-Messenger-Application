@@ -355,10 +355,92 @@ let sendDocumentMessage = ( sender , receiverID , document , sendToGroup )=>{
 }
 
 
+/********************************************************
+ * @param {*} userID | string | who is logging in
+ * @param {*} quantityIndividualTab | number | quantity of individual conversation which appears in the screen
+ * @param {*} quantityGroupTab | number | quantity of group conversation which appears in the screen
+ * 
+ * Step 1 : check input data
+ * Step 2 : retrieve friends who does not appear in left tab of screen
+ * Step 3 : retrieve necessary information from Step 2  & attach updateTime
+ * Step 4 : retrieve group chat that user is a member
+ * Step 5 : merge friends & group to @allUnseenConversation & sort by updatedTime
+ * Step 6 : retrieve messages between user & friends(or Group)
+ * Step 7 : sort by updated Time again & finish
+ * @returns conversation | object | information about unseen conversation
+ ********************************************************/
+let readMoreConversationAllChat = ( userID , quantityIndividualTab , quantityGroupTab )=>{
+    return new Promise( async ( resolve , reject)=>{
+        /* Step 1 */
+        if( !userID || !quantityIndividualTab || !quantityGroupTab)
+        {
+            reject(false);
+        }
+
+        try 
+        {
+            /* Step 2 */
+            let result = await contactSchema.retrieveMoreFriendContact( userID , quantityIndividualTab );
+            /* Step 3 */
+            let unseenFriends = result.map( async (element)=>{
+                if( element.contactId == userID)
+                {
+                    let user = await userSchema.findByIdentificationAndRetrieveSpecificFields( element.userId );
+                    user.updatedAt = element.updatedAt;
+                    return user;
+                }
+                else
+                {
+                    let user = await userSchema.findByIdentificationAndRetrieveSpecificFields( element.contactId );
+                    user.updatedAt = element.updatedAt;
+                    return user;
+                }
+            });
+            
+            let unseenIndividualConversation = await Promise.all(unseenFriends);
+            /* Step 4 */
+            let unseenGroupConversation = await chatGroupSchema.readMoreChatGroup( userID , quantityGroupTab );
+            /* Step 5 */
+            let allUnseenConversation = unseenIndividualConversation.concat(unseenGroupConversation);
+                allUnseenConversation = _.sortBy(allUnseenConversation ,(element)=>{
+                    return -element.updatedAt;
+                });
+            /* Step 6 */
+            let allUnseenContentConversation = allUnseenConversation.map( async (element)=>{
+                element = element.toObject();
+                if( element.member )
+                {
+                    let content = await messengerSchema.model.retrieveGroupContentMessenger(element._id);
+                    element.messenger = _.reverse(content);
+                }
+                else
+                {
+                    let content = await messengerSchema.model.retrieveIndividualContentMessenger(userID, element._id);
+                    element.messenger = _.reverse(content);
+                }
+                return element;
+            });
+            /* Step 7 */         
+            allUnseenContentConversation = await Promise.all(allUnseenContentConversation);
+            allUnseenContentConversation = _.sortBy(allUnseenContentConversation,(element)=>{
+                return -element.updatedAt;
+            });
+
+            resolve(allUnseenContentConversation);
+        } 
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
 
 module.exports = {
     retrieveConversation : retrieveConversation,
     sendMessage : sendMessage,
     sendPhotoMessage : sendPhotoMessage,
-    sendDocumentMessage : sendDocumentMessage
+    sendDocumentMessage : sendDocumentMessage,
+    readMoreConversationAllChat : readMoreConversationAllChat
 }

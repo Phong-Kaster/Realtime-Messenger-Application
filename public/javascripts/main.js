@@ -11,6 +11,11 @@ function nineScrollLeft() {
   });
 }
 
+
+function nineScrollLeftResize()
+{
+  $(".left").getNiceScroll().resize();
+}
 function nineScrollRight(dataChat) {
   $(`.right .chat[data-chat = ${dataChat}]`).niceScroll({
     smoothscroll: true,

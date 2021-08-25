@@ -52,6 +52,15 @@ chatGroupSchema.statics = {
             "member": {$elemMatch: {"userId": userId}}
         }, {_id: 1})
         .exec();
+    },
+    readMoreChatGroup(userId, quantitySeenGroup)
+    {
+        return this.find({
+            "member": {$elemMatch: {"userId": userId}}
+        }, {_id: 1})
+        .sort({"updatedAt": -1})
+        .skip(quantitySeenGroup)
+        .exec();
     }
 }
 

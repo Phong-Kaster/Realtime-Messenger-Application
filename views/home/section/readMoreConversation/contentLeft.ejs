@@ -1,0 +1,51 @@
+                    <% conversation.forEach((element)=>{ %>
+                        <%if( !element.member ){ %>
+                        <a href="#uid_<%= element._id %>" class="room-chat" data-target="#to_<%= element._id %>">
+                            <li class="person" data-chat="<%= element._id %>">
+                                <div class="left-avatar">
+                                    <div class="dot"></div>
+                                    <img src="./images/users/<%= element.avatar %>" alt="avatar">
+                                </div>
+                                <span class="name">
+                                    <% if( element.username.length > 15){ %> 
+                                        <%= element.username.substr(0,15).concat("......") %>
+                                    <% }else{ %>
+                                        <%= element.username %>
+                                    <%}%>
+                                </span>
+                                <span class="time"><%= convertTimestamp( retrieveTheLastOfArray(element.messenger).createdAt )%></span>
+                                <span class="preview convert-emoji">
+                                    <% if( !element.messenger.length ) { %> 
+                                        Say "hi" to  <%= element.username %>
+                                    <% } %>
+
+                                    <% if( retrieveTheLastOfArray(element.messenger).senderId != userID){ %> 
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have received a photo from group "<%= element.name %>" 
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have received a file from group "<%= element.name %>"   
+                                        <% } %>
+                                    <% } else { %>
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "text" ) { %>
+                                            You: <%= retrieveTheLastOfArray(element.messenger).content %>    
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "photo" ) { %>
+                                            You have sent a photo to group
+                                        <% } %>
+
+                                        <% if( retrieveTheLastOfArray(element.messenger).typeMessenger == "document" ) { %>
+                                            You have sent a file to group   
+                                        <% } %>
+                                    <% } %>
+                                </span>
+                            </li>
+                        </a>
+                        <% } %>
+                    <% }) %>

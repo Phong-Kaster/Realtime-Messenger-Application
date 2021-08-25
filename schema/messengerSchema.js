@@ -63,6 +63,7 @@ messengerSchema.statics = {
         .limit(10)
         .exec();
     },
+    /* -1 : get  older to newer messages */
     retrieveGroupContentMessenger(receiverId)
     {
         return this.find({"receiverId": receiverId})

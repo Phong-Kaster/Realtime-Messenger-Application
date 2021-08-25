@@ -37,6 +37,7 @@ let typingMessageOff = (dataChat)=>{
 }
 
 
+
 /*****************************************
  * handel event click on "chat" button in contact management modal
  * views/home/section/contact - line 72
@@ -47,13 +48,15 @@ let typingMessageOff = (dataChat)=>{
 let handleEventClickChatButton = ()=>{
     $(".user-talk").unbind("click").on("click", function(){
         let messenger = $(this).data("uid");
-        console.log(messenger);
 
         $(".modal-content").find(".close").click();
 
         $("#all-chat").find(`ul a[data-target="#to_${messenger}"]`).click();
     });
 }
+
+
+
 $(document).ready(function(){
     socket.on("response-typing-message-on",function(sender){
         let groupTyping = `<div class="convert-emoji bubble you data-mess-id="${sender.id}">

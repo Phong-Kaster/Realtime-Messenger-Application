@@ -141,7 +141,7 @@ contactSchema.statics = {
                 {"status": true}
             ]
         })
-        .sort({$natural:-1})
+        .sort({"updatedAt": -1})
         .skip(quantitySeenFriendContacts)
         .limit(10)
         .exec();
