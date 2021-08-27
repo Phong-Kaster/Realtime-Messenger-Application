@@ -11,6 +11,9 @@ import {bufferBase64ToString} from "../helpers/bufferBase64ToString.js";
 import {promisify} from "util";
 // make "ejs.renderFile" function available to be await function
 const renderedHTML = promisify(ejs.renderFile).bind(ejs);
+
+
+
 /**************************************************************
  * handle function send text message
  * @param {*} req 
@@ -129,6 +132,7 @@ let sendPhotoMessage = ( req ,res )=>{
 }
 
 
+
 /***************************************************************************************************/
 /************************************ SEND A PHOTO AS A MESSAGE ************************************/
 /***************************************************************************************************/
@@ -191,6 +195,8 @@ let sendDocumentMessage = ( req , res )=>{
     });
 }
 
+
+
 /***************************************
  * @param {*} req 
  * @param {*} res 
@@ -245,9 +251,48 @@ let readMoreConversationAllChat = async ( req , res )=>{
 
 
 
+let readMoreMessage = async ( req , res )=>{
+    let receiverID = req.params.receiverID;
+    let quantitySeenMessage = Number(req.params.quantitySeenMessage);
+    let sendToGroup = (req.params.sendToGroup === "true");
+    let userID = req.user._id;
+    // console.log(receiverID);
+    // console.log(quantitySeenMessage)
+    // console.log(sendToGroup)
+    // console.log( typeof(sendToGroup));
+
+    try 
+    {
+        let olderMessage = await conversationModel.readMoreMessage( userID, receiverID , quantitySeenMessage , sendToGroup);
+        let data = {
+            bufferBase64ToString : bufferBase64ToString,
+            olderMessage : olderMessage,
+            userID : userID
+        }
+
+        let contentRight = await renderedHTML("views/home/section/readMoreMessage/contentRight.ejs", data);
+        let photoModal = await renderedHTML("views/home/section/readMoreMessage/photoModal.ejs", data);
+        let documentModal = await renderedHTML("views/home/section/readMoreMessage/documentModal.ejs", data);
+        
+        return res.status(200).send({
+            contentRight : contentRight,
+            photoModal : photoModal,
+            documentModal : documentModal
+        });
+    } 
+    catch (error) 
+    {
+        console.log(error);
+        return res.status(500).send(error);
+    }
+}
+
+
+
 module.exports = {
     sendMessage : sendMessage,
     sendPhotoMessage : sendPhotoMessage,
     sendDocumentMessage : sendDocumentMessage,
-    readMoreConversationAllChat : readMoreConversationAllChat
+    readMoreConversationAllChat : readMoreConversationAllChat,
+    readMoreMessage : readMoreMessage
 }

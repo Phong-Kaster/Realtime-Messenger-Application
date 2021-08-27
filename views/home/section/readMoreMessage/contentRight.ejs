@@ -1,0 +1,31 @@
+<% olderMessage.forEach( (message)=>{ %>
+    <% if(message.typeMessenger === "text"){ %>
+        <div class="convert-emoji bubble <% if(message.senderId == userID){ %> me <%}else{%> you <%}%>" data-mess-id="<%= message._id %>">
+            <% if(message.senderId != userID){ %>
+                <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+            <% } %>
+                &nbsp;&nbsp;<%= message.content %>&nbsp;
+        </div>
+    <% } %>
+
+    <% if(message.typeMessenger === "photo"){ %> 
+        <div class="convert-emoji bubble <% if(message.senderId == userID){ %> me <%}else{%> you <%}%> bubble-image-file" data-mess-id=<%= message._id %>">
+            <% if(message.senderId != userID){ %>
+                <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+            <% } %>
+                <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>" class="show-image-chat">
+        </div>
+    <% } %>
+
+    <% if(message.typeMessenger === "document"){ %> 
+        <div class="convert-emoji bubble <% if(message.senderId == userID){ %> me <%}else{%> you <%}%> bubble-attachment-file" data-mess-id="<%= message._id %>">
+            <% if(message.senderId != userID){ %>
+                <img src="/images/users/<%= message.sender.avatar %>" class="avatar-small" title="<%= message.sender.username %>">
+            <% } %>
+            <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
+                download="<%= message.fileName %>">
+                <%= message.file.fileName %> 
+            </a>
+        </div>
+    <% } %>                            
+<% }) %>

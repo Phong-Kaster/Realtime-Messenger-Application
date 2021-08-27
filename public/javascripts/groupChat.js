@@ -104,7 +104,7 @@ function ajaxToCreateGroupChat( friendIDs , groupChatName ){
                 </span>
             </div>
             <div class="content-chat">
-                <div class="chat" data-chat="${data.group._id}">
+                <div class="chat chat-in-group" data-chat="${data.group._id}">
                 </div>
             </div>
             <div class="write" data-chat="${data.group._id}">
@@ -348,7 +348,7 @@ $(document).ready(function(){
                 </span>
             </div>
             <div class="content-chat">
-                <div class="chat" data-chat="${returnedData._id}">
+                <div class="chat chat-in-group" data-chat="${returnedData._id}">
                 </div>
             </div>
             <div class="write" data-chat="${returnedData._id}">

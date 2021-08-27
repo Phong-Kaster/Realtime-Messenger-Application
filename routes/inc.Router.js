@@ -138,6 +138,9 @@ let incRouters = (app) =>{
 
     // read more conversation
     router.get("/read-more-conversation-all-chat/:quantityIndividualTab/:quantityGroupTab" , loginValidation.isLogout , conversationController.readMoreConversationAllChat);
+
+    // read more message
+    router.get("/read-more-message/:receiverID/:quantitySeenMessage/:sendToGroup" , loginValidation.isLogout , conversationController.readMoreMessage);
     return app.use("/",router);
 }
 

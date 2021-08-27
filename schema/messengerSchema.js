@@ -79,6 +79,27 @@ messengerSchema.statics = {
                 {$and: [ {"senderId":receiverId},{"receiverId":senderId} ]}
             ]
         }).exec();
+    },
+    retrieveMoreGroupContentMessenger( receiverId , quantitySeenMessage)
+    {
+        return this.find({"receiverId": receiverId})
+        .sort({"createdAt" : -1})
+        .skip(quantitySeenMessage)
+        .limit(10)
+        .exec();
+    },
+    retrieveMoreIndividualContentMessenger(senderId, receiverId, quantitySeenMessage)
+    {
+        return this.find({
+            $or: [
+                {$and: [ {"senderId":senderId},{"receiverId":receiverId} ]},
+                {$and: [ {"senderId":receiverId},{"receiverId":senderId} ]}
+            ]
+        })
+        .sort({"createdAt" : -1})
+        .skip(quantitySeenMessage)
+        .limit(10)
+        .exec();
     }
 }
 

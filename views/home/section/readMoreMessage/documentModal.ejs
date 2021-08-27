@@ -1,0 +1,10 @@
+<% olderMessage.forEach( (message)=>{ %>
+    <% if(message.typeMessenger === "document"){ %> 
+        <li>
+            <a href="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data)  %>" 
+                download="<%= message.fileName %>">
+                <%= message.file.fileName %> 
+            </a>
+        </li>
+    <% } %>
+<% }); %>

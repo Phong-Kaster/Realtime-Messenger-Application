@@ -15,6 +15,7 @@
 - [**The reason why I write**](#the-reason-why-i-write)
 - [**Architecture**](#architecture)
 - [**Installation**](#installation)
+- [**Usage**](#usage)
 - [**Features**](#features)
   - [**1.User Account Manager Functions**](#1user-account-manager-functions)
     - [**1.1.Login**](#11login)
@@ -42,7 +43,7 @@
   - [**Phase 2** : **19-07-2021 to 06-08-2021**](#phase-2--19-07-2021-to-06-08-2021)
   - [**Phase 3** : **08-08-2021 to 16-08-2021**](#phase-3--08-08-2021-to-16-08-2021)
   - [**Phase 4** : **17-08-2021 to 19-08-2021**](#phase-4--17-08-2021-to-19-08-2021)
-  - [**Phase 5** : **21-08-2021 to xx-08-2021**](#phase-5--21-08-2021-to-xx-08-2021)
+  - [**Phase 5** : **21-08-2021 to 25-08-2021**](#phase-5--21-08-2021-to-25-08-2021)
 - [**Third-party libraries**](#third-party-libraries)
 - [**Post script**](#post-script)
 - [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with--and-javascript-)
@@ -81,6 +82,20 @@ To active , run :
         bower install
 
 Installation will be activated automatically.
+
+# [**Usage**](#usage)
+
+Step 1: download my project & extract it.
+
+Step 2: Open with your Visual Studio Code
+
+Step 3: Run `bower install` to install third-party libraries used
+
+Step 4: Run `npm install` to install NodeJS package modules
+
+Step 5: Run `npm start` to start your server
+
+Step 6: Have a coffee ☕ & enjoy my work
 
 # [**Features**](#features)
 
@@ -138,7 +153,7 @@ Every message is the past & the past must be remove. Good-bye
 
 ### [**3.1.Sorting Conversation reasonably**](#31sorting-conversation-reasonably)
 
-Every single conversation will be sorted by time when they are created. You never miss any new message 📩
+Every single conversation will be sorted by time when they are created. You never miss any new message 📩. It is easier to find the conversation you need. Do the same like [Facebook]() , [Whatsapp]() ....
 
 ### [**3.2.Preview**](#32preview)
 
@@ -147,15 +162,15 @@ Take a glance some new messages. If you don't have time to read whole message.�
 ### [**3.3.Emoji**](#33emoji)
 
 Ya-hoo 😱 ! Send message only transfer information. So send your message with emoji. 
-Now words can fly 🕊🕊
+Now words can fly 🕊🕊. Message not only transfer your mean but it also transfer your mood.
 
 ### [**3.4.Photo**](#34photo)
 
-Not only text but photo also can be sent as a message. Just click, choose your photo & send. Easy📸📸📸
+Not only text but photo also can be sent as a message. Just click, choose your photo & send. Easy📸📸📸. Share with your friend about beautiful time. 
 
 ### [**3.5.Document**](#35document)
 
-Now, the last miracle is file. Files | Documents can also be sent & downloaded simply by receiver.
+Now, the last miracle is file. Files | Documents can also be sent & downloaded simply by receiver. Serving your work. No need go into [Gmail](https://mail.google.com/) ,[Google Drive](https://www.google.com/drive/). If your files isn't too large.
 
 
 ##  [**4.Video Call Function**](#4video-call-function)
@@ -268,14 +283,15 @@ Note : 25-07-2021 to 31-07-2021 I did not do any thing because revising for Comp
        2.Server-side, handle logic with SocketIO in the same local network
 
        3.Set up a simple TURN server - a protocol for relaying network traffic
- ## **Phase 5** : **21-08-2021 to xx-08-2021**
+ ## **Phase 5** : **21-08-2021 to 25-08-2021**
        
        1.Create a new group chat & chat immediately
 
        2.Create a new conversation tab after accepting friend request
 
+       3.Load more conversation that doesn't appear
 
-
+       4.Read older messages
 
 # [**Third-party libraries**](#third-party-libraries)
 With front-end , I used third-party libraries which have its version as :
@@ -306,6 +322,7 @@ They will be installed immediately when `bower install` command run
 
 - Begun on **24-06-2021**
 
-- Finish on **xx-xx-2021**
-  
+- Finish on **25-08-2021**
+
+- It took me 2 months & 1 day to complete this app. I'm sure that my knowledge have boarded. Hope next year, this day, I will said "good-bye" to my university where I have spent 4,5 years becoming a junior programmer.
 # [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with-love-and-javascript)

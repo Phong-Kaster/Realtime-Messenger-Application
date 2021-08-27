@@ -355,6 +355,7 @@ let sendDocumentMessage = ( sender , receiverID , document , sendToGroup )=>{
 }
 
 
+
 /********************************************************
  * @param {*} userID | string | who is logging in
  * @param {*} quantityIndividualTab | number | quantity of individual conversation which appears in the screen
@@ -437,10 +438,42 @@ let readMoreConversationAllChat = ( userID , quantityIndividualTab , quantityGro
 
 
 
+let readMoreMessage = (userID, receiverID , quantitySeenMessage , sendToGroup)=>{
+    if( !receiverID || !quantitySeenMessage)
+    {
+        return false;
+    }
+
+    return new Promise( async ( resolve , reject)=>{
+        try 
+        {
+            let olderMessage;
+            
+            if( sendToGroup )
+            {
+                olderMessage = await messengerSchema.model.retrieveMoreGroupContentMessenger( receiverID , quantitySeenMessage);
+            }
+            olderMessage = await messengerSchema.model.retrieveMoreIndividualContentMessenger( userID , receiverID , quantitySeenMessage);
+            olderMessage = _.reverse(olderMessage);
+            
+            resolve(olderMessage);
+        } 
+        catch (error) 
+        {
+            reject(error);
+        }
+    });
+}
+
+
+
 module.exports = {
     retrieveConversation : retrieveConversation,
     sendMessage : sendMessage,
+
     sendPhotoMessage : sendPhotoMessage,
     sendDocumentMessage : sendDocumentMessage,
-    readMoreConversationAllChat : readMoreConversationAllChat
+
+    readMoreConversationAllChat : readMoreConversationAllChat,
+    readMoreMessage : readMoreMessage
 }

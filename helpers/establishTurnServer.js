@@ -40,7 +40,7 @@ export let establishTurnServer = ()=>{
             {
                 reject(error);
             }
-            
+            //console.log(body);
             let bodyJSON = JSON.parse(body);
             resolve(bodyJSON.v.iceServers);
         });

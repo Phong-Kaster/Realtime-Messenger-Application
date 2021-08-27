@@ -23,6 +23,8 @@ let ajaxToRetrieveMoreConversationAllChat = ( quantityIndividualTab , quantityGr
 
         $("body").append( data.photoModal );
         $("body").append( data.documentModal );
+
+        handleEventScrollUp();
     });
 }
 

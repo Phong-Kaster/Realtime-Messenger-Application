@@ -1399,3 +1399,8 @@ label:focus,
   color:#000000 !important;
   font-weight:bold;
 }
+
+.message-loading{
+  display: block;
+  margin: 0 auto;
+}

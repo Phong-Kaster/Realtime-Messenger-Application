@@ -207,6 +207,24 @@ function convertUnicodeEmojiToImage()
     $(this).html(converted);
   });
 }
+
+function noConversation(){
+  if( !$("ul.people").find("li").length )
+  {
+      Swal.fire({
+        icon: 'info',
+        title: 'Oops...',
+        text: "You don't have friend to chat now ?",
+        confirmButtonText: "Ya ! Find now ",
+        confirmButtonColor: "#0077ff"
+      }).then( (result) => {
+          $("#contactsModal").modal("show");
+      });
+  }
+}
+
+
+
 $(document).ready(function() {
   // Hide số thông báo trên đầu icon mở modal contact
   showModalContacts();
@@ -239,7 +257,14 @@ $(document).ready(function() {
   selectChatScreen();
 
   //alway click first friend contact - views/home/section/contentLeft.ejs
-  $("ul.people").find("li").first().click();
-
+  if( $("ul.people").find("li").length )
+  {
+    $("ul.people").find("li").first().click();
+  }
+  
+  // convert buffer data to photo
   convertUnicodeEmojiToImage();
+
+  // if a new user log in, pop up a notification remind him/her find some friend
+  noConversation();
 });

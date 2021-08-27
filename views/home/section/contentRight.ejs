@@ -35,7 +35,7 @@
                         </span>
                     </div>
                     <div class="content-chat">
-                        <div class="chat" data-chat="<%= element._id %>">
+                        <div class="chat chat-in-group" data-chat="<%= element._id %>">
                             <% if( element.messenger ) { %> 
                                 <% element.messenger.forEach( (message)=>{ %>
                                     <% if(message.typeMessenger === "text"){ %>

@@ -1,0 +1,5 @@
+<% olderMessage.forEach( (message)=>{ %>
+    <% if(message.typeMessenger == "photo"){ %> 
+        <img src="data: <%= message.file.fileType %>; base64, <%= bufferBase64ToString(message.file.data) %>">
+    <% } %>                         
+<% }) %>
