@@ -6,8 +6,6 @@ import {bufferBase64ToString } from '../helpers/bufferBase64ToString.js';
 import {retrieveTheLastOfArray} from '../helpers/retrieveTheLastOfArray.js';
 import {convertTimestamp} from '../helpers/convertTimestamp.js';
 import {establishTurnServer} from '../helpers/establishTurnServer.js'
-
-
 /*************************************************************
  * @notifications | array | notifications appear in notice icon
  * @quantityOfUnreadNotification | number | how many notification user have not read ?
@@ -21,6 +19,7 @@ import {establishTurnServer} from '../helpers/establishTurnServer.js'
  * @quantityOfReceivedFriendRequestContacts | number | indicates how many friend requests user received
  * 
  * @allContentChat | object | contain content of all message belong to user._id
+ * @userInformation | array | contain detailed information of all users includes Avatar, id, username
  * 
  * @iceServers | string | contains information about TURN server to replay traffic network.
  * it helps the application can make a call 
@@ -40,7 +39,10 @@ let home = async (req,res) =>{
     let quantifyOfSentFriendRequestContact = await contactModel.countSentFriendContact(req.user._id);
     let quantityOfReceivedFriendRequestContacts = await contactModel.countReceivedFriendContact(req.user._id);
     
-    let allContentChat = await conversationModel.retrieveConversation(req.user._id);
+    let chat = await conversationModel.retrieveConversation(req.user._id);
+    let allContentChat = chat.allContentConversation;
+    let userInformation = chat.userInformation;
+
 
     let iceServers = await establishTurnServer();
     iceServers = JSON.stringify(iceServers);
@@ -63,6 +65,7 @@ let home = async (req,res) =>{
         quantityOfReceivedFriendRequestContacts : quantityOfReceivedFriendRequestContacts,
 
         allContentChat : allContentChat,
+        userInformation : userInformation,
 
         bufferBase64ToString : bufferBase64ToString,
         retrieveTheLastOfArray : retrieveTheLastOfArray,

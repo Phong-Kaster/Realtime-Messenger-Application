@@ -224,7 +224,6 @@ function noConversation(){
 }
 
 
-
 $(document).ready(function() {
   // Hide số thông báo trên đầu icon mở modal contact
   showModalContacts();
@@ -267,4 +266,5 @@ $(document).ready(function() {
 
   // if a new user log in, pop up a notification remind him/her find some friend
   noConversation();
+
 });

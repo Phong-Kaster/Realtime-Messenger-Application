@@ -1,0 +1,64 @@
+<% allContentChat.forEach( (element,index)=>{ %>
+<div class="modal fade" id="membersModal_<%= element._id %>" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Members</h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-attachments">
+                    <li class="_contactList" data-uid="#">
+                        <div class="contactPanel">
+                            <div class="user-avatar">
+                                <img src="./images/users/<%= user.avatar %>" alt="">
+                            </div>
+                            <div class="user-name">
+                                <p>
+                                    <%= user.username %>
+                                </p>
+                            </div>
+                            <br>
+                            <div class="user-address">
+                                    <%= (user.address) ? user.address : "" %>
+                            </div>
+                            <div class="user-no-talk" data-uid="#">
+                                You
+                            </div>
+                        </div>
+                    </li>
+
+
+                    <% if( element.member ){ %> 
+                        <% element.member.forEach( (e)=>{ %>
+                                <% userInformation.forEach( (user)=>{ %>
+                                        <% if( e.userId == user._id){ %> 
+                                            <li class="_contactList" data-uid="<%= element._id %>">
+                                                <div class="contactPanel">
+                                                    <div class="user-avatar">
+                                                        <img src="./images/users/<%= user.avatar %>" alt="">
+                                                    </div>
+                                                    <div class="user-name">
+                                                        <p>
+                                                            <%= user.username %>
+                                                        </p>
+                                                    </div>
+                                                    <br>
+                                                    <div class="user-address">
+                                                            <%= (user.address) ? user.address : "" %>
+                                                    </div>
+                                                    <div class="user-talk" data-uid="<%= user._id %>">
+                                                        Chat
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        <% } %>
+                                <% }); %>
+                        <% }); %>
+                    <% } %>                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<% }); %>

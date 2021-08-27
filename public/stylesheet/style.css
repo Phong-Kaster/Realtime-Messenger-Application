@@ -193,6 +193,35 @@ label:focus,
   margin: 10px 0px 0px 60px;
 }
 
+.contactPanel .user-no-talk {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-shrink: 0;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding: 0 12px;
+  min-width: 26px;
+  min-height: 26px;
+  line-height: 26px;
+  font-size: 13px;
+  border-color: #FF7333 ;
+  background-color: #FF7333 ;
+  color: #fff;
+  fill: #fff;
+  margin: 10px 0px 5px 2px;
+}
+
 .contactPanel .user-add-new-contact,
 .contactPanel .user-talk,
 .contactPanel .user-remove-contact,
@@ -861,7 +890,12 @@ label:focus,
 
 .show-image-chat {
   max-width: 50%;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
 }
+
+.show-image-chat:hover {opacity: 0.7;}
 
 #loader {
   position: absolute;

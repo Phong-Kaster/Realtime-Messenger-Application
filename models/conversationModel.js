@@ -24,7 +24,7 @@ const fsExtra = require('fs-extra');
 let retrieveConversation = ( userID )=>{
     return new Promise( async ( resolve , reject )=>{
         try 
-        {
+        {   
             /* Step 1 */
             let result = await contactSchema.retrieveFriendContact( userID );
             let contacts = result.map( async (element)=>{
@@ -42,11 +42,12 @@ let retrieveConversation = ( userID )=>{
                 }
             });
             let personalConversation = await Promise.all(contacts);
-
             /* Step 2 */
             let groupConversation = await chatGroupSchema.retrieveGroupConversation(userID);
             /* Step 3 */
             let allConversation = personalConversation.concat(groupConversation);
+            
+
             allConversation = _.sortBy( allConversation , (element)=>{
                 return -element.updatedAt;
             });
@@ -66,13 +67,16 @@ let retrieveConversation = ( userID )=>{
                 }
                 return element;
             });
-            /* Step 5 */         
+            /* Step 5 */       
             allContentConversation = await Promise.all(allContentConversation);
             allContentConversation = _.sortBy(allContentConversation,(element)=>{
                 return -element.updatedAt;
             });
             /* Step 6 */
-            resolve(allContentConversation);
+            resolve({
+                allContentConversation : allContentConversation,
+                userInformation : personalConversation
+            });
         } 
         catch (error) 
         {
