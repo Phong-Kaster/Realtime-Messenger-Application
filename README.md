@@ -52,7 +52,7 @@
 
 [Facebook Messenger](https://www.facebook.com/) , [WhatsApp](https://www.whatsapp.com/?lang=en) , [Skype](https://www.skype.com/en/features/skype-web/) doesn't respect your private ?  Advertisements make you annoy ? You want some chatting application which protects your information & encrypts every single messenger  ? It's simple 😆 Get into Realtime Messenger Application . I can do it for you & for free forever 🤗.This is my idea
 
-
+Note: I am just kidding. It's just my own application.
 # [**The reason why I write**](#the-reason-why-i-write-)
 When I make a start , I have been just a third-year student in [Posts and Telecommunications Institute of Technology HCM Branch](https://en.wikipedia.org/wiki/Posts_and_Telecommunications_Institute_of_Technology,_Ho_Chi_Minh_City).So I am hungry for a challenge , I want to learn & build some thing usefully . In addition , it can make employer impressive,so on 😎😋
 # [**Architecture**](#architecture)
