@@ -15,3 +15,5 @@ public/bower_components/
 
 #ignore emojione library
 public/emojione
+
+.env

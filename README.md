@@ -44,6 +44,7 @@
   - [**Phase 3** : **08-08-2021 to 16-08-2021**](#phase-3--08-08-2021-to-16-08-2021)
   - [**Phase 4** : **17-08-2021 to 19-08-2021**](#phase-4--17-08-2021-to-19-08-2021)
   - [**Phase 5** : **21-08-2021 to 25-08-2021**](#phase-5--21-08-2021-to-25-08-2021)
+  - [**Phase 6** : **25-08-2021 to 27-08-2021**](#phase-6--25-08-2021-to-27-08-2021)
 - [**Third-party libraries**](#third-party-libraries)
 - [**Post script**](#post-script)
 - [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with--and-javascript-)
@@ -54,23 +55,23 @@
 
 Note: I am just kidding. It's just my own application.
 # [**The reason why I write**](#the-reason-why-i-write-)
-When I make a start , I have been just a third-year student in [Posts and Telecommunications Institute of Technology HCM Branch](https://en.wikipedia.org/wiki/Posts_and_Telecommunications_Institute_of_Technology,_Ho_Chi_Minh_City).So I am hungry for a challenge , I want to learn & build some thing usefully . In addition , it can make employer impressive,so on 😎😋
+When I make a start, I have been just a third-year student in [Posts and Telecommunications Institute of Technology HCM Branch](https://en.wikipedia.org/wiki/Posts_and_Telecommunications_Institute_of_Technology,_Ho_Chi_Minh_City). So I am hungry for a challenge, I want to learn & build some thing usefully. In addition , it can make employer impressive,so on 😎😋
 # [**Architecture**](#architecture)
 
-What type of architecture have I used ? I have written this application following **Model-View-Controller** architecture
+What type of architecture have I used ? I have written this application following **Model-View-Controller** architecture. It's said to be a dependable architecture. Who doesn't know this popular one ?😵
 
 # [**Installation**](#installation)
-In folder `public/bower_components` contains third-party libraries.They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , [Bower](https://bower.io/#getting-started) was used to managing these libraries.
+In folder `public/bower_components` contains third-party libraries. They have the same feature like `node_modules` so that I do not want to commit them to Github. To address the problem , [Bower](https://bower.io/#getting-started) was used to managing these libraries.
 
 We have 2 important bower file:
 
-**bowerrc** : it tell our PC where our libraries will be stored.There I choose `public` folder to store them.You can decide where the files will be stored after finishing process
+**bowerrc** : it tell our PC where our libraries will be stored. There I choose `public` folder to store them. You can decide where the files will be stored after finishing process
 
        {
               "directory": "public/"
        }
 
-**bower.json** : configuration file include many valuable information and what URL we have to download ? .This code below tell the application where to retrieve these files.You can push them to your github and replace the link below with your GitHub link
+**bower.json** : configuration file include many valuable information and what URL we have to download ? .This code below tell the application where to retrieve these files. You can push them to your github and replace the link below with your GitHub link
 
        "dependencies": 
        {
@@ -130,7 +131,7 @@ Some people are obsessed with their private 😨 . You are afraid of being read 
 
 ### [**2.1.Search By Keyword**](#21-search-by-keyword)
 
-User could find their friend with a searching tab.Just click on it & type name you want.All user having username relating to the keyword will be showed up. So easy 😋
+User could find their friend with a searching tab. Just click on it & type name you want.All user having username relating to the keyword will be showed up. So easy 😋
 
 ### [**2.2.Send & Cancel Friend Request**](#22send--cancel-friend-request)
 
@@ -138,15 +139,15 @@ Of course, found friend ? Why don't you send a friend request, do you ? 😎 Whe
 
 ### [**2.3.Contact Management**](#23contact-management)
 
-A full-scaled menu was designed to help user see every single contact easily. User could see their friend, see all user that they sent friend request & how many friend request they received.Consider accept or deny friend request that user received 😛
+A full-scaled menu was designed to help user see every single contact easily. User could see their friend, see all user that they sent friend request & how many friend request they received. Consider accept or deny friend request that user received 😛
 
 ### [**2.4.Notification & notifications Management**](#24notification--notifications-management)
 
-User could access all content of notification with icon or get a full-scaled tab.All notifications user received is here.
+User could access all content of notification with icon or get a full-scaled tab. All notifications user received is here.
 
 ### [**2.5.Unfriend**](#25unfriend)
 
-Nothing lasts forever ! If you don't want to be friend with some one.Just unfriend them ! 🙋‍♂️🙋‍♀️ Say google and go separate ways 👻👻. Whom you unfriend does not know anything about it.Every thing is secret
+Nothing lasts forever ! If you don't want to be friend with some one. Just unfriend them ! 🙋‍♂️🙋‍♀️ Say google and go separate ways 👻👻. Whom you unfriend does not know anything about it.Every thing is secret
 Every message is the past & the past must be remove. Good-bye
 
 ##  [**3.User-to-user chat Function**](#3user-to-user-chat-function)
@@ -293,6 +294,11 @@ Note : 25-07-2021 to 31-07-2021 I did not do any thing because revising for Comp
 
        4.Read older messages
 
+## **Phase 6** : **25-08-2021 to 27-08-2021**
+       1. Read more message & pop up if no conversation
+
+       2. Modal for detailing chat group's members 
+
 # [**Third-party libraries**](#third-party-libraries)
 With front-end , I used third-party libraries which have its version as :
 1. bootstrap : 3.3.7
@@ -322,7 +328,9 @@ They will be installed immediately when `bower install` command run
 
 - Begun on **24-06-2021**
 
-- Finish on **25-08-2021**
+- Finish on **27-08-2021**
 
-- It took me 2 months & 1 day to complete this app. I'm sure that my knowledge have boarded. Hope next year, this day, I will said "good-bye" to my university where I have spent 4,5 years becoming a junior programmer.
+- It took me 2 months & 3 days to complete this app. I'm so ecstatic that my knowledge have boarded. Hope next year, this day, I will said "good-bye" to my university where I have spent 4,5 years becoming a junior programmer.
+
+- I wish I would have become adept at getting programming with NodeJS & build many dependable, adaptable applications & so on.
 # [**Made with 💘 and JavaScript <img src="https://upload.vectorlogo.zone/logos/javascript/images/239ec8a4-163e-4792-83b6-3f6d96911757.svg" width="25">**](#made-with-love-and-javascript)

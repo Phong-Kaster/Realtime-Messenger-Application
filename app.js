@@ -34,7 +34,7 @@ const event = require("events");
 // })
 
 // fake HTTPS method to trick Facebook security
-/*pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
+pem.createCertificate({ days: 1, selfSigned: true }, function (err, keys) {
     if (err) 
     {
       console.log("pem error : " + err);
@@ -45,7 +45,7 @@ const event = require("events");
     connectDatabase();
 
     //config session
-    configSession(app);
+    session.sessionConfigure(app);
 
     //config View engine
     configViewEngine(app);
@@ -56,22 +56,36 @@ const event = require("events");
     // call connect flash
     app.use(connectFlash());
 
+    //use cookie parser
+    app.use(cookieParser());
+
     // passport must stand between connect database and initRouter
     app.use(passport.initialize());
     app.use(passport.session());
 
+
     // initialize routers
-    initRouter(app);
-   
+    incRouter(app);
+
+
+    // configure passport socket io to retrieve information user from passportJS
+    passportSocketIoConfigure( io , cookieParser , session.sessionStore );
+
+
+    // increase maximum event the application can listen a mean while
+    event.EventEmitter.defaultMaxListeners = 30;
+
+    incSocket(io);
+
     https.createServer({ key: keys.serviceKey, cert: keys.certificate }, app).listen( port, () => {
       console.log(`->Server is running on port https://localhost:${process.env.APP_PORT} to connect database ${process.env.DATABASE_NAME}`);
       console.log(`->rma stands for ${process.env.STANDARD_DATABASE_NAME}`)
   })
-  })*/
+  })
 
 /**this code block will be re-used  when it public in internet*/
 
-
+/*
 //connect to MongoDB
 connectDatabase();
 
@@ -105,8 +119,11 @@ event.EventEmitter.defaultMaxListeners = 30;
 // initialize socket io
 incSocket(io);
 
+*/
+
+
 /* ======================= LISTEN ON PORT 3000 ======================= */
-server.listen( port, () => {
-    console.log(`->Server is running on port http://localhost:${process.env.APP_PORT} to connect database ${process.env.DATABASE_NAME}`);
-    console.log(`->rma stands for ${process.env.STANDARD_DATABASE_NAME}`);
-});
+// server.listen( port, () => {
+//     console.log(`->Server is running on port http://localhost:${process.env.APP_PORT} to connect database ${process.env.DATABASE_NAME}`);
+//     console.log(`->rma stands for ${process.env.STANDARD_DATABASE_NAME}`);
+// });
